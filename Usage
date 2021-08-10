@@ -1,0 +1,11 @@
+There will be three folders in MLDATA folder, which are repos, diff, sha
+
+1. DownloadFromGithub.py
+To download the github project and get the code before committed and after committed.
+The code will be stored in diff.
+
+2. Remove Header(#include), so that the file can be processed with gcc compiler without too many errors.
+
+3. Processed by GCC to remove the useless part in gcc.
+
+4.Transfer to CSV file. There are several variables. UP is the number of Added lines. Down is the number of Deleted lines. Index is the start of commit
