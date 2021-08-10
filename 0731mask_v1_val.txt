@@ -1,0 +1,1110 @@
+source code: 
+char *M_DirName(const char *path)
+ const char *M_BaseName(const char *path)
+ {
+     const char *p;
+     p = strrchr(path, DIR_SEPARATOR);
+     if (p == NULL)
+------------------------------------------------------------
+bug injection: 
+void FILN_ERROR(M_Basename,
+				     (char *)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (unsigned long)
+				     (
+------------------------------------------------------------
+actual bug: 
+ char *M_DirName(const char *path)
+ const char *M_BaseName(const char *path)
+ {
+     char *p;
+     p = strrchr(path, DIR_SEPARATOR);
+     if (p == NULL)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void SetJoystickButtonLabel(void)
+     }
+     TXT_SetButtonLabel(joystick_button, name);
+     UnInitJoystick();
+ }
+------------------------------------------------------------
+bug injection: 
+void InitJoystick(void)
+     int i;
+------------------------------------------------------------
+actual bug: 
+ static void SetJoystickButtonLabel(void)
+     }
+     TXT_SetButtonLabel(joystick_button, name);
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+P_CrossSpecialLine
+         break;
+     case 231:
+         EV_Teleport(line, side, thing, TF_SRCSILENCE);
+         break;
+------------------------------------------------------------
+bug injection: 
+staticCrossSpecialLine
+         break;
+     case 231:
+         EV_Teleport(line, side, thing );
+         break;
+------------------------------------------------------------
+actual bug: 
+ P_CrossSpecialLine
+         break;
+     case 231:
+         EV_Teleport(line, side, thing );
+         break;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void A_BurnSpread(mobj_t* actor)
+     if(actor->flags & MF_DROPPED)
+         return;
+     y = actor->y + (((P_Random() + 12) & 31) << FRACBITS);
+     x = actor->x + (((P_Random() + 12) & 31) << FRACBITS);
+     mo = P_SpawnMobj(x, y, actor->z + (4*FRACUNIT), MT_PFLAME);
+------------------------------------------------------------
+bug injection: 
+physical_t* p = &players[0];
+     p->state = &states[P_GetState(actor->type)];
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->pflame = &p->state->info;
+     p->state->p
+------------------------------------------------------------
+actual bug: 
+ void A_BurnSpread(mobj_t* actor)
+     if(actor->flags & MF_DROPPED)
+         return;
+     x = actor->x + (((P_Random() + 12) & 31) << FRACBITS);
+     y = actor->y + (((P_Random() + 12) & 31) << FRACBITS);
+     mo = P_SpawnMobj(x, y, actor->z + (4*FRACUNIT), MT_PFLAME);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+P_SpawnMobj
+     mobj->flags = info->flags;
+     mobj->health = info->spawnhealth;
+     mobj->reactiontime = info->reactiontime;
+     mobj->lastlook = P_Random () % MAXPLAYERS;
+------------------------------------------------------------
+bug injection: 
+class = 0;
+     if (info->flags & MIF_FLOATBOB) <to-buggy> class = 0; <to-buggy> class = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags & MIF_FLOATBOB)Artitype = 0;Artitype = 0;
+     if (info->flags
+------------------------------------------------------------
+actual bug: 
+ P_SpawnMobj
+     mobj->flags = info->flags;
+     mobj->health = info->spawnhealth;
+     if (gameskill!= sk_nightmare)
+  mobj->reactiontime = info->reactiontime;
+     mobj->lastlook = P_Random () % MAXPLAYERS;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void NET_CL_SendResendRequest(int start, int end)
+     {
+         int index;
+         index = i - recvwindow_start;
+         if (index < 0 || index >= BACKUPTICS)
+             continue;
+------------------------------------------------------------
+bug injection: 
+static void)
+client_tclient_tclient_tclient_client_client_client_client_client_client_client0client0client0client0client0client0client0client, char *client_ char *client:
+ client:
+)
+       ,lus;
+)ToClient(ToClient(ToClient); agreement(Handshake)Handshake)Handshake)ToClient;ToClient
+ {
+------------------------------------------------------------
+actual bug: 
+ static void NET_CL_SendResendRequest(int start, int end)
+     {
+         int index;
+         index = start - recvwindow_start;
+         if (index < 0 || index >= BACKUPTICS)
+             continue;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int show_talk = 0;
+ static int use_libsamplerate = 0;
+ static float libsamplerate_scale = 0.65;
+ static char *timidity_cfg_path = NULL;
+ static char *gus_patch_path = NULL;
+ static unsigned int gus_ram_kb = 1024;
+------------------------------------------------------------
+bug injection: 
+static int use_PREFERRED(int use_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INT_PREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFER_INTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFERINTPREFER
+------------------------------------------------------------
+actual bug: 
+ static int show_talk = 0;
+ static int use_libsamplerate = 0;
+ static float libsamplerate_scale = 0.65;
+ static char *timidity_cfg_path = "";
+ static char *gus_patch_path = "";
+ static unsigned int gus_ram_kb = 1024;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+int main(int argc, char **argv)
+     myargc = argc;
+     myargv = argv;
+     M_FindResponseFile();
+------------------------------------------------------------
+bug injection: 
+int main(int argc, char **argv)
+     myargc = argc;
+     myargv = argv;
+     M_FindResponseFile();
+     exit(0); <to-buggy> <pad><pad><pad><pad><pad><pad><pad>
+------------------------------------------------------------
+actual bug: 
+ int main(int argc, char **argv)
+     myargc = argc;
+     myargv = argv;
+     LockCPUAffinity();
+     M_FindResponseFile();
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+boolean P_SpawnTeleportBeacon(player_t* player)
+ boolean P_UseInventoryItem(player_t* player, int item)
+ {
+     int i;
+     const char *name;
+     if(player->cheats & CF_ONFIRE)
+         return false;
+------------------------------------------------------------
+bug injection: 
+void AF_Teleport(player->mo,
+                                 &player->mo->subsector->sector->lightlevel->lighttable,
+                                 &player->mo->subsector->sector->flags,
+                                 &player->mo->subsector->sector->flags2,
+                                 &player->mo->subsector->sector->flags3
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------
+actual bug: 
+ boolean P_SpawnTeleportBeacon(player_t* player)
+ boolean P_UseInventoryItem(player_t* player, int item)
+ {
+     int i;
+     char* name;
+     if(player->cheats & CF_ONFIRE)
+         return false;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void LaunchDoom(void *unused1, void *unused2)
+ static txt_button_t *GetLaunchButton(void)
+ {
+     const char *label;
+     switch (gamemission)
+     {
+------------------------------------------------------------
+bug injection: 
+static void Doom_Doomf_GetDoomf_DoM_DoomfDoomsDoomsDoom_Doom_Doom_Doom_Doom_Doom_Doom_Doom_Doom_Doom
+ DoomsDoom(DoomsDoom(DoomsDoom
+ DoomsDoom(Doom
+     Doom
+     Doom
+     Doom
+     Doom
+     Doom
+     Doom
+ o
+     Doom
+ o
+ o
+     Doom
+lDoom
+lDoom
+lDoom
+lDoom
+lDoom
+lDoom
+
+
+     Doom
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+     Doom
+
+------------------------------------------------------------
+actual bug: 
+ static void LaunchDoom(void *unused1, void *unused2)
+ static txt_button_t *GetLaunchButton(void)
+ {
+     char *label;
+     switch (gamemission)
+     {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+char *D_TryFindWADByName(const char *filename)
+ char *D_FindIWAD(int mask, GameMission_t *mission)
+ {
+     char *result;
+     const char *iwadfile;
+     int iwadparm;
+     int i;
+------------------------------------------------------------
+bug injection: 
+static iwad_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_EnsureA_
+------------------------------------------------------------
+actual bug: 
+ char *D_TryFindWADByName(const char *filename)
+ char *D_FindIWAD(int mask, GameMission_t *mission)
+ {
+     char *result;
+     char *iwadfile;
+     int iwadparm;
+     int i;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void D_Display (void)
+ static void EnableLoadingDisk(void)
+ {
+     const char *disk_lump_name;
+     if (show_diskicon)
+     {
+------------------------------------------------------------
+bug injection: 
+static void DoMerge(void)
+     void D_t*lock_t*lock_t*
+ {
+     char *lock_t*lock_tlock_tlock_tlock_tlock_t lock_t lock_t lock_t lock_t lock_t lock_t lock_t lock_t lock_t lock_t lock_t lock_t lock_t lock,
+ lock->lock = lock)
+     char *lock;
+------------------------------------------------------------
+actual bug: 
+ void D_Display (void)
+ static void EnableLoadingDisk(void)
+ {
+     char *disk_lump_name;
+     if (show_diskicon)
+     {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+boolean mus2mid(MEMFILE *musinput, MEMFILE *midioutput)
+                 return true;
+             }
+             channel = GetMIDIChannel(eventdescriptor & 0x0F, midioutput);
+             event = eventdescriptor & 0x70;
+             switch (event)
+------------------------------------------------------------
+bug injection: 
+static_cast<int>(eventdescriptor & 0x0F))
+             { <to-buggy> static int i;
+     if (i)
+------------------------------------------------------------
+actual bug: 
+ boolean mus2mid(MEMFILE *musinput, MEMFILE *midioutput)
+                 return true;
+             }
+             channel = GetMIDIChannel(eventdescriptor & 0x0F);
+             event = eventdescriptor & 0x70;
+             switch (event)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void TXT_ScrollPaneMousePress(TXT_UNCAST_ARG(scrollpane),
+             int range = FullWidth(scrollpane) - scrollpane->w;
+             int bar_max = scrollpane->w - 3;
+             scrollpane->x = ((rel_x - 1) * range + bar_max - 1) / bar_max;
+         }
+         return;
+------------------------------------------------------------
+bug injection: 
+static void TXT_ScrollPaneMouseRelease(TXT_UNCAST_ARG(scrollpane),
+             int range = FullWidth(scrollpane) - scrollpane->w;
+             int bar_max = scrollpane->w - 3;
+             scrollpane->x = ((rel_x - 1) * range + bar_max - 1) / bar_max;
+         }
+------------------------------------------------------------
+actual bug: 
+ static void TXT_ScrollPaneMousePress(TXT_UNCAST_ARG(scrollpane),
+             int range = FullWidth(scrollpane) - scrollpane->w;
+             int bar_max = scrollpane->w - 3;
+             scrollpane->x = ((rel_x - 1) * range + (bar_max / 2)) / bar_max;
+         }
+         return;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void A_SigilShock (player_t *player, pspdef_t *psp)
+ void A_TorpedoExplode(mobj_t* actor)
+ {
+     int i;
+     actor->angle -= ANG180;
+------------------------------------------------------------
+bug injection: 
+void A_SigilShock (player_t *player, pspdef_t *psp)
+ void A_TorpedoExplode(mobj_t* actor)
+ {
+     int i = 0;
+     actor->angle -= ANG180;
+------------------------------------------------------------
+actual bug: 
+ void A_SigilShock (player_t *player, pspdef_t *psp)
+ void A_TorpedoExplode(mobj_t* actor)
+ {
+     int i = 0;
+     actor->angle -= ANG180;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+boolean P_CheckMeleeRange(mobj_t* actor)
+     dist = P_AproxDistance(pl->x - actor->x, pl->y - actor->y);
+     if(dist >= MELEERANGE - 20*FRACUNIT + pl->info->radius)
+         return false;
+     if(!P_CheckSight (actor, actor->target))
+------------------------------------------------------------
+bug injection: 
+boolean P_CheckMeleeRange(mobj_t* actor)
+     dist = P_AproxDistance(pl->x - actor->x, pl->y - actor->y);
+     if(dist >= MELEERANGE - 20*FRACUNIT + pl->info->radius)
+         return false;
+     if(!P_CheckSight (actor, actor->target))
+------------------------------------------------------------
+actual bug: 
+ boolean P_CheckMeleeRange(mobj_t* actor)
+     dist = P_AproxDistance(pl->x - actor->x, pl->y - actor->y);
+     if(dist >= MELEERANGE - 36*FRACUNIT + pl->info->radius)
+         return false;
+     if(!P_CheckSight (actor, actor->target))
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

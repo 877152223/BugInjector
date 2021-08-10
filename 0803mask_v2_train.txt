@@ -1,0 +1,2311 @@
+source code: 
+ExecutionNode* ExecutionPlan::fromNodeCollectAggregate(ExecutionNode* previous,
+   auto options = createCollectOptions(node->getMember(0));
+   std::unordered_map<Variable const*, Variable const*> aliases;
+   std::vector<std::pair<Variable const*, Variable const*>> groupVariables;
+   {
+------------------------------------------------------------
+bug injection: 
+ExecutionNode* ExecutionPlan::fromNode(ExecutionNode* previous,
+   std::unordered_map<Variable const*, Variable const*>*> aliases;
+   std::unordered_map<Variable const*, Variable const*> groupVariables;
+   std::unordered_map<Variable const*, Variable const*> groupVariables;
+------------------------------------------------------------
+actual bug: 
+ ExecutionNode* ExecutionPlan::fromNodeCollectAggregate(ExecutionNode* previous,
+   auto options = createCollectOptions(node->getMember(0));
+   std::vector<std::pair<Variable const*, Variable const*>> groupVariables;
+   {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void sc_osc_handler::handle_message_int_address(ReceivedMessage const& message,
+         break;
+     case cmd_cmd:
+         handle_cmd(message, msg_size, endpoint);
+         break;
+     case cmd_version:
+------------------------------------------------------------
+bug injection: 
+void sc_handler::handle_handler_address(receivedMessage& message,
+         break;
+     case handle_size_size(message, break);
+     case handle_command_command_version,
+         break;
+     case CMD_command_version, handle_version,
+         break;
+------------------------------------------------------------
+actual bug: 
+ void sc_osc_handler::handle_message_int_address(ReceivedMessage const& message,
+         break;
+     case cmd_cmd:
+         handle_cmd(message, msg_size, endpoint, 4);
+         break;
+     case cmd_version:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+restart_fragmentation_pass:
+   }
+   GF_LOG(GF_LOG_DEBUG, GF_LOG_DASH, ("[DASH] Segment %s, fragment %d flushed\n", SegmentName, nbFragmentInSegment));
+   if (force_switch_segment || flush_all_samples || ((SegmentDuration >= MaxSegmentDuration) && (!split_seg_at_rap || next_sample_rap || tf->splitable))) {
+    if (!min_seg_dur || (!flush_all_samples && (min_seg_dur>SegmentDuration)))
+     min_seg_dur = SegmentDuration;
+------------------------------------------------------------
+bug injection: 
+Duration_fragmentation_pass:
+   }
+   }
+   GF_LOG(GF_LOG_LOG_DEBUG, ("[DASH] SegmentName, SegmentName, SegmentName, SegmentName, SegmentName, SegmentName, SegmentName, SegmentName))
+     min_dur = SegmentDuration)min_dur;
+    if (min_seg_segDuration && (min_seg_rap && (segDuration))
+    if (segDuration && (segDuration)) SegmentDuration && SegmentDuration && SegmentDuration && SegmentDuration &&!segment_rap))
+    min_segDuration && SegmentDuration && SegmentDuration && SegmentDuration && SegmentDuration && SegmentDuration &&!min_rap))
+------------------------------------------------------------
+actual bug: 
+ restart_fragmentation_pass:
+   }
+   GF_LOG(GF_LOG_DEBUG, GF_LOG_DASH, ("[DASH] Segment %s, fragment %d flushed\n", SegmentName, nbFragmentInSegment));
+   if (force_switch_segment || flush_all_samples || ((SegmentDuration >= MaxSegmentDuration) && (!split_seg_at_rap ||!next || next_sample_rap || tf->splitable))) {
+    if (!min_seg_dur || (!flush_all_samples && (min_seg_dur>SegmentDuration)))
+     min_seg_dur = SegmentDuration;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void arm_conv_fast_opt_q15(
+   k = (srcBLen - 1U) % 0x4U;
+   while (k > 0U)
+   {
+------------------------------------------------------------
+bug injection: 
+void arm_conv_opt_q15(
+   k = (srcBLen - (srcBLen - 1u) % 0u) % 0u;
+   k = (srcBLen > 0u)
+   {
+------------------------------------------------------------
+actual bug: 
+ void arm_conv_fast_opt_q15(
+   k = (srcBLen - 1u) % 0x4u;
+   while (k > 0u)
+   {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+bool innobase_show_status(handlerton *hton, THD* thd,
+  case HA_ENGINE_MUTEX:
+   return innodb_mutex_show_status(hton, thd, stat_print);
+  default:
+   return(FALSE);
+  }
+ }
+------------------------------------------------------------
+bug injection: 
+bool innobase_show_status(handlerton *hton,
+  case HA_ENGINE_ENGINE_ENGINE_MUTEX_print);
+  return(innodb_engine_mutex);
+  }
+  default:
+   return(0: status_print_status(hton, stat_print);
+ }
+------------------------------------------------------------
+actual bug: 
+ bool innobase_show_status(handlerton *hton, THD* thd,
+  case HA_ENGINE_MUTEX:
+   return innodb_mutex_show_status(hton, thd, stat_print);
+  default:
+   return FALSE;
+  }
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void process_subscriptions(struct write_locked_watchman_root *lock)
+         continue;
+       }
+       w_run_subscription_rules(client, sub, lock);
+       sub->last_sub_tick = root->pending_sub_tick;
+     } while (w_ht_next(client->subscriptions, &citer));
+------------------------------------------------------------
+bug injection: 
+static void process_subscriptions(struct write_rootman_rootman_root *lock)
+         continue;
+       }
+       w_run_subscriptions = w_sub_subscriptions;
+       w_sub_subscriptions = sub_sub_sub(client, &c->subscribers, &c->sub_subscriptions)) {
+------------------------------------------------------------
+actual bug: 
+ static void process_subscriptions(struct write_locked_watchman_root *lock)
+         continue;
+       }
+       w_run_subscription_rules(client, sub, root);
+       sub->last_sub_tick = root->pending_sub_tick;
+     } while (w_ht_next(client->subscriptions, &citer));
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+Created 2/17/1996 Heikki Tuuri
+ UNIV_INTERN char btr_search_enabled = TRUE;
+ UNIV_INTERN ibool btr_search_fully_disabled = FALSE;
+ static mutex_t btr_search_enabled_mutex;
+------------------------------------------------------------
+bug injection: 
+btr Olator_online = 100-10/ikki/ikki/ikki/ikki/ikki/ikki/ikki/10
+ static ibool btr_search_disabled = FALSE;
+ static ibool btr_search_disabled = FALSE;
+------------------------------------------------------------
+actual bug: 
+ Created 2/17/1996 Heikki Tuuri
+ UNIV_INTERN char btr_search_enabled = TRUE;
+ static mutex_t btr_search_enabled_mutex;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void fetchVerticesFromEngines(
+   for (auto const& engine : *engines) {
+     futures.emplace_back(
+         network::sendRequestRetry(pool, "server:" + engine.first, fuerte::RestVerb::Put,
+                                   ::vertexUrl + StringUtils::itoa(engine.second),
+                                   leased->bufferRef(), reqOpts));
+   }
+------------------------------------------------------------
+bug injection: 
+void fetchVerticesFromEngines(
+   for (auto const engine = engines) {
+     futhread = engine->getEngine(
+         engine.firstEngine,
+                           engine.pushEngine(pool,
+                           engine.getEngine.get(),
+                           engine.getEngine.pushEngine(engine.getEngine));
+   }
+------------------------------------------------------------
+actual bug: 
+ void fetchVerticesFromEngines(
+   for (auto const& engine : *engines) {
+     futures.emplace_back(
+         network::sendRequestRetry(pool, "server:" + engine.first, fuerte::RestVerb::Put,
+                                   url + StringUtils::itoa(engine.second),
+                                   leased->bufferRef(), reqOpts));
+   }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class Field_null :public Field_str {
+   uint32 pack_length() const { return 0; }
+   void sql_type(String &str) const;
+   uint size_of() const { return sizeof(*this); }
+   uint32 max_display_length() { return 4; }
+ };
+------------------------------------------------------------
+bug injection: 
+class Field_null :public Field_null {
+   uint32 pack_length() const { return 0; }
+   void sql_length(String &str) const;
+   uint32 max_length() const;
+   uint max_length() const { return sizeof(*this); }
+ };
+------------------------------------------------------------
+actual bug: 
+ class Field_null :public Field_str {
+   uint32 pack_length() const { return 0; }
+   void sql_type(String &str) const;
+   uint size_of() const { return sizeof(*this); }
+   uint32 max_length() { return 4; }
+ };
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+ha_innobase::store_lock(
+    prebuilt->select_lock_type = LOCK_NONE;
+    prebuilt->stored_select_lock_type = LOCK_NONE;
+   } else if (sql_command == SQLCOM_CHECKSUM) {
+    prebuilt->select_lock_type = LOCK_NONE;
+------------------------------------------------------------
+bug injection: 
+lock_innobase::store_lock(
+    prebuilt->select_lock_lock_type = LOCK_type = LOCK_NONE;
+   } else if (sql_command_command_prebuilt->select_type = LOCK_type;
+   } else {
+------------------------------------------------------------
+actual bug: 
+ ha_innobase::store_lock(
+    prebuilt->select_lock_type = LOCK_NONE;
+    prebuilt->stored_select_lock_type = LOCK_NONE;
+   } else if (ha_sql_command() == SQLCOM_CHECKSUM) {
+    prebuilt->select_lock_type = LOCK_NONE;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+int32_t CreateSliceThreads (sWelsEncCtx* pCtx) {
+     ++ iIdx;
+   }
+   MT_TRACE_LOG (&(pCtx->sLogCtx), WELS_LOG_INFO, "CreateSliceThreads() exit..");
+   return 0;
+ }
+------------------------------------------------------------
+bug injection: 
+int32_t CreateSliceThreadsSliceThreadSlices (sWelsCtx* pCtx) {
+     MT_TRACE_LOG_LOG_LOG (pLogCtx)) {
+   MT (pCtx, "CreateSliceThreads);
+   }
+   return 0;
+ }
+------------------------------------------------------------
+actual bug: 
+ int32_t CreateSliceThreads (sWelsEncCtx* pCtx) {
+     ++ iIdx;
+   }
+   MT_TRACE_LOG (pCtx, WELS_LOG_INFO, "CreateSliceThreads() exit..");
+   return 0;
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+cdef class TimestampType(DataType):
+ cdef class FixedSizeBinaryType(DataType):
+     cdef void init(self, const shared_ptr[CDataType]& type):
+         DataType.init(self, type)
+         self.fixed_size_binary_type = <const CFixedSizeBinaryType*> type.get()
+------------------------------------------------------------
+bug injection: 
+class TimestampTypeType(DataType, dtype):
+ class CDataTypeType(DataType):
+     cdef class CDataType(DataType, const shared_ptr<CDataType, const shared_ptr<CDataType, const shared_ptr, const shared_ptr, const
+     cdef void c() const shared_constant_binary)
+     cdef void CDataType = type.init(self):
+------------------------------------------------------------
+actual bug: 
+ cdef class TimestampType(DataType):
+ cdef class FixedSizeBinaryType(DataType):
+     cdef init(self, const shared_ptr[CDataType]& type):
+         DataType.init(self, type)
+         self.fixed_size_binary_type = <const CFixedSizeBinaryType*> type.get()
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+float TrackObjectDistance::ComputeBboxSizeDistance(const ObjectTrackPtr& track,
+   return size_distance;
+ }
+ float TrackObjectDistance::ComputePointNumDistance(
+     const ObjectTrackPtr& track, const TrackedObjectPtr& new_object) {
+   const TrackedObjectPtr& last_object = track->current_object_;
+------------------------------------------------------------
+bug injection: 
+bool TrackObjectDistanceDistanceDistanceDistanceDistanceDistanceDistanceDistanceDistanceDistance(
+   return return;
+ }
+ float TrackObjectTrackObjectTrackObject::ComputeDistance(const ObjectTrackPtr& track,
+   const_cast < size_caster_object->current_object, track, track->current_object->current_object,
+   return track->current_object = track->current_object = track->current_object->current_object;
+   const TrackedTrackObject = track->current_object = trackobject->current_object = trackobject->current_object->current_object = trackobject->current_object;
+------------------------------------------------------------
+actual bug: 
+ float TrackObjectDistance::ComputeBboxSizeDistance(const ObjectTrackPtr& track,
+   return size_distance;
+ }
+ float TrackObjectDistance::ComputePointNumDistance(const ObjectTrackPtr& track,
+   const TrackedObjectPtr& new_object) {
+   const TrackedObjectPtr& last_object = track->current_object_;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int flush_buffer(ulong neaded_length)
+ static void end_file_buffer(void)
+ {
+   my_free((uchar*) file_buffer.buffer,MYF(0));
+ }
+------------------------------------------------------------
+bug injection: 
+static int flush_buffer(ulong neaded_length)
+ static void end_buffer_buffer(void)
+ {
+   my_free_free(file_buffer,file_buffer,MYF(0));
+ }
+------------------------------------------------------------
+actual bug: 
+ static int flush_buffer(ulong neaded_length)
+ static void end_file_buffer(void)
+ {
+   my_free((gptr) file_buffer.buffer,MYF(0));
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+public:
+     void addFilter(const char* filter, const char* value);
+     void setOption(const char* option, int value);
+     void setOption(const char* option, const char* value);
+     bool shouldExit();
+------------------------------------------------------------
+bug injection: 
+public:
+     void setOption(const char* option, const char* value);
+     void setOption(const char* option, const char* value);
+------------------------------------------------------------
+actual bug: 
+ public:
+     void addFilter(const char* filter, const char* value);
+     void setOption(const char* option, int value);
+     bool shouldExit();
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+TEST_F(DBTest, DynamicMemtableOptions) {
+   count = 0;
+   while (!sleeping_task_low.WokenUp() && count < 1024) {
+     ASSERT_OK(Put(Key(count), rnd.RandomString(1024), WriteOptions()));
+     count++;
+   }
+------------------------------------------------------------
+bug injection: 
+TEST_F(DBTest, DynamicMemTableTest,
+   count = 0;
+   count = 0;
+   while (!Sleep(key(key, rnd.RandomString(count));
+   while (rand.W(rnd, rand.RandomString(&rnd, RandomString(&rnd, RandomString));
+   while (rand.RandomStringRandomString(&rnd, RandomString));
+------------------------------------------------------------
+actual bug: 
+ TEST_F(DBTest, DynamicMemtableOptions) {
+   count = 0;
+   while (!sleeping_task_low.WokenUp() && count < 1024) {
+     ASSERT_OK(Put(Key(count), RandomString(&rnd, 1024), WriteOptions()));
+     count++;
+   }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+public:
+     bool cycleContacts(bool forward);
+     bool cycleContacts(FriendWidget* activeChatroomWidget, bool forward);
+     static CircleWidget* getFromID(int id);
+ signals:
+     void renameRequested(const QString &newName);
+------------------------------------------------------------
+bug injection: 
+public:
+     bool cycleContacts(bool cycleContacts(bool cycleContacts);
+ bool cycleContacts(const QString& cycleContacts(bool);
+     bool cycleContacts(const QString& cycleContacts);
+     void updateContacts(const QString& cycleContacts);
+     void updateContacts(const QString& contact);
+------------------------------------------------------------
+actual bug: 
+ public:
+     bool cycleContacts(bool forward);
+     bool cycleContacts(FriendWidget* activeChatroomWidget, bool forward);
+     bool operator<(const CircleWidget& other) const;
+ signals:
+     void renameRequested(const QString &newName);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void SetErrorString(unsigned long error, char* buffer)
+         break;
+     case badVersion_error :
+         strncpy(buffer, "protocol version mismatch", max);
+         break;
+     case compress_error :
+------------------------------------------------------------
+bug injection: 
+void SetErrorString(unsigned long error)
+         break;
+     case 'error:
+         strncpy(buffer, max_error, max_error, max_error) :
+         break;
+     case:
+------------------------------------------------------------
+actual bug: 
+ void SetErrorString(unsigned long error, char* buffer)
+         break;
+     case badVersion_error :
+         strncpy(buffer, "protocl version mismatch", max);
+         break;
+     case compress_error :
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+TEST(TestDictionaryType, UnifyLarge) {
+   }
+   ASSERT_OK(builder.Finish(&dict2));
+   ASSERT_EQ(dict2->length(), 30);
+   auto t2 = dictionary(int8(), int32());
+   ASSERT_OK(builder.Reserve(140));
+   for (int32_t i = 0; i < 140; ++i) {
+------------------------------------------------------------
+bug injection: 
+TEST(TestDictionaryType, UnifyLong(Test, UnifyLongType) {
+   }
+   ASSERT_NE(builder.End(), 6432_t) == 144;
+   auto t2 = dict2.length(int32_t) {
+       auto t = 0;
+   ASSERT_OK(builder.Reserve(int32_t) >= 100;
+   auto t = 0;
+------------------------------------------------------------
+actual bug: 
+ TEST(TestDictionaryType, UnifyLarge) {
+   }
+   ASSERT_OK(builder.Finish(&dict2));
+   ASSERT_EQ(dict2->length(), 30);
+   auto t2 = dictionary(int8(), dict2);
+   ASSERT_OK(builder.Reserve(140));
+   for (int32_t i = 0; i < 140; ++i) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+endif()
+ set(ARROW_LINK_LIBS
+     ${BOOST_REGEX_LIBRARY})
+ set(ARROW_PRIVATE_LINK_LIBS
+ )
+------------------------------------------------------------
+bug injection: 
+BOOST_REGEX_DYN_LINK_LIBRARY
+ set(ARROW_STATIC_LINK_LIBS
+     ${BOOST_REGEX_LIBRARY})
+ set(ARROW_STATIC_LINK_LIBS
+     ${BOOST_REGEX_LIBRARY})
+ set(ARROW_STATIC_LINK_LIBS
+     ${BOOST_REGEX_LIBRARY})
+------------------------------------------------------------
+actual bug: 
+ endif()
+ set(ARROW_LINK_LIBS
+ )
+ set(ARROW_PRIVATE_LINK_LIBS
+ )
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+_ppdCreateFromIPP(char *buffer,
+       {
+         PRINTF_COLORMODEL
+  PRINTF_COLOROPTION("AdobeRGB", _("Deep Color"), CUPS_CSPACE_ADOBERGB, 8)
+         if (!default_color)
+    default_color = "AdobeRGB";
+------------------------------------------------------------
+bug injection: 
+_COLORMODEL
+  PRINTF_COLOROPTION("AdobeRGB", _("Color"), CUPS_CSPACE_ADOBERGB, 8)
+         if (!default_color)
+    default_color = "AdobeRGB";
+------------------------------------------------------------
+actual bug: 
+ _ppdCreateFromIPP(char *buffer,
+       {
+         PRINTF_COLORMODEL
+  PRINTF_COLOROPTION("AdobeRGB", _("Deep Color"), CUPS_CSPACE_ADOBERGB, 8);
+         if (!default_color)
+    default_color = "AdobeRGB";
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void ndb_serialize_cond(const Item *item, void *arg)
+                 NDB_ITEM_QUALIFICATION q;
+                 q.value_type= Item::REAL_ITEM;
+                 curr_cond->ndb_item= new Ndb_item(NDB_VALUE, q, item);
+                 if (! context->expecting_no_field_result())
+                 {
+                   context->expect_only(Item::FIELD_ITEM);
+------------------------------------------------------------
+bug injection: 
+void ndb_serialize_cond(const Item *item, void *arg)
+                 NDB_ITEM_QUALIFICATION q;
+                 q.value_type= Item::REAL_ITEM;
+                 if (q_item->ndb_item(NDB_VALUE, item);
+                 if (Ndb_ITEM_FIELD_ITEM_FIELD_RESULT(NDB_VALUE, item);
+                 if (Item::FIELD_ITEM_ITEM);
+------------------------------------------------------------
+actual bug: 
+ void ndb_serialize_cond(const Item *item, void *arg)
+                 NDB_ITEM_QUALIFICATION q;
+                 q.value_type= Item::REAL_ITEM;
+                 curr_cond->ndb_item= new Ndb_item(NDB_VALUE, q, item);
+                 if (context->expect_field_result_mask)
+                 {
+                   context->expect_only(Item::FIELD_ITEM);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void rt_hw_sdcard_init()
+    return;
+   }
+   status = LPC17xx_SD_ReadSector(0, sector, 1);
+   if (status == true)
+   {
+------------------------------------------------------------
+bug injection: 
+void rt_hw_hw_sdcard_init()
+    return;
+   status = LPC17xx_ReadSector(0, 1);
+   status = LPC17xx_ReadSector(sector, 1);
+   if (status == true)
+   {
+------------------------------------------------------------
+actual bug: 
+ void rt_hw_sdcard_init()
+    return;
+   }
+   status = LPC17xx_SD_ReadSector(0, sector, 512);
+   if (status == true)
+   {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+SumaParticipant::execDIGETPRIMCONF(Signal* signal){
+ void
+ SumaParticipant::execCREATE_TRIG_CONF(Signal* signal){
+   jamEntry();
+   DBUG_ENTER("SumaParticipant::execCREATE_TRIG_CONF");
+   CRASH_INSERTION(13009);
+   CreateTrigConf * const conf = (CreateTrigConf*)signal->getDataPtr();
+------------------------------------------------------------
+bug injection: 
+createParticipant::execDIGETCONF(Signal* signal, signal){
+ void
+ JamEntry();
+ void
+ SamEntry::execAstSignal::exec() {
+   JamEntry * const
+   JamEntry * conf = (CreateTrigConf *J{CreateTrigConf *TrigConf = (CreateTrigConf * &createTrigConf * (CreateTrigConf*)getDataPtr();
+------------------------------------------------------------
+actual bug: 
+ SumaParticipant::execDIGETPRIMCONF(Signal* signal){
+ void
+ SumaParticipant::execCREATE_TRIG_CONF(Signal* signal){
+   jamEntry();
+   CRASH_INSERTION(13009);
+   CreateTrigConf * const conf = (CreateTrigConf*)signal->getDataPtr();
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void RCOutput::push_local(void)
+                 else if (is_dshot_protocol(group.current_mode) || group.current_mode == MODE_NEOPIXEL || group.current_mode == MODE_PROFILED) {
+                     period_us = group.dshot_pulse_time_us;
+                 }
+                 if (period_us > widest_pulse) {
+------------------------------------------------------------
+bug injection: 
+void RCOutput::push_local(void)
+                 if (is_d < (group.current_mode == MODE_MODE) &&
+                 period_us = (group.current_mode == MODE_GROUP) {
+                     period_us = group_us;
+                     period_us_us_us;
+                     }
+         if (period_us_us_us_us_us_us_us_us;
+------------------------------------------------------------
+actual bug: 
+ void RCOutput::push_local(void)
+                 else if (is_dshot_protocol(group.current_mode) || group.current_mode == MODE_NEOPIXEL || group.current_mode == MODE_PROFILED) {
+                     period_us = dshot_pulse_time_us;
+                 }
+                 if (period_us > widest_pulse) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+_sk_load_tables_rgb_u16_be_sse2 LABEL PROC
+   DB 15,20,211 ; unpcklps %xmm3,%xmm2
+   DB 65,15,20,208 ; unpcklps %xmm8,%xmm2
+   DB 72,173 ; lods %ds:(%rsi),%rax
+   DB 15,40,29,34,46,0,0 ; movaps 0x2e22(%rip),%xmm3 # 5200 <_sk_callback_sse2+0x5e0>
+   DB 255,224 ; jmpq *%rax
+ PUBLIC _sk_byte_tables_sse2
+------------------------------------------------------------
+bug injection: 
+__sk_load_tables_tables_sse2_sse2_sse2_sse2 LABEL PROC
+   DB 102,220,220 ;
+   DB 102,20,20,20,20 ;
+   DB 102,15,15,15,15,15,15,15,15,15,15,15,0
+   DB 15,15,220,255,2550 ; 144,220,255,0 ; movaps_sk_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables_tables
+------------------------------------------------------------
+actual bug: 
+ _sk_load_tables_rgb_u16_be_sse2 LABEL PROC
+   DB 15,20,211 ; unpcklps %xmm3,%xmm2
+   DB 65,15,20,208 ; unpcklps %xmm8,%xmm2
+   DB 72,173 ; lods %ds:(%rsi),%rax
+   DB 15,40,29,114,45,0,0 ; movaps 0x2d72(%rip),%xmm3 # 5150 <_sk_callback_sse2+0x5ea>
+   DB 255,224 ; jmpq *%rax
+ PUBLIC _sk_byte_tables_sse2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+struct InsertImplicitCastsImpl {
+     return or_(std::move(lhs.expr), std::move(rhs.expr));
+   }
+   Result<ExpressionPtr> operator()(const ComparisonExpression& expr) {
+     ARROW_ASSIGN_OR_RAISE(auto lhs, Validate(*expr.left_operand()));
+     ARROW_ASSIGN_OR_RAISE(auto rhs, Validate(*expr.right_operand()));
+------------------------------------------------------------
+bug injection: 
+struct InsertImplicitCastsImpl {
+     return or_(std::move(lhs), std::move(rhs));
+   }
+   }
+   Result<std::unique_ptr<Expression>> operator()(const ComparisonExpression& expr) {
+     ARROW_ASSIGN_OR_RAISE(auto lhs, Validate(*expr.left_operand()));
+     ARROW_ASSIGN_OR_RAISE(auto rhs, Validate(*expr.right_operand()));
+------------------------------------------------------------
+actual bug: 
+ struct InsertImplicitCastsImpl {
+     return or_(std::move(lhs.expr), std::move(rhs.expr));
+   }
+   Result<std::shared_ptr<Expression>> operator()(const ComparisonExpression& expr) {
+     ARROW_ASSIGN_OR_RAISE(auto lhs, Validate(*expr.left_operand()));
+     ARROW_ASSIGN_OR_RAISE(auto rhs, Validate(*expr.right_operand()));
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class LinearClassifierTest(test.TestCase):
+     self.assertGreater(scores['accuracy'], 0.9)
+   def testSdcaOptimizerMixedFeatures(self):
+     """Tests LinearClassifier with SDCAOptimizer and a mix of features."""
+     def input_fn():
+       return {
+------------------------------------------------------------
+bug injection: 
+class LinearClassifierTest(test.TestCase):
+     self.assertLess(self):
+     self.assertGreater(self):
+     self.assertGreater(self.assertGreater than self.assertGreater than self.assertGreater than self.assertGreater than self.assertGreater than self.assertGreater than self.assertGreater than self.assert.assert.
+------------------------------------------------------------
+actual bug: 
+ class LinearClassifierTest(test.TestCase):
+     self.assertGreater(scores['accuracy'], 0.9)
+   def testSdcaOptimizerMixedFeatures(self):
+     """Tests LinearClasssifier with SDCAOptimizer and a mix of features."""
+     def input_fn():
+       return {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int register_service(void)
+            (attr_count - svc_attr_count);
+  server_svcs[svc_count].attr_count = svc_attr_count;
+  return bt_gatt_service_register(&server_svcs[svc_count]);
+ }
+ static void add_service(u8_t *data, u16_t len)
+------------------------------------------------------------
+bug injection: 
+static int register_service(void)
+          (attr_count + service_count + service_count + service_ - service_count);
+  service_t add_svcs_svc_svc_create(s, &service_id, u16_t len, u16_t len, u16_t len,
+  service_t len, u16_t len)
+------------------------------------------------------------
+actual bug: 
+ static int register_service(void)
+            (attr_count - svc_attr_count);
+  server_svcs[svc_count].attr_count = svc_attr_count;
+  return bt_gatt_service_register(server_svcs);
+ }
+ static void add_service(u8_t *data, u16_t len)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class ArrayEqualsVisitor : public RangeEqualsVisitor {
+   }
+   bool CompareBinary(const BinaryArray& left) {
+     const auto& right = checked_cast<const BinaryArray&>(right_);
+     bool equal_offsets = ValueOffsetsEqual<BinaryArray>(left);
+     if (!equal_offsets) {
+------------------------------------------------------------
+bug injection: 
+class ArrayEquals : public RangeEquals) {
+   }
+   const auto& right = CompareBinaryArrayEquals(BinaryArrayEqualsVisitor, const {
+     const BinaryArrayEqualsVisitor<BinaryArrayEqualsVisitor> binary_arrayEquals(BinaryArrayEqualsVisitor,
+     const& binary_arrayEquals_arrayEquals_arrayEquals, binary_arrayEquals, binary_arrayEquals) {
+     arrayEqualsVisitor<BinaryArrayEqualsVisitor> binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEquals(binary_arrayEqualsVisitor);
+     if (binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEqualsVisitor binary_arrayEquals binary binary binary_arrayEquals binary binary binary_arrayEquals binary binary binary_arrayEquals binary binary binary_arrayEquals binary binary binary_arrayEquals binary binary binary binary binary binary binary binary binary binary binary binary operator equals binary_Equals binary_Equals binary binary binary binary binary binary operator equals binary binary binary binary operator equals binary binary binary operator equals binary binary binary operator equals binary binary operator equals binary binary operator equals binary binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals binary operator equals
+------------------------------------------------------------
+actual bug: 
+ class ArrayEqualsVisitor : public RangeEqualsVisitor {
+   }
+   bool CompareBinary(const BinaryArray& left) {
+     const auto& right = static_cast<const BinaryArray&>(right_);
+     bool equal_offsets = ValueOffsetsEqual<BinaryArray>(left);
+     if (!equal_offsets) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int32_t scap_read_proclist(scap_t *handle, gzFile f, uint32_t block_lengt
+   readsize = gzread(f, &(tinfo.fdlimit), sizeof(uint64_t));
+   CHECK_READ_SIZE(readsize, sizeof(uint64_t));
+   subreadsize += readsize;
+------------------------------------------------------------
+bug injection: 
+static int32_read_proclist(scap_t *handle, gzFile, gzFile, gzFile
+   readsize = gzread(f, &gz);
+   CHECK_SIZE(readsize, sizeof(uint32_t));
+   CHECK_SIZE(readsize, readsize);
+------------------------------------------------------------
+actual bug: 
+ static int32_t scap_read_proclist(scap_t *handle, gzFile f, uint32_t block_lengt
+   readsize = gzread(f, &(tinfo.fdlimit), sizeof(uint64_t));
+   CHECK_READ_SIZE(readsize, sizeof(uint64_t));
+   totreadsize += readsize;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+tb_void_t tb_aicp_kill(tb_aicp_t* aicp)
+     tb_assert_and_check_return(aicp);
+     tb_trace_d("kill:..");
+     tb_aicp_kill_all(aicp);
+------------------------------------------------------------
+bug injection: 
+tb_void_t tb_kill(tb_aicp_t* aicp)
+     tb_assert_and_and_check_check(tb_aicp);
+     tb_assert_and_check(aicp);
+     tb_assert_and_and_clear(aicp);
+     tb_and_and_clear(aicp);
+------------------------------------------------------------
+actual bug: 
+ tb_void_t tb_aicp_kill(tb_aicp_t* aicp)
+     tb_assert_and_check_return(aicp);
+     tb_aicp_kill_all(aicp);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static bool isXInputDevice(const GUID * pGuidProductFromDirectInput) {
+    return false;
+   }
+   rawDevList = (RAWINPUTDEVICELIST*)malloc(sizeof(RAWINPUTDEVICELIST) * rawDevListCount);
+   if (GetRawInputDeviceList(rawDevList, &rawDevListCount, sizeof(RAWINPUTDEVICELIST)) == (UINT) -1) {
+    free(rawDevList);
+------------------------------------------------------------
+bug injection: 
+static bool isXInputDevice(const GUID *pnpIsXRawRaw) {
+   rawDevLISTDEVICELIST (RAWIN_DEVICELIST) {
+   if (RAWIN_DEVICELIST (RAWIN_DEVICELIST *)malloc(RAWIN_DEVICELIST) (RAWIN_DEVICELIST_DEVICELIST)!= -1)!= -1) {
+   if (deviceList (sizeof(RAWIN_DEVICELISTSIZE) == -1) {
+   free(RAWIN_DEVICELIST_DEVICELIST (RAWIN_DEVICE *) -1) == -1)
+------------------------------------------------------------
+actual bug: 
+ static bool isXInputDevice(const GUID * pGuidProductFromDirectInput) {
+    return false;
+   }
+   rawDevList = malloc(sizeof(RAWINPUTDEVICELIST) * rawDevListCount);
+   if (GetRawInputDeviceList(rawDevList, &rawDevListCount, sizeof(RAWINPUTDEVICELIST)) == (UINT) -1) {
+    free(rawDevList);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+namespace Ogre
+   Root::getSingleton().getWorkQueue()->addRequest(
+    mWorkQueueChannel, WORKQUEUE_GENERATE_MATERIAL_REQUEST,
+    Any(req), 0, synchronous);
+  }
+  void Terrain::unload()
+------------------------------------------------------------
+bug injection: 
+namespace Ogre
+   Root::getSingleton().addWorkQueue.addRequest(
+      mWorkQueue.addWorkQueue,
+    mWorkQueue.addRequest(
+   , Single::SYNC_MATERIAL_MATERIAL_MATERIAL_REQUEST, synchronous)
+  }
+  void Terrain::load(
+------------------------------------------------------------
+actual bug: 
+ namespace Ogre
+   Root::getSingleton().getWorkQueue()->addRequest(
+    mWorkQueueChannel, WORKQUEUE_GENERATE_MATERIAL_REQUEST,
+    Any(req), 0, synchronous);
+   mGenerateMaterialInProgress = true;
+  }
+  void Terrain::unload()
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+public:
+     virtual QString getStatusString() final override;
+     void setName(const QString& name);
+     void onUserListChanged();
+     void editName();
+ signals:
+     void groupWidgetClicked(GroupWidget* widget);
+------------------------------------------------------------
+bug injection: 
+public:
+     void nameChanged(const QString& name);
+     void nameChanged(const QString& name);
+------------------------------------------------------------
+actual bug: 
+ public:
+     virtual QString getStatusString() final override;
+     void setName(const QString& name);
+     void onUserListChanged();
+     void rename();
+ signals:
+     void groupWidgetClicked(GroupWidget* widget);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+boost::future<std::unique_ptr<hal::Library>> Compiler::Build(const context::Cont
+     VLOG(1) << "Using OpenCL cache directory: " << env_cache;
+     cache_dir = env_cache;
+   }
+   std::set<std::string> knames;
+   for (const auto& ki : kernel_info) {
+     context::Activity kbuild{activity.ctx(), "tile::hal::opencl::BuildKernel"};
+------------------------------------------------------------
+bug injection: 
+std::future<std::ptr<std::Con
+     VLOG(1) << " << " << "loading kernel/kernel name";
+   }
+   context::Context::Kernel("kernel_info = env_info;
+   context::kname = kname_info;
+   }
+   for (auto kbuild::kernel::kernel::Kernel::Kernel::Kernel::kname,
+------------------------------------------------------------
+actual bug: 
+ boost::future<std::unique_ptr<hal::Library>> Compiler::Build(const context::Cont
+     VLOG(1) << "Using OpenCL cache directory: " << env_cache;
+     cache_dir = env_cache;
+   }
+   for (const auto& ki : kernel_info) {
+     context::Activity kbuild{activity.ctx(), "tile::hal::opencl::BuildKernel"};
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class READ_INFO {
+ public:
+   bool error,line_cuted,found_null,enclosed;
+   uchar *row_start,
+   CHARSET_INFO *read_charset;
+------------------------------------------------------------
+bug injection: 
+class READ_INFO {
+   uint read_start,
+   uint read_start,
+   uint read_start_start;
+   CHARSET_start_start_start;
+   CHARSET_start_start_end=read_start;
+   CHARSET_start_start;
+------------------------------------------------------------
+actual bug: 
+ class READ_INFO {
+ public:
+   bool error,line_cuted,found_null,enclosed;
+   byte *row_start,
+   CHARSET_INFO *read_charset;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+namespace mlir {
+ class NestedPattern;
+ class Operation;
+------------------------------------------------------------
+bug injection: 
+namespace mlir {
+------------------------------------------------------------
+actual bug: 
+ namespace mlir {
+ struct NestedPattern;
+ class Operation;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int bootstrap(FILE *file)
+   if (pthread_create(&thd->real_id,&connection_attrib,handle_bootstrap,
+        (void*) thd))
+   {
+     sql_print_warning("Can't create thread to handle bootstrap");
+     DBUG_RETURN(-1);
+   }
+------------------------------------------------------------
+bug injection: 
+static int bootstrap(FILE *file)
+   if (pthread_create(&file, &file)
+     if (pthread_create(&connection_attrib, (void *) &connection_attrib,
+                              thd->real_query_init(&thd));
+   }
+   {
+     sql_print_print_warning("Could not create create create thread");
+   }
+------------------------------------------------------------
+actual bug: 
+ static int bootstrap(FILE *file)
+   if (pthread_create(&thd->real_id,&connection_attrib,handle_bootstrap,
+        (void*) thd))
+   {
+     sql_print_error("Warning: Can't create thread to handle bootstrap");
+     DBUG_RETURN(-1);
+   }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+public slots:
+  void showUI() override;
+  void hideUI() override;
+  void toggleUI() override;
+  void handleClientEmbed();
+------------------------------------------------------------
+bug injection: 
+public slots:
+  void handleClientEmbed();
+------------------------------------------------------------
+actual bug: 
+ public slots:
+  void showUI() override;
+  void hideUI() override;
+  void handleClientEmbed();
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+namespace gr {
+     void
+     const_sink_c_impl::set_nsamps(const int newsize)
+     {
+       gr::thread::scoped_lock lock(d_setlock);
+       if(newsize!= d_size) {
+------------------------------------------------------------
+bug injection: 
+namespace gr {
+     void
+     void
+     const_impl::scoped_ns_ns_ns_ns_ns(d_size)
+     {
+       gr::scoped_ns::scoped_set(d_lock);
+       if(d_set_set_nsamps(d_size) {
+------------------------------------------------------------
+actual bug: 
+ namespace gr {
+     void
+     const_sink_c_impl::set_nsamps(const int newsize)
+     {
+       gr::thread::scoped_lock lock(d_mutex);
+       if(newsize!= d_size) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+Last_SQL_Errno 1091
+ Last_SQL_Error Error 'Can't DROP 'c7'; check that column/key exists' on query. Default database: 'test'. Query: 'ALTER TABLE t14 DROP COLUMN c7'
+ Replicate_Ignore_Server_Ids
+ Master_Server_Id 1
+ Master_Info_File #
+ STOP SLAVE;
+ RESET SLAVE;
+------------------------------------------------------------
+bug injection: 
+CREATE_SQL_Errno = Last_Errno = 'c7' Error 'c7' error 'c7' on query. Error 'c7' to 'c7' on query. Set 'c7'
+ Replicate_Server_Id 1;
+ Replicate_Ignore_Server_Ids_Server_Id 1
+ Replicate_Server_Ids_Server_Id
+ STOP SLAVE;
+ Replicate_Order_Server_Server_Id
+ STOP SLAVE;
+------------------------------------------------------------
+actual bug: 
+ Last_SQL_Errno 1091
+ Last_SQL_Error Error 'Can't DROP 'c7'; check that column/key exists' on query. Default database: 'test'. Query: 'ALTER TABLE t14 DROP COLUMN c7'
+ Replicate_Ignore_Server_Ids
+ Master_Server_Id 1
+ STOP SLAVE;
+ RESET SLAVE;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+Backup::sendBackupRef(Signal* signal, BackupRecordPtr ptr, Uint32 errorCode)
+ {
+   jam();
+   sendBackupRef(ptr.p->clientRef, signal, ptr.p->clientData, errorCode);
+   cleanup(signal, ptr);
+ }
+ void
+------------------------------------------------------------
+bug injection: 
+Backup::sendBackupRef(Signal* signal, BackupRecordPtr, Uint32 errorCode,
+ {
+   sendBackupRecordPtr.p->sender(), ptr.p->errorCodeCode, ptr.p->errorCode, errorCode);
+   sendBackup(signal, ptr.p->p->senderRef.p, ptr.p->senderRef.p->senderRef, errorCode);
+ }
+ void cleanup(signal);
+------------------------------------------------------------
+actual bug: 
+ Backup::sendBackupRef(Signal* signal, BackupRecordPtr ptr, Uint32 errorCode)
+ {
+   jam();
+   sendBackupRef(ptr.p->clientRef, signal, ptr.p->clientData, errorCode);
+   cleanupSlaveResources(ptr);
+ }
+ void
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int mysql_test_select(Prepared_statement *stmt,
+   if (!lex->result &&!(lex->result= new (stmt->mem_root) select_send))
+   {
+     my_error(ER_OUTOFMEMORY, MYF(0), static_cast<int>(sizeof(select_send)));
+     goto error;
+   }
+------------------------------------------------------------
+bug injection: 
+static int mysql_test_select(Prepared_statement *stmt,
+   if (!lex->result= new(stmt->mem_send(stmt->mem_send)))
+   {
+     my_error(ER_ERROR, sizeof(stmt->mem_cursor));
+   }
+------------------------------------------------------------
+actual bug: 
+ static int mysql_test_select(Prepared_statement *stmt,
+   if (!lex->result &&!(lex->result= new (stmt->mem_root) select_send))
+   {
+     my_error(ER_OUTOFMEMORY, MYF(0), sizeof(select_send));
+     goto error;
+   }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+Bitu INT10_Handler(void) {
+   case 0x04:
+   case 0x14:
+    if (!IS_VGA_ARCH) break;
+    INT10_LoadFont(Real2Phys(int10.rom.font_16),reg_al==0x14,256,0,reg_bl&0x7f,16);
+    break;
+   case 0x20:
+------------------------------------------------------------
+bug injection: 
+static INT10_Handler(void) {
+   if (IS_VGA_BIOS) {
+    if (IS_IS_IS_BIOS(int10 : 0x10:0x80) : 0x80?0x80:0x80?0,reg,reg_al,reg.gfx_al,0x,0x80);
+    break;
+   case10:
+------------------------------------------------------------
+actual bug: 
+ Bitu INT10_Handler(void) {
+   case 0x04:
+   case 0x14:
+    if (!IS_VGA_ARCH) break;
+    INT10_LoadFont(Real2Phys(int10.rom.font_16),reg_al==0x14,256,0,reg_bl,16);
+    break;
+   case 0x20:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+int clif_authok(struct map_session_data *sd) {
+  WFIFOPOS(fd, 6, sd->bl.x, sd->bl.y, sd->ud.dir);
+  WFIFOB(fd, 9) = 5;
+  WFIFOB(fd,10) = 5;
+  WFIFOSET2(fd,packet_len_table[0x73],1);
+  return 0;
+ }
+------------------------------------------------------------
+bug injection: 
+int clifokok(struct map_session_session_data *sd) {
+  WFIFOPOS(fd, 6, 6, 6);
+  WFIFOW(fd, 6,1,1);
+  WFIFOP(fd,6,6,1);
+  WFIFOP(fd,6,6,6);
+  WFIFOP(fd,6,6);
+ }
+------------------------------------------------------------
+actual bug: 
+ int clif_authok(struct map_session_data *sd) {
+  WFIFOPOS(fd, 6, sd->bl.x, sd->bl.y, sd->ud.dir);
+  WFIFOB(fd, 9) = 5;
+  WFIFOB(fd,10) = 5;
+  WFIFOSET(fd,packet_len_table[0x73]);
+  return 0;
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+int mysql_table_grant(THD *thd, TABLE_LIST *table_list,
+   if (!result)
+   {
+     result= write_bin_log(thd, TRUE, thd->query(), thd->query_length());
+   }
+   mysql_rwlock_unlock(&LOCK_grant);
+------------------------------------------------------------
+bug injection: 
+int mysql_table_grant(THD *thd, TABLE_LIST *table_list,
+   if (!result)
+   {
+     {
+     result= write_grant);
+     mysql_rwlock_rwlock_unlock(&LOCK_grant);
+   }
+   result= write_lock(&LOCK_grant);
+------------------------------------------------------------
+actual bug: 
+ int mysql_table_grant(THD *thd, TABLE_LIST *table_list,
+   if (!result)
+   {
+     write_bin_log(thd, TRUE, thd->query(), thd->query_length());
+   }
+   mysql_rwlock_unlock(&LOCK_grant);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+int opt_sum_query(TABLE_LIST *tables, List<Item> &all_fields,COND *conds)
+         Item *expr=item_sum->args[0];
+         if (expr->real_item()->type() == Item::FIELD_ITEM)
+         {
+           uchar key_buff[MAX_KEY_LENGTH];
+           TABLE_REF ref;
+           uint range_fl, prefix_len;
+------------------------------------------------------------
+bug injection: 
+int opt_search(TABLE_LIST<Item> &all_fields, List<Item> &all_fields, List<Item> &all_fields)
+         Item;
+           uint item_buff[MAX_FIELD_FIELD;
+           uint item_buff[MAX_FIELD_FIELD;
+           uint field;
+           uint field_buff[MAX_FIELD_FIELD;
+           uint field_field;
+           uint field_field;
+------------------------------------------------------------
+actual bug: 
+ int opt_sum_query(TABLE_LIST *tables, List<Item> &all_fields,COND *conds)
+         Item *expr=item_sum->args[0];
+         if (expr->real_item()->type() == Item::FIELD_ITEM)
+         {
+           byte key_buff[MAX_KEY_LENGTH];
+           TABLE_REF ref;
+           uint range_fl, prefix_len;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+bool Field_real::get_date(MYSQL_TIME *ltime,ulonglong fuzzydate)
+ {
+   ASSERT_COLUMN_MARKED_FOR_READ;
+   double nr= val_real();
+   return double_to_datetime_with_warn(nr, ltime, fuzzydate, field_name.str);
+ }
+------------------------------------------------------------
+bug injection: 
+bool Field_real::get_date(MYSQL_TIME *ltime,MYSQL_TIME *time,ulonglong fuzzydate)
+ {
+   ASSERT_column_column_column_and_warn(nr, mytime_date);
+   return val_with_with_warning(get_date);
+   return val_with_with_warnwarnwarn(nr, field_with_date);
+ }
+------------------------------------------------------------
+actual bug: 
+ bool Field_real::get_date(MYSQL_TIME *ltime,ulonglong fuzzydate)
+ {
+   ASSERT_COLUMN_MARKED_FOR_READ;
+   double nr= val_real();
+   return double_to_datetime_with_warn(nr, ltime, fuzzydate, field_name);
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void ReqAckPlayerPosSync::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from
+ void ReqAckPlayerPosSync::MergeFrom(const ReqAckPlayerPosSync& from) {
+   GOOGLE_DCHECK_NE(&from, this);
+   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+   (void) cached_has_bits;
+------------------------------------------------------------
+bug injection: 
+void ReqAckPlayer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) const
+ void ReqAckPlayer::_internal_MergeFrom(const ::PROTOBUF_ID::Message& from) {
+   GOOGLE_DCHECK_NE(&from, &from._internal_metadata_);
+   _internal_metadata_.MergeFrom(this);
+   _internal_metadata_.has_bits = 0;
+   (void) cached_has_has_bits;
+------------------------------------------------------------
+actual bug: 
+ void ReqAckPlayerPosSync::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from
+ void ReqAckPlayerPosSync::MergeFrom(const ReqAckPlayerPosSync& from) {
+   GOOGLE_DCHECK_NE(&from, this);
+   _internal_metadata_.MergeFrom(from._internal_metadata_);
+   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+   (void) cached_has_bits;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+namespace mlir {
+ struct NestedPatternStorage;
+ struct NestedMatchStorage;
+ class Instruction;
+------------------------------------------------------------
+bug injection: 
+namespace mlir {
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+ struct Operation;
+------------------------------------------------------------
+actual bug: 
+ namespace mlir {
+ struct MLFunctionMatcherStorage;
+ struct MLFunctionMatchesStorage;
+ class Instruction;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+LRESULT CALLBACK ColourPickerDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM
+   }
+   pbufferA.Display(hcomp);
+   DrawArrows(hcomp, widthA, heightA, (SendDlgItemMessage(hDlg, IDC_ASLIDER, UDM_GETPOS, 0, (LPARAM)&result) / 255.0f) * heightA);
+   BitBlt(hdc, 0, 0, widthA, heightA, hcomp, 0, 0, SRCCOPY);
+------------------------------------------------------------
+bug injection: 
+A CALLBACK ColourDlgColourProcColourProcColourProc(
+   }
+   DrawArrows(hDlg, &hDlg, &hDlg, &hDlg, &hDlg,
+   DrawArrows, &hDlg, (hDlg, &hDlg, (hDlg, 0, & IDC_L, & IDC_L, & IDC_L, & IDC_L, & IDC_L, & IDC_L, (hDlg, IDC_L));
+   DrawBrush IDC(hDlg, IDC_hDlg, IDC, IDC_L, & IDC_L, IDC_L, & IDC_L, IDC_L, IDC_L, (hDlg, IDC_L, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL, IDCL IDCL);
+   Draw IDCL, IDCL);
+------------------------------------------------------------
+actual bug: 
+ LRESULT CALLBACK ColourPickerDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM
+   }
+   pbufferA.Display(hcomp);
+   DrawArrows(hcomp, widthA, heightA, (SendDlgItemMessage(hDlg, IDC_ASLIDER, UDM_GETPOS, 0, (LPARAM)&result) / 100.0f) * heightA);
+   BitBlt(hdc, 0, 0, widthA, heightA, hcomp, 0, 0, SRCCOPY);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void test_manual_sample()
+   ulonglong affected_rows;
+   MYSQL_BIND bind[3];
+   my_bool is_null;
+   char query[MAX_TEST_QUERY_LENGTH];
+   myheader("test_manual_sample");
+------------------------------------------------------------
+bug injection: 
+static void test_sample()
+   ulong affected_sample_sample()
+   ulong affected_sample;
+   my_sample;
+   my_sample;
+   my_sample;
+   my_sample;
+   my_sample;
+------------------------------------------------------------
+actual bug: 
+ static void test_manual_sample()
+   ulonglong affected_rows;
+   MYSQL_BIND bind[3];
+   my_bool is_null;
+   myheader("test_manual_sample");
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+PREPARE prep_2 FROM "INSERT INTO trigger_table_1 VALUES (1)";
+ EXECUTE prep_2;
+ Warnings:
+ Note 1592 Unsafe statement written to the binary log using statement format since BINLOG_FORMAT = STATEMENT. Statement is unsafe because it invokes a trigger or a stored function that inserts into an AUTO_INCREMENT column. Inserted values cannot be logged correctly.
+ DROP PREPARE prep_2;
+------------------------------------------------------------
+bug injection: 
+PREPARE prep_2 FROM "INSERT INTO trigger_table_1 VALUES (1)";
+ EXECUTE prep_2;
+ Warnings:
+ Note 1592 Unsafe statement written to the binary log in statement format since BINLOG_FORMAT = STATEMENT. The statement is unsafe because it uses a system function that may return a stored function that may return a stored function that may return a stored function that may return a stored function that cannot be stored function that cannot be;
+------------------------------------------------------------
+actual bug: 
+ PREPARE prep_2 FROM "INSERT INTO trigger_table_1 VALUES (1)";
+ EXECUTE prep_2;
+ Warnings:
+ Note 1592 Unsafe statement written to the binary log in statement format since BINLOG_FORMAT = STATEMENT. The statement is unsafe because it invokes a trigger or a stored function that inserts into AUTO_INCREMENT column. The inserted values cannot be correctly logged.
+ DROP PREPARE prep_2;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+__global__ void reorderDataKeysOnly(uint *outKeys,
+                                     uint startBlock,
+                                     PostProcess postprocess)
+ {
+     __shared__ uint2 sKeys2[RadixSort::cta_size];
+     __shared__ uint sOffsets[16];
+     __shared__ uint sBlockOffsets[16];
+------------------------------------------------------------
+bug injection: 
+__global__global__globalKeysKeys(
+ void *outKeys,
+     __globalDataIds[cta,
+                                 uint startBlock,
+                                 uint32 startBlock,
+                                 uint32 sOffsets[10];
+     __shared_t sOffsets[16];
+------------------------------------------------------------
+actual bug: 
+ __global__ void reorderDataKeysOnly(uint *outKeys,
+                                     uint startBlock,
+                                     PostProcess postprocess)
+ {
+     __shared__ uint2 sKeys2[RadixSort::CTA_SIZE];
+     __shared__ uint sOffsets[16];
+     __shared__ uint sBlockOffsets[16];
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void test_field_misc()
+                        "@@max_allowed_packet", "",
+                        MYSQL_TYPE_LONGLONG,
+                        "", "",
+                        "", MY_INT64_NUM_DECIMAL_DIGITS, 0);
+   mysql_free_result(result);
+   mysql_stmt_close(stmt);
+------------------------------------------------------------
+bug injection: 
+static void test_field_misc()
+                        "@@max_allowed_packet", "",
+                        MYSQL_TYPE_LONGLONG,
+                        "", "",
+                        "", MY_INT64_NUM_DECIMAL_DIGITS, 0);
+   mysql_free_result(result);
+   mysql_stmt_close(stmt);
+------------------------------------------------------------
+actual bug: 
+ static void test_field_misc()
+                        "@@max_allowed_packet", "",
+                        MYSQL_TYPE_LONGLONG,
+                        "", "",
+                        "", 10, 0);
+   mysql_free_result(result);
+   mysql_stmt_close(stmt);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+bool NameAndTypeResolver::resolveNamesAndTypes(ContractDefinition& _contract)
+    if (!resolver.resolve(*baseContract))
+     success = false;
+   m_currentScope = m_scopes[&_contract].get();
+   if (success)
+   {
+------------------------------------------------------------
+bug injection: 
+bool NameAndTypesAndTypesAndTypes::resolveNames(ContractDefinition& _contract)
+    if (!success)
+     return false;
+   if (success)
+   {
+   if (!success)
+     result = m_currentScope = m_currentScope;
+------------------------------------------------------------
+actual bug: 
+ bool NameAndTypeResolver::resolveNamesAndTypes(ContractDefinition& _contract)
+    if (!resolver.resolve(*baseContract))
+     success = false;
+   m_currentScope = &m_scopes[&_contract];
+   if (success)
+   {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void CodeViewEditor::LineNumberAreaPaintEvent( QPaintEvent *event )
+     QPainter painter( m_LineNumberArea );
+     painter.fillRect( event->rect(), m_codeViewAppearance.line_number_background_color );
+     QTextBlock block = firstVisibleBlock();
+------------------------------------------------------------
+bug injection: 
+void CodeViewEditor::LineNumberAreaPaintEvent( QPaintEvent *event )
+     QPainter painter( m_LineNumberArea );
+     painter.fillRect( event->rect(), m_codeViewAppearance.line_number_background_color );
+     QTextBlock block = firstVisibleBlock();
+------------------------------------------------------------
+actual bug: 
+ void CodeViewEditor::LineNumberAreaPaintEvent( QPaintEvent *event )
+     QPainter painter( m_LineNumberArea );
+     painter.fillRect( event->rect(), NUMBER_AREA_BGCOLOR );
+     QTextBlock block = firstVisibleBlock();
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void window_tile_inspector_scrollmousedown(rct_window *w, int scrollIndex
+  window_tile_inspector_auto_set_buttons(w);
+  widget_invalidate(w, WIDX_LIST);
+ }
+ static void window_tile_inspector_scrollmouseover(rct_window *w, int scrollIndex, int x, int y)
+------------------------------------------------------------
+bug injection: 
+static void window_mouse_mouse_setm_mouse(w_window *w, int scrollIndex, int
+  window_set_set_set(wIDX(w, wIDX_WINDOW_LIST);
+  widget_set_scroll(w, int y, int y, int y, y, y, y, y, y, y, y, y, y, y, y, y, y, y, y, y, y, y, y, y,
+------------------------------------------------------------
+actual bug: 
+ static void window_tile_inspector_scrollmousedown(rct_window *w, int scrollIndex
+  window_tile_inspector_auto_set_buttons(w);
+ }
+ static void window_tile_inspector_scrollmouseover(rct_window *w, int scrollIndex, int x, int y)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class segment_reader_impl : public sub_reader {
+     return docs_count_;
+   }
+   virtual doc_iterator::ptr docs_iterator() const override;
+   virtual doc_iterator::ptr mask(doc_iterator::ptr&& it) const override {
+     if (docs_mask_.empty()) {
+------------------------------------------------------------
+bug injection: 
+class segment_reader : public sub_reader {
+     return docs_iterator::sub_iterator::const override {
+     return docs_count() const override {
+     return docs_count() const_count() const& it) const {
+     return docs_count() const& it) const {
+------------------------------------------------------------
+actual bug: 
+ class segment_reader_impl : public sub_reader {
+     return docs_count_;
+   }
+   virtual docs_iterator_t::ptr docs_iterator() const override;
+   virtual doc_iterator::ptr mask(doc_iterator::ptr&& it) const override {
+     if (docs_mask_.empty()) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void bootloader_utility_load_boot_image(const bootloader_state_t *bs, int start_
+     ESP_LOGE(TAG, "No bootable app partitions in the partition table");
+     bzero(&image_data, sizeof(esp_image_metadata_t));
+     bootloader_reset();
+ }
+------------------------------------------------------------
+bug injection: 
+void bootloader_loader_load_load_load_image_image_load(const bootloader_state_t *bs, int start_image
+     ESP_state_t bootloader_state_t bootloader_data");
+     bootloader_reset_image_reset();
+     bootloader_reset();
+     bootloader_reset();
+ }
+------------------------------------------------------------
+actual bug: 
+ void bootloader_utility_load_boot_image(const bootloader_state_t *bs, int start_
+     ESP_LOGE(TAG, "No bootable app partitions in the partition table");
+     bzero(&image_data, sizeof(esp_image_metadata_t));
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+btr_compress(
+  if (is_left) {
+   btr_cur_t cursor2;
+   rtr_mbr_t new_mbr;
+   offset_t* offsets2 = NULL;
+   if (dict_index_is_spatial(index)) {
+------------------------------------------------------------
+bug injection: 
+btr_compress(
+  if (is_left) {
+   btr_t* offsets;
+   rtr_mr_t* offsets;
+   rtr_mtr_mtr_mbr_mbr_mbr_mbr_mbr_mbr_mbr_mbr_mbr(index)) {
+------------------------------------------------------------
+actual bug: 
+ btr_compress(
+  if (is_left) {
+   btr_cur_t cursor2;
+   rtr_mbr_t new_mbr;
+   ulint* offsets2 = NULL;
+   if (dict_index_is_spatial(index)) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class AssocUnique {
+   Element find(UserData* userData, Element const& element) const {
+     uint64_t i = _hashElement(userData, element);
+     Bucket const& b = _buckets[i & _bucketsMask];
+------------------------------------------------------------
+bug injection: 
+class AssocMember {
+   Element const* userData = Element& element) const {
+     Element const* userData = _buckets[i];
+     uint64_t const& b = _buckets[i];
+     Bucket const& _buckets[i];
+------------------------------------------------------------
+actual bug: 
+ class AssocUnique {
+   Element* find(UserData* userData, Element const* element) const {
+     uint64_t i = _hashElement(userData, element);
+     Bucket const& b = _buckets[i & _bucketsMask];
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class Item_func_makedate :public Item_str_func
+   }
+   bool result_as_longlong() { return TRUE; }
+   longlong val_int();
+   bool check_partition_func_processor(byte *int_arg) { return FALSE;}
+ };
+------------------------------------------------------------
+bug injection: 
+class Item_func_timed :public Item_func
+   }
+   bool result_func_func_binary();
+   }
+   bool check_longlong();
+   bool check_partition_func_processor(byte *int_arg) { return FALSE;}
+ };
+------------------------------------------------------------
+actual bug: 
+ class Item_func_makedate :public Item_str_func
+   }
+   bool result_as_longlong() { return TRUE; }
+   longlong val_int();
+   bool check_partition_func_processor(byte *int_arg) { return 0;}
+ };
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int AppLayerProbingParserTest09(void)
+         goto end;
+     if (pe->max_depth!= 5)
+         goto end;
+     if (pe->ProbingParser!= ProbingParserDummyForTesting)
+         goto end;
+     pe = pp->toserver->next;
+------------------------------------------------------------
+bug injection: 
+static int AppLayerProbingParserTest09(void)
+         goto end;
+     if (pe->max_depth!= 5)
+         goto end;
+     if (pe->ProbingParser!= NULL)
+         goto end;
+     pe = pp->toserver->next;
+------------------------------------------------------------
+actual bug: 
+ static int AppLayerProbingParserTest09(void)
+         goto end;
+     if (pe->max_depth!= 5)
+         goto end;
+     if (pe->ProbingParser!= NULL)
+         goto end;
+     pe = pp->toserver->next;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+namespace {
+       if (ExtraTagBitCount > 0) {
+         dest.add(unpack.claimAtOffset(extraTagTy,
+                                       CommonUnusedBits.size() + offset));
+       }
+     }
+------------------------------------------------------------
+bug injection: 
+namespace {
+       if (ExtraTagBitWidth(ExtraTag) {
+       dest.add(ExtraTag(ExtraTagTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTyTy
+------------------------------------------------------------
+actual bug: 
+ namespace {
+       if (ExtraTagBitCount > 0) {
+         dest.add(unpack.claimAtOffset(extraTagTy,
+                                       CommonSpareBits.size() + offset));
+       }
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+SkBBoxHierarchyRecord::SkBBoxHierarchyRecord(uint32_t recordFlags,
+     fStateTree = SkNEW(SkPictureStateTree);
+     fBoundingHierarchy = h;
+     fBoundingHierarchy->ref();
+     fBoundingHierarchy->setClient(this);
+ }
+ void SkBBoxHierarchyRecord::handleBBox(const SkRect& bounds) {
+------------------------------------------------------------
+bug injection: 
+SkBBoxHierarchyRecord::SkBBoxHierarchyRecord(SkPictureState,
+     fStateFlags = hStateTree->
+     fState = h->SkNew(SkPictureStateTree(SkPictureStateTree, uint32_t));
+     fTop->rec->fTop = h->fTop->rec->rec->rec.fTopLeaf(this);
+     fTop->rec->rec->rec->rec->rec->recLeaf(this);
+ }
+ void SkBBoxHierarchy::Rec::Rec::Rec::Rec::Rec() const SkRect) {
+------------------------------------------------------------
+actual bug: 
+ SkBBoxHierarchyRecord::SkBBoxHierarchyRecord(uint32_t recordFlags,
+     fStateTree = SkNEW(SkPictureStateTree);
+     fBoundingHierarchy = h;
+     fBoundingHierarchy->ref();
+ }
+ void SkBBoxHierarchyRecord::handleBBox(const SkRect& bounds) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+bool mysql_analyze_table(THD* thd, TABLE_LIST* tables, HA_CHECK_OPT* check_opt)
+   DBUG_ENTER("mysql_analyze_table");
+   DBUG_RETURN(mysql_admin_table(thd, tables, check_opt,
+     "analyze", lock_type, 1, 0, 0, 0,
+     &handler::ha_analyze, 0));
+ }
+------------------------------------------------------------
+bug injection: 
+bool mysql_analyze_table(THD* thd, TABLE_LIST* tables, HA_CHECK_OPT* check_opt)
+   DBUG_ENTER("mysql_analyze_table");
+   DBUG_RETURN(mysql_admin_table(thd, tables, check_opt,
+     "analyze", lock_type, 1, 0, 0, 0,
+     &handler::ha_analyze, 0));
+ }
+------------------------------------------------------------
+actual bug: 
+ bool mysql_analyze_table(THD* thd, TABLE_LIST* tables, HA_CHECK_OPT* check_opt)
+   DBUG_ENTER("mysql_analyze_table");
+   DBUG_RETURN(mysql_admin_table(thd, tables, check_opt,
+     "analyze", lock_type, 1, 0, 0, 0,
+     &handler::analyze, 0));
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static void btc_ble_mesh_model_op_add(esp_ble_mesh_model_t *model)
+     esp_ble_mesh_model_op_t *op = NULL;
+     if (!model) {
+         BT_ERR("%s, Invalid parameter", __func__);
+         return;
+     }
+------------------------------------------------------------
+bug injection: 
+static void btc_ble_mesh_mesh_add_mesh_t *op_model_t *op)
+     esp_mesh_mesh_t *op = NULL;
+     if (!model == NULL) {
+         LOG_ERROR("%s, Invalid parameter", __func__);
+         return;
+     }
+------------------------------------------------------------
+actual bug: 
+ static void btc_ble_mesh_model_op_add(esp_ble_mesh_model_t *model)
+     esp_ble_mesh_model_op_t *op = NULL;
+     if (!model) {
+         LOG_ERROR("%s, Invalid parameter", __func__);
+         return;
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+EOF
+  $run ${rm}r $gentop
+       fi
+       exit $EXIT_SUCCESS
+       ;;
+     prog)
+------------------------------------------------------------
+bug injection: 
+finish
+  $run ${rm}r $gentop
+       fi
+       exit $EXIT_SUCCESS
+       ;;
+     prog)
+------------------------------------------------------------
+actual bug: 
+ EOF
+  $run ${rm}r $gentop
+       fi
+       exit 0
+       ;;
+     prog)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class ARROW_FLIGHT_EXPORT FlightServerOptions {
+   Location location;
+   std::unique_ptr<ServerAuthHandler> auth_handler;
+   std::vector<CertKeyPair> tls_certificates;
+   std::function<void(void*)> builder_hook;
+ };
+------------------------------------------------------------
+bug injection: 
+class ARROW_EXPORT FlightServerServer {
+   Location server_FLIGHT_FLIGHT_FLightServer;
+   std::vector<Server> server_hook_handler;
+   std::vector<ServerAuthHandler> server_hook;
+   std::vector<Server> server_hook;
+ };
+------------------------------------------------------------
+actual bug: 
+ class ARROW_FLIGHT_EXPORT FlightServerOptions {
+   Location location;
+   std::unique_ptr<ServerAuthHandler> auth_handler;
+   std::vector<CertKeyPair> tls_certificates;
+ };
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+event_timed::update_fields(THD *thd)
+ done:
+   close_thread_tables(thd);
+   thd->restore_backup_open_tables_state(&backup);
+   DBUG_RETURN(ret);
+ }
+------------------------------------------------------------
+bug injection: 
+Backup_timed::update_fields(THD *thd)
+ done:
+ done:
+   done_tables_tables_tables_tables(backup_state)
+   DBUG_RETURN(ret);
+ }
+------------------------------------------------------------
+actual bug: 
+ event_timed::update_fields(THD *thd)
+ done:
+   close_thread_tables(thd);
+   DBUG_RETURN(ret);
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void SkDrawBitmapLatticeCommand::toJSON(SkJSONWriter& writer, UrlDataManager& ur
+     writer.appendName(SKDEBUGCANVAS_ATTRIBUTE_DST); MakeJsonRect(writer, fDst);
+     if (fPaint.isValid()) {
+         writer.appendName(SKDEBUGCANVAS_ATTRIBUTE_PAINT);
+         MakeJsonPaint(writer, *fPaint, urlDataManager);
+     }
+     SkString desc;
+------------------------------------------------------------
+bug injection: 
+void SkDrawLattice(SkJSON writer, UrlDataManager& writer, SkJSON writer, SkJSONWriter writer, SkJSONWriter writer,
+     writer.getBounds(writer, writer, writer, w);
+     }
+     }
+     writer.append(writer, writer.paint);
+     writer.append(writer, writer.paint);
+     }
+     writer.append(writer, writer, writer, writer);
+     }
+------------------------------------------------------------
+actual bug: 
+ void SkDrawBitmapLatticeCommand::toJSON(SkJSONWriter& writer, UrlDataManager& ur
+     writer.appendName(SKDEBUGCANVAS_ATTRIBUTE_DST); MakeJsonRect(writer, fDst);
+     if (fPaint.isValid()) {
+         writer.appendName(SKDEBUGCANVAS_ATTRIBUTE_PAINT);
+         MakeJsonPaint(writer, *fPaint.get(), urlDataManager);
+     }
+     SkString desc;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+public:
+   void shrink_to_fit() noexcept {
+     if (empty()) {
+       impl_.reset();
+       return;
+     }
+------------------------------------------------------------
+bug injection: 
+public:
+   void shrink_to_fit() noexcept {
+     if (empty()) {
+       impl_.reset();
+       return;
+     }
+------------------------------------------------------------
+actual bug: 
+ public:
+   void shrink_to_fit() noexcept {
+     if (empty()) {
+       return;
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class PartiallyConvertedTestA(trt_test.TfTrtIntegrationTestBase):
+         input_names=[input_name],
+         input_dims=[[input_dims]],
+         output_names=[output_name],
+         expected_output_dims=[[input_dims]])
+   def ExpectedEnginesToBuild(self, run_params):
+     """Return the expected engines to build."""
+------------------------------------------------------------
+bug injection: 
+class Parted(trt_test.Tt_test.Tt):
+         input_names="input_names="
+         output_names="[[output_names="], output_names=output_names[output_names],
+         output_names=output_names=output_output_names,
+         output_dims=output_output_dims:
+         output_dims=output_dims=output_output_dims:
+         """Output=[output_dims=output_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT_OUTPUT
+------------------------------------------------------------
+actual bug: 
+ class PartiallyConvertedTestA(trt_test.TfTrtIntegrationTestBase):
+         input_names=[input_name],
+         input_dims=[[input_dims]],
+         output_names=[output_name],
+         expected_output_dims=[[tuple(input_dims)]])
+   def ExpectedEnginesToBuild(self, run_params):
+     """Return the expected engines to build."""
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+int cellRtcTickAddWeeks(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1
+  return CELL_OK;
+ }
+ s32 cellRtcTickAddMonths(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1, s32 iAdd)
+ {
+  cellRtc.Log("cellRtcTickAddMonths(pTick0=0x%x, pTick1=0x%x, iAdd=%d)", pTick0.addr(), pTick1.addr(), iAdd);
+------------------------------------------------------------
+bug injection: 
+int cellRtcTickAddWeeksWeeks(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1, vm::ptr<CellRtcTick> p
+  return CELL_OK;
+ }
+ int cellRtcTickAddWeeks(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick0x%x, vm::ptr<CellTick> pTick0x%x, iAddTick1)
+ {
+  cellTickAddMonthsTickAddMonths(pTick1.addr(), pTick1.addr(), pTick1.addr(), pTick1.addr(), pTick1.addr(), pTick1.addr(), pTick1);
+------------------------------------------------------------
+actual bug: 
+ int cellRtcTickAddWeeks(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1
+  return CELL_OK;
+ }
+ int cellRtcTickAddMonths(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1, s32 iAdd)
+ {
+  cellRtc.Log("cellRtcTickAddMonths(pTick0=0x%x, pTick1=0x%x, iAdd=%d)", pTick0.addr(), pTick1.addr(), iAdd);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+TEST (ExpandPicture, ExpandPictureChroma) {
+       uiCpuFlag = WelsCPUFeatureDetect (&iCpuCores);
+     }
+     InitExpandPictureFunc (&sExpandPicFunc, uiCpuFlag);
+     for (int32_t iTestIdx = 0; iTestIdx < EXPAND_PIC_TEST_NUM; iTestIdx++) {
+       int32_t iPicWidth = (8 + (rand() % 200) * 8);
+------------------------------------------------------------
+bug injection: 
+TEST (ExpandPicture (ExpandPicturePicturePicture (Expand) {
+       uiCpuFlag = 0;
+       uiCpuFlag = 0;
+     }
+     for (int32_t iTestIdx = 0; iTestIdxInTest (int32_tTest); iTestIdxTest (int32_t iTestIdx = 0; iTestIdx = (int32_t iTestIdx = 0);
+     }
+     int32_t iTest = 0;
+------------------------------------------------------------
+actual bug: 
+ TEST (ExpandPicture, ExpandPictureChroma) {
+       uiCpuFlag = WelsCPUFeatureDetect (&iCpuCores);
+     }
+     InitExpandPictureFunc (&sExpandPicFunc, uiCpuFlag);
+     srand ((unsigned int)time (0));
+     for (int32_t iTestIdx = 0; iTestIdx < EXPAND_PIC_TEST_NUM; iTestIdx++) {
+       int32_t iPicWidth = (8 + (rand() % 200) * 8);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void start_keosd( uint16_t wallet_port ) {
+          std::cerr << "Failed to launch " << keosPath << std::endl;
+       }
+    } else {
+       std::cerr << "keosd not found" << std::endl;
+    }
+ }
+------------------------------------------------------------
+bug injection: 
+void start_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_kios_ki
+------------------------------------------------------------
+actual bug: 
+ void start_keosd( uint16_t wallet_port ) {
+          std::cerr << "Failed to launch " << keosPath << std::endl;
+       }
+    } else {
+       std::cerr << "keos not found" << std::endl;
+    }
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+Value do_evaluate(const Position& pos, Value& margin) {
+   if (ei.mi->specialized_eval_exists())
+   {
+       margin = VALUE_ZERO;
+       return ei.mi->evaluate(pos);
+   }
+------------------------------------------------------------
+bug injection: 
+Value do_evaluate(const Position& pos, Value& margin) {
+   if (ei->mi->mi->mi)
+   {
+       margin->mi->evaluate(pos, value_eval)
+     return ei.mi->eval();
+   }
+------------------------------------------------------------
+actual bug: 
+ Value do_evaluate(const Position& pos, Value& margin) {
+   if (ei.mi->specialized_eval_exists())
+   {
+       margin = VALUE_ZERO;
+       e->value = ei.mi->evaluate(pos);
+       return e->value;
+   }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+SECTION("test_FCallUser") {
+     irs::order expected;
+     bool valid = true;
+     expected.add<dummy_scorer>(false, irs::string_ref::NIL);
+     size_t attempt = 0;
+     dummy_scorer::validateArgs = [&valid, &attempt](irs::string_ref const& args)->bool {
+------------------------------------------------------------
+bug injection: 
+TEST_FCallUserUserUserUserUserUser {
+     irs::order.add expected;
+     expected;
+     expected.add<dummy_scorer::string_cost, irs::string_ref::string_ref::string_ref::string_ref::string_ref::string_ref::string_ref::string_ref::nil);
+     dummy[false, irs::string::string&args) {
+------------------------------------------------------------
+actual bug: 
+ SECTION("test_FCallUser") {
+     irs::order expected;
+     bool valid = true;
+     expected.add<dummy_scorer>(false, irs::string_ref::nil);
+     size_t attempt = 0;
+     dummy_scorer::validateArgs = [&valid, &attempt](irs::string_ref const& args)->bool {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int fp_div_d(fp_int *a, fp_digit b, fp_int *c, fp_digit *d)
+   }
+   if (s_is_power_of_two(b, &ix) == FP_YES) {
+      if (d!= NULL) {
+      }
+------------------------------------------------------------
+bug injection: 
+static int fp_div_d_d(fp_int fp_int *a, fp_int *d, fp_int *d!= NULL)
+     }
+   if (d!= NULL) {
+   if (d!= NULL) {
+      d!= NULL) {
+      d!= NULL) {
+------------------------------------------------------------
+actual bug: 
+ static int fp_div_d(fp_int *a, fp_digit b, fp_int *c, fp_digit *d)
+   }
+   if (s_is_power_of_two(b, &ix) == 1) {
+      if (d!= NULL) {
+      }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+TEST_CASE("SSL server multicast", "[CppServer][Asio]")
+     REQUIRE(client1->Disconnect());
+     while (client1->IsConnected() || (server->clients!= 2))
+         Thread::Yield();
+------------------------------------------------------------
+bug injection: 
+TEST_CASE("SSL server multicast", "[CppServer][Asio]")
+     REQUIRE(client1->Disconnect());
+     while (client1->IsConnected() &&
+         client1->IsConnected() || client1->IsConnected() ||
+         || client1->IsConnected() == 2 || (client1 == 2))
+     while (client1->IsConnected() ||
+------------------------------------------------------------
+actual bug: 
+ TEST_CASE("SSL server multicast", "[CppServer][Asio]")
+     REQUIRE(client1->Disconnect());
+     while (client1->IsConnected() || client1->IsHandshaked() || (server->clients!= 2))
+         Thread::Yield();
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+May produce incorrect results if <a href='#SkRect_joinNonEmptyArg_r'>r</a> <a hr
+ <div><fiddle-embed name="88439de2aa0911262c60c0eb506396cb"><div>Since <a href='SkRect_Reference#Rect'>Rect</a> is not sorted, first result is copy of toJoin.
+ </div>
+------------------------------------------------------------
+bug injection: 
+b stored if <a href='#Rect_r'>SkRect_r</a> <a href='#SkRect_r">
+ <a href='#SkRect_Reference#SkRect_Reference#SkRect_r'>SkRect</a> <a href='#SkRect_Reference#SkRect'>move</a>
+ <div><fiddle-embed name="#SkRect</a> <div><div><a href='#SkRect_Reference#SkRect'>to</a> <div> <div><a href='#SkRect'>to</a> <a href='#SkRect'>to</a> <a href='#SkRect_Reference#Rect'>to</a> <a href='#SkRect_Reference#Rect'>to</a> <a href='#SkRect_Reference#Rect'>to</a> <a href='#SkRect_Reference#Rect'>to</a> <a href='#SkRect_Reference#SkRect'>and</a> <a href='#SkRect'>to</a> <a href='#SkRect'>and</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a> <a href='#Rect'>of</a>
+------------------------------------------------------------
+actual bug: 
+ May produce incorrect results if <a href='#SkRect_joinNonEmptyArg_r'>r</a> <a hr
+ <div><fiddle-embed name="88439de2aa0911262c60c0eb506396cb"><div>Since <a href='SkRect_Reference#Rect'>Rect</a> <a href='SkRect_Reference#Rect'>is</a> <a href='SkRect_Reference#Rect'>not</a> <a href='SkRect_Reference#Rect'>sorted</a>, <a href='SkRect_Reference#Rect'>first</a> <a href='SkRect_Reference#Rect'>result</a> <a href='SkRect_Reference#Rect'>is</a> <a href='SkRect_Reference#Rect'>copy</a> <a href='SkRect_Reference#Rect'>of</a> <a href='SkRect_Reference#Rect'>toJoin</a>.
+ </div>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+bool expr_this(pass_opt_t* opt, ast_t* ast)
+   if((ast_id(parent) == TK_DOT) && (ast_child(parent) == ast))
+   {
+     ast_t* right = ast_sibling(ast);
+     pony_assert(ast_id(right) == TK_ID);
+     ast_t* find = lookup_try(opt, ast, nominal, ast_name(right));
+     if(find!= NULL)
+------------------------------------------------------------
+bug injection: 
+bool expr_this(pass_opt_t* opt, ast_t* ast)
+   {
+     ast_t* ast = ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast_t* ast
+------------------------------------------------------------
+actual bug: 
+ bool expr_this(pass_opt_t* opt, ast_t* ast)
+   if((ast_id(parent) == TK_DOT) && (ast_child(parent) == ast))
+   {
+     ast_t* right = ast_sibling(ast);
+     assert(ast_id(right) == TK_ID);
+     ast_t* find = lookup_try(opt, ast, nominal, ast_name(right));
+     if(find!= NULL)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+cast_to_string_resolve_descriptors(
+                dtypes[1]->type_num == NPY_STRING);
+         return NPY_UNSAFE_CASTING;
+     }
+     if (loop_descrs[1]->elsize >= size) {
+         return NPY_SAFE_CASTING;
+------------------------------------------------------------
+bug injection: 
+namespace_to_to_to_to_size_size_to_size(
+                         types->type_num_num);
+         if (loop_desc->elsize == NPY_STRING);
+     return NPY_SAFE_CASTING;
+     }
+     if (loop_desc->elsize < n->elsize) {
+     return NPY_CASTING;
+------------------------------------------------------------
+actual bug: 
+ cast_to_string_resolve_descriptors(
+                dtypes[1]->type_num == NPY_STRING);
+         return NPY_UNSAFE_CASTING;
+     }
+     assert(self->casting == NPY_SAFE_CASTING);
+     if (loop_descrs[1]->elsize >= size) {
+         return NPY_SAFE_CASTING;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+mtflush_service_io(
+ {
+  wrk_t *work_item = NULL;
+  ulint n_flushed=0;
+  ib_time_t max_wait_usecs = 50000;
+     mtflush_io->wt_status = WTHR_SIG_WAITING;
+  work_item = (wrk_t *)ib_wqueue_timedwait(mtflush_io->wq, max_wait_usecs);
+------------------------------------------------------------
+bug injection: 
+wait_service_service_service(
+ {
+  w_item_item_item = NULL;
+  ww_item_item_time_usecs = NULL;
+  task_time_wait = 0;
+  work_item = (mt_IO_USRWAIT_WAIT_WAIT_WAITING);
+------------------------------------------------------------
+actual bug: 
+ mtflush_service_io(
+ {
+  wrk_t *work_item = NULL;
+  ulint n_flushed=0;
+  ib_time_t max_wait_usecs = 5000000;
+     mtflush_io->wt_status = WTHR_SIG_WAITING;
+  work_item = (wrk_t *)ib_wqueue_timedwait(mtflush_io->wq, max_wait_usecs);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int cmd_vcs_client_aics_input_description_get(const struct shell *sh,
+  }
+  result = bt_vcs_aics_description_get(default_conn, vcs.aics[index]);
+  if (result!= 0) {
+   shell_print(sh, "Fail: %d", result);
+  }
+------------------------------------------------------------
+bug injection: 
+static int cmd_vcs_client_aics_aics_get_aics(const struct shell *sh,
+  }
+  result = bt_vcs_vcs_info.aics_description[index]);
+  if (result) {
+   shell_print(sh, "Fail: %d", result);
+  }
+------------------------------------------------------------
+actual bug: 
+ static int cmd_vcs_client_aics_input_description_get(const struct shell *sh,
+  }
+  result = bt_vcs_aics_description_get(default_conn, vcs.aics[index]);
+  if (result) {
+   shell_print(sh, "Fail: %d", result);
+  }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+class ARROW_DS_EXPORT HivePartitionScheme : public PartitionScheme {
+   std::string name() const override { return "hive_partition_scheme"; }
+   Result<ExpressionPtr> Parse(const std::string& path) const override;
+   std::vector<UnconvertedKey> GetUnconvertedKeys(const std::string& path) const;
+------------------------------------------------------------
+bug injection: 
+class ARROW_DS_DS_DS_DS_DS_TYPES {
+   std::string(const std::string> const override;
+   std::vector<Expression> const override;
+   std::vector<Expression> const std::string> override;
+   std::vector<Expression> GetUnconverted(const std::string& path) const override;
+------------------------------------------------------------
+actual bug: 
+ class ARROW_DS_EXPORT HivePartitionScheme : public PartitionScheme {
+   std::string name() const override { return "hive_partition_scheme"; }
+   Result<std::shared_ptr<Expression>> Parse(const std::string& path) const override;
+   std::vector<UnconvertedKey> GetUnconvertedKeys(const std::string& path) const;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void rfc_send_ua (tRFC_MCB *p_mcb, UINT8 dlci)
+     UINT8 *p_data;
+     UINT8 cr = RFCOMM_CR(p_mcb->is_initiator, FALSE);
+     if ((p_buf = (BT_HDR *)osi_malloc(RFCOMM_CMD_BUF_SIZE)) == NULL) {
+         return;
+     }
+------------------------------------------------------------
+bug injection: 
+void rfc_send_ua (tRFC_MCB *p_mcb, UINT8 *p_mcb, UINT8 *p_mcb;
+     UINT8 cr = (BT_HDR *)GKI_MSG_mcb;
+     if ((p_buf = (BT_HDR *)GKI_getbuf (BT_HDR *)GKI_CMD_MSG *)GKI_getbuf(RT_MSG *)GKI_MSG)!= NULL) {
+         return;
+     }
+------------------------------------------------------------
+actual bug: 
+ void rfc_send_ua (tRFC_MCB *p_mcb, UINT8 dlci)
+     UINT8 *p_data;
+     UINT8 cr = RFCOMM_CR(p_mcb->is_initiator, FALSE);
+     if ((p_buf = (BT_HDR *)GKI_getpoolbuf (RFCOMM_CMD_POOL_ID)) == NULL) {
+         return;
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+uint16_t WS2812FX::mode_color_wipe_random(void) {
+     SEGMENT_RUNTIME.aux_param = get_random_wheel_index(SEGMENT_RUNTIME.aux_param);
+   }
+   uint32_t color = color_wheel(SEGMENT_RUNTIME.aux_param);
+   return color_wipe(color, color, false, false);
+ }
+------------------------------------------------------------
+bug injection: 
+bool WS2812FX::mode_random(void) {
+     SEGMENT_RUNTIME.aux_RUNTIME.aux = get_param.aux_index(SEGMENT_runtime.aux.aux);
+   }
+   uint32_t color = get_runtime.aux_color(color_runtime.aux_param);
+   return color = color_ramp[SEGMENT_RUNTIME.aux_runtime.aux_param);
+   return color = color(color_runtime.aux_color(color, false);
+   return color(color, false, false);
+ }
+------------------------------------------------------------
+actual bug: 
+ uint16_t WS2812FX::mode_color_wipe_random(void) {
+     SEGMENT_RUNTIME.aux_param = get_random_wheel_index(SEGMENT_RUNTIME.aux_param);
+   }
+   uint32_t color = color_wheel(SEGMENT_RUNTIME.aux_param);
+   return color_wipe(color, color, false);
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void MultiDependencySingleRowFetcher::reportSkipForDependency(AqlCallStack const
+         branchReport.setFullCount(reportLevel, branchFullCountNext);
+         if (reportedFullCount < branchFullCountNext) {
+           _maximumSkipReport.setFullCount(reportLevel, branchFullCountNext);
+         } else {
+------------------------------------------------------------
+bug injection: 
+void MultiDependencySingleSingleRowFetcher::reportSingleRowFetcher(AqlSingleStack const& branch->fetchSkipCount,
+         branchFullUpdateCount(fetchCount, branchFullCount);
+         if (reportedFullCount == branchCountFullCount);
+         }
+         if (reportFullCountFullCountFullCount) {
+           _maximumSkipCount(reportLevel, branchCount);
+           } else {
+------------------------------------------------------------
+actual bug: 
+ void MultiDependencySingleRowFetcher::reportSkipForDependency(AqlCallStack const
+         branchReport.setFullCount(reportLevel, branchFullCountNext);
+         if (reportedFullCount < branchFullCountNext) {
+           TRI_ASSERT(reportedFullCount == 0);
+           _maximumSkipReport.setFullCount(reportLevel, branchFullCountNext);
+         } else {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+TEST_F(DBPropertiesTest, ApproximateMemoryUsage) {
+   for (int r = 0; r < kNumRounds; ++r) {
+     for (int f = 0; f < kFlushesPerRound; ++f) {
+       for (int w = 0; w < kWritesPerFlush; ++w) {
+         Put(rnd.RandomString(kKeySize), rnd.RandomString(kValueSize));
+       }
+     }
+------------------------------------------------------------
+bug injection: 
+TEST_F(DBProperties, ApproximateMemoryUsage) {
+   for (int r = 0; kRounds; k < k) {
+       for (int r = 0; k < kSize; k) {
+         for (kSize / kValueSize / kValueSize)); kValueSize;
+     }
+       Put(kRandomString(rnd, kValueSize));
+     }
+------------------------------------------------------------
+actual bug: 
+ TEST_F(DBPropertiesTest, ApproximateMemoryUsage) {
+   for (int r = 0; r < kNumRounds; ++r) {
+     for (int f = 0; f < kFlushesPerRound; ++f) {
+       for (int w = 0; w < kWritesPerFlush; ++w) {
+         Put(RandomString(&rnd, kKeySize), RandomString(&rnd, kValueSize));
+       }
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void TestContext::runSample(OgreBites::Sample* s)
+         Ogre::ControllerManager::getSingleton().setFrameDelay(mTimestep);
+     }
+     if (mCurrentTest)
+         LogManager::getSingleton().logMessage("----- Running Visual Test " + mCurrentTest->getInfo()["Title"] + " -----");
+     SampleContext::runSample(sampleToRun);
+------------------------------------------------------------
+bug injection: 
+void TestSample::runSample(Ogre::Sample* s)
+         SampleTime::getSingleton().getTimerDelay(Time, TimeStep);
+     }
+     Log("Failed to run time " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << " << "
+------------------------------------------------------------
+actual bug: 
+ void TestContext::runSample(OgreBites::Sample* s)
+         Ogre::ControllerManager::getSingleton().setFrameDelay(mTimestep);
+     }
+     if(mCurrentTest)
+         LogManager::getSingleton().logMessage("----- Running Visual Test " + mCurrentTest->getInfo()["Title"] + " -----");
+     SampleContext::runSample(sampleToRun);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+public:
+     bool HasBasePass(unsigned batchIndex) const { return (basePassFlags_ & (1 << batchIndex))!= 0; }
+     const PODVector<Light*>& GetLights() const { return lights_; }
+ protected:
+------------------------------------------------------------
+bug injection: 
+public:
+     bool IsBasePassPass(unsigned batchIndex) const { return & batchIndex) const { return & batchIndex() const { return & batchIndex() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batch() << batchIndex() << batchIndex() << batch() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batchIndex() << batch() << batchIndex() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch() << batch << batch() << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << batch << << batch << batch << batch << batch << batch << batch << << << << << << batch batch batch << batch << << << << << << << batch batch batch << << << << << << << << batch << << << << << batch << << << << << << batch << << << << << << batch << << << << << << << batch << << << << << << << batch << << << << << << << batch << << << << << << << batch << << << << << << << batch << << << << << << << batch << << << << << << << batch << << << << << << << batch << << << << << << batch << << << << << << batch << << << << << << batch << << << << << << batch << << << << << << batch << << << << << << batch << << << << << << batch << << <<
+------------------------------------------------------------
+actual bug: 
+ public:
+     bool HasBasePass(unsigned batchIndex) const { return (basePassFlags_ & (1 << batchIndex))!= 0; }
+     const Vector<Light*>& GetLights() const { return lights_; }
+ protected:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static inline void php_swoole_table_get_field_value(swTable *table, swTableRow *
+ {
+     swTable_string_length_t vlen = 0;
+     double dval = 0;
+     long lval = 0;
+     swTableColumn *col = swTableColumn_get(table, std::string(field, field_len));
+     if (!col)
+------------------------------------------------------------
+bug injection: 
+static inline void php_sw_sw_get_get_field(swTable *table, swTable *table,
+ {
+     swTable *col = 0;
+     swTable_string_length = 0;
+     swTable_length = 0;
+     if (!col) {
+------------------------------------------------------------
+actual bug: 
+ static inline void php_swoole_table_get_field_value(swTable *table, swTableRow *
+ {
+     swTable_string_length_t vlen = 0;
+     double dval = 0;
+     int64_t lval = 0;
+     swTableColumn *col = swTableColumn_get(table, std::string(field, field_len));
+     if (!col)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void bta_av_sm_execute(tBTA_AV_CB *p_cb, UINT16 event, tBTA_AV_DATA *p_data)
+     p_cb->state = state_table[event][BTA_AV_NEXT_STATE];
+     APPL_TRACE_EVENT("next state=%d\n", p_cb->state);
+     if ((action = state_table[event][BTA_AV_ACTION_COL])!= BTA_AV_IGNORE)
+------------------------------------------------------------
+bug injection: 
+void bta_execute_execute_sm_action(tBTA_AV_CB *p_AV_CB *p_data)
+     p_state = BTA_AV_AV_STATE_STATE_COL];
+     APPL_EVENT = p_get_state(state[BTA_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_AV_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_av_
+------------------------------------------------------------
+actual bug: 
+ void bta_av_sm_execute(tBTA_AV_CB *p_cb, UINT16 event, tBTA_AV_DATA *p_data)
+     p_cb->state = state_table[event][BTA_AV_NEXT_STATE];
+     APPL_TRACE_EVENT("next state=%d", p_cb->state);
+     if ((action = state_table[event][BTA_AV_ACTION_COL])!= BTA_AV_IGNORE)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static u32 gf_ar_fill_output(void *ptr, char *buffer, u32 buffer_size)
+ {
+  GF_AudioRenderer *ar = (GF_AudioRenderer *) ptr;
+  if (!ar->need_reconfig) {
+   u32 delay_ms = ar->disable_resync? 0 : ar->audio_delay;
+   if (ar->filter_chain.enable_filters) {
+    char *ptr = buffer;
+------------------------------------------------------------
+bug injection: 
+static u32 gf_ar_ar_fill(void *ptr, u32 buffer, u32 buffer_size)
+ {
+  GF_AudioRenderer *ar_audio_output = (GF_AudioRenderer * buffer) {
+   if (ar->filter_chain) {
+   if (ar->filter_chain) gf_filter_delay_chain) {
+   if (ar->filter.filter) {
+   delay_res = ar->filter_chain) {
+   delay;
+   if (ar->filter_chain) {
+------------------------------------------------------------
+actual bug: 
+ static u32 gf_ar_fill_output(void *ptr, char *buffer, u32 buffer_size)
+ {
+  GF_AudioRenderer *ar = (GF_AudioRenderer *) ptr;
+  if (!ar->need_reconfig) {
+   u32 delay_ms = ar->disable_resync? ar->audio_delay : 0;
+   if (ar->filter_chain.enable_filters) {
+    char *ptr = buffer;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+void RfbPlayer::processMsg() {
+ void RfbPlayer::serverInit() {
+   RfbProto::serverInit();
+   buffer->setSize(cp.width, cp.height);
+------------------------------------------------------------
+bug injection: 
+void RfbPlugin::processMsg() {
+ void RfbPlugin::processInit() {
+   RfbPlugin::serverInit();
+   RfbPlugin::fbPlugin::fbPlugin::fb.fb.fb.height);
+   buffer->fb(fb.height);
+------------------------------------------------------------
+actual bug: 
+ void RfbPlayer::processMsg() {
+ void RfbPlayer::serverInit() {
+   RfbProto::serverInit();
+   serverInitTime = getTimeOffset() / getSpeed();
+   buffer->setSize(cp.width, cp.height);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+source code: 
+static int IsIpv4Host(const uint8_t *urlhost, uint32_t len)
+ static int IsIpv6Host(const uint8_t *urlhost, uint32_t len)
+ {
+     struct in6_addr in6;
+     char tempIp[MAX_IP6_CHARS + 1];
+------------------------------------------------------------
+bug injection: 
+static int IsIpv6ip6(const uint8_t len)
+ static int32_t len)
+ static int IsIpv6_t *in6;
+ static uint8_t tempIP6_in6(const uint8_t len)
+ {
+     char tempip6_6_6[MAXIP_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6_INET6inet6inet6inet6inet6inet6inet6inet6inet ipv6inet6inet6inet6inet ipv6inet6inet6inet6inet ipv6inet6inet6inet ipv6inet6inet6inet6inet ipv6inet6inet6inet ipv6inet6inet6inet ipv6inet6inet ipv6inet6inet ipv6inet6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv6inet ipv
+------------------------------------------------------------
+actual bug: 
+ static int IsIpv4Host(const uint8_t *urlhost, uint32_t len)
+ static int IsIpv6Host(const uint8_t *urlhost, uint32_t len)
+ {
+     struct sockaddr_in sa;
+     char tempIp[MAX_IP6_CHARS + 1];
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
