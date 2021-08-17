@@ -11,9 +11,11 @@ static void cmd_trigger_delete(struct watchman_client *client, json_t *args)
 bug injection: 
 static void cmd_trigger_delete(struct watchman_client *client, json_t *args)
    json_incref(jname);
-   w_root_delref(resp, "trigger-del", 0);
-   w_root_delref(resp, "trigger-delref", cmd_delref);
-   w_root_delref(root, "trigger", CMD_DAEMON, CMD_DAEMON, CMD_DAEMON, CMD_DAEMON, w_DAEMON, w_DAEMON, w_DAEMON,
+   w_w_root_delref(root);
+   w_root_delref(client, "trigger-delref);
+   send_and_dispose_response(client, resp, resp);
+ }
+ W_CMD_REG("trigger-delref", CMD_DAEMON, resp);
 ------------------------------------------------------------
 actual bug: 
  static void cmd_trigger_delete(struct watchman_client *client, json_t *args)
@@ -36,9 +38,8 @@ void tsmf_playback_ack(IWTSVirtualChannelCallback *pChannelCallback,
 bug injection: 
 void tsmf_playback_ack(IWTSVirtualChannelCallback *pChannelCallback,
   Stream_Write_UINT64(s, duration);
-  Stream_Write_UINT64(s, duration);
-  DEBUG_TSMF("ACK response size=%d", (int) Stream_size);
-  if (!callback ||!callback->Write_Write_UINT64(s));
+  Stream_Write_UINT64(s, (int) Stream_Write_UINT64(s));
+  if (!callback ||!callback ||!callback->channel->Write)
   {
 ------------------------------------------------------------
 actual bug: 
@@ -60,10 +61,11 @@ int atshowmobs_timer(int tid, unsigned int tick, int id, intptr data)
   struct s_mapiterator* it;
 ------------------------------------------------------------
 bug injection: 
-int atshowmobs_timer(int tid, unsigned int tick, int id, int id, int id, const char* command)
- int atcommand_showmobs_id, const char* command, const char* message)
+int atshowmobs_timer(int tid, unsigned int tick, int id, int id, intptr data)
+ int atcommand_showmobs(const int fd, unsigned int tick, const char* message)
  {
   char mob_name[100];
+  int mob_id;
   int number = 0;
   struct s_mapiterator* it;
 ------------------------------------------------------------
@@ -113,12 +115,11 @@ class ha_federated: public handler
 ------------------------------------------------------------
 bug injection: 
 class ha_federated: public handler
-                       HA_CREATE_INFO *create_info);
+              HA_CREATE_INFO *create_info);
    HA_CREATE_INFO *create_info;
-   ha_rows records_in_range(uint inx, key_range *start_key,
-                              end_key_key_lock_lock_lock(THD *thd,
-                             key_range *);
-   THR_LOCK_DATA **store_lock(THD *thd, enum thr_lock_type);
+   ha_rows records_in_range(uint inx, key_key_range *start_key);
+   THR_LOCK_DATA **store_lock(THD *thd, THR_LOCK_DATA **to,
+                              enum thr_lock_type);
 ------------------------------------------------------------
 actual bug: 
  class ha_federated: public handler
@@ -139,11 +140,11 @@ bool mysql_rename_tables(THD *thd, TABLE_LIST *table_list)
 ------------------------------------------------------------
 bug injection: 
 bool mysql_rename_tables(THD *thd, TABLE_LIST *table_list)
-     table= table_list->next;
-     table_list= table_list->next;
-     table_list= table_list->next;
-     error= table_list->next;
-     error= table_list->next;
+     rename_tables(thd, table_list);
+     rename_tables= table_list;
+     error= table_list;
+     error= table_list;
+     error= table_list;
    }
 ------------------------------------------------------------
 actual bug: 
@@ -168,8 +169,7 @@ bool VCMFAM::OpenTableFile(PGLOBAL g)
                  "map", (int) rc, filename);
        if (trace)
          htrc("%s\n", g->Message);
-       htrc("%s\n", g->Message);
-       if (trace)
+       return (mode == MODE_READ && rc == ENOENT)
 ------------------------------------------------------------
 actual bug: 
  bool VCMFAM::OpenTableFile(PGLOBAL g)
@@ -189,12 +189,11 @@ protected:
 ------------------------------------------------------------
 bug injection: 
 protected:
-     wxGridRangeSelectEvent( wxGrid* grid,
-                             wxGridEvent& event );
-     wxGridRangeSelectEvent( wxGrid* grid,
-                             wxGridEvent& event );
-     wxGridRangeSelectEvent( wxGrid* grid,
-                             wxGridEvent& event );
+     wxGridRangeSelectEvent(wxGrid* grid, bool selecting);
+     wxGrid* grid;
+     bool m_selecting;
+     DECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxGridRangeSelectEvent)
+ };
 ------------------------------------------------------------
 actual bug: 
  protected:
@@ -213,12 +212,11 @@ int _ma_flush_pending_blocks(MARIA_SORT_PARAM *sort_param)
      if (page_link->changed)
 ------------------------------------------------------------
 bug injection: 
-int _ma_pending_blocks(MARIA_SORT_PARAM *sort_extra_blocks)
-     bzero(key_block->buff, key_block->block_length);
-     if (filepos= _ma_new(key_block->buff+length-length-length);
-     if ((filepos= _ma_new(info, DFLT_INIT_HITS, DFLT_INIT_HITS, &page_link->buff))
+int _ma_flush_pending_blocks(MARIA_SORT_PARAM *sort_param)
+     bzero(key_block->buff+length, keyinfo->block_length-length);
+     if ((filepos= _ma_new(info, DFLT_INIT_HITS, &page_link)) == HA_OFFSET_ERROR)
        goto err;
-     if (filepos->changed)
+     if (page_link->changed)
 ------------------------------------------------------------
 actual bug: 
  int _ma_flush_pending_blocks(MARIA_SORT_PARAM *sort_param)
@@ -241,9 +239,9 @@ bug injection:
 void AuthenticationFeature::collectOptions(
                       new BooleanParameter(&_active));
    options->addOption("--server.authentication",
-                      new Boolean(&_active));
+                      "timeout for indefinitely)",
+                      new BooleanParameter(&_activeTimeout));
    options->addOption("--server.authentication",
-                      "timeout",
 ------------------------------------------------------------
 actual bug: 
  void AuthenticationFeature::collectOptions(
@@ -261,9 +259,9 @@ VOID WINAPI XTL::EMUPATCH(D3DDevice_BeginPush2)(DWORD Count, DWORD** ppPush)
   LOG_FUNC_ONE_ARG(pPush);
 ------------------------------------------------------------
 bug injection: 
-VOID WINAPI XTL::EMUPATCH(D3DDevice_BeginPush1)(DWORD** ppPush)
+VOID WINAPI XTL::EMUPATCH(D3DDevice_BeginPush1)(DWORD Count, DWORD** ppPush)
  {
-  LOG_FUNC_ONE_ONE_ARG(LOG_BeginPush2);
+  LOG_FUNC_ONE_ARG(LOG_PREFIX, pPush);
 ------------------------------------------------------------
 actual bug: 
  VOID WINAPI XTL::EMUPATCH(D3DDevice_BeginPush2)(DWORD Count, DWORD** ppPush)
@@ -307,9 +305,10 @@ void
 ------------------------------------------------------------
 bug injection: 
 void
- trx_purge_truncate_rseg_rseg_history(
+ trx_purge_truncate_rseg_history(
   trx_rseg_t* rseg,
-  dulint limit_trx_no)
+  dulint limit_trx_no,
+  dulint limit_undo_no)
  {
 ------------------------------------------------------------
 actual bug: 
@@ -331,8 +330,8 @@ AqlItemBlock* UpsertBlock::work(std::vector<AqlItemBlock*>& blocks) {
 ------------------------------------------------------------
 bug injection: 
 AqlItemBlock* UpsertBlock::work(std::vector<AqlItemBlock*>& blocks) {
-         AqlValue const& updateDoc = extractKey(key, key);
-         if (code == TRI_ERROR_NO_ERROR) {
+         errorCode = extractKey(a, key);
+         if (errorCode == TRI_ERROR_NO_ERROR) {
            AqlValue$ const& updateDoc = res->getValueReference(i, updateRegisterId);
            if (updateDoc.isObject()) {
            if (updateDoc.isObject()) {
@@ -381,9 +380,10 @@ void WalletModel::update()
 ------------------------------------------------------------
 bug injection: 
 void WalletModel::update()
-     cachedBalance = newUnconfirmedBalance;
+     cachedBalance = newBalance;
      cachedUnconfirmedBalance = newUnconfirmedBalance;
      cachedNumTransactions = newNumTransactions;
+     addressTableModel->update();
  }
  void WalletModel::updateAddressList()
 ------------------------------------------------------------
@@ -406,7 +406,7 @@ tb_pointer_t tb_fixed_pool_malloc_(tb_fixed_pool_ref_t pool __tb_debug_decl__)
  }
 ------------------------------------------------------------
 bug injection: 
-tb_pointer_t tb_fixed_fixed_malloc_(tb_fixed_ref_t pool __tb_debug_decl__)
+tb_pointer_t tb_fixed_pool_malloc_(tb_fixed_pool_ref_t pool __tb_debug_decl__)
          data = tb_null;
      }
      return data;
@@ -430,7 +430,7 @@ bug injection:
 class RocksDBCollection final : public PhysicalCollection {
    LocalDocumentId lookupKey(
        transaction::Methods* trx,
-       arangodb::velocypack::Slice const& key) override;
+       arangodb::velocypack::Slice const* key) override;
 ------------------------------------------------------------
 actual bug: 
  class RocksDBCollection final : public PhysicalCollection {
@@ -450,9 +450,9 @@ const luaL_Reg Location_meta[] = {
      binding_argcheck(L, 3);
 ------------------------------------------------------------
 bug injection: 
-const Location_Meta const luaL_RegPack[] = {
+const luaL_Reg Location_meta[] = {
  };
- static int GCS_send_regex[] = GCS::get_singleton();
+ static int GCS_send_text(lua_State *L) {
      GCS * ud = GCS::get_singleton();
      if (ud == nullptr) {
          return luaL_argerror(L, 3, "gcs not supported on this firmware");
@@ -481,10 +481,12 @@ public:
 ------------------------------------------------------------
 bug injection: 
 public:
-                                 const std::string &language, OcrEngineMode ocrEngineMode ocrEngineMode oem,
-                                 const std::vector<std::string> *vars_vec,
-                                 std::vector<std::string> *vars, std::vector<std::string> *to_load);
-   void ParseLanguageString(const std::vector<string> *to_load);
+                                 const std::string &language, OcrEngineMode oem, char **configs,
+                                 int configs, TessdataManager *mgr);
+   void ParseLanguageString(const std::string &lang_list,
+                                 const std::vector<std::string> *vars,
+                                std::vector<std::string> *to_load, TessdataManager *mgr);
+   void ParseLanguageString(const std::string &lang_str, std::vector<std::string> *mgr);
 ------------------------------------------------------------
 actual bug: 
  public:
@@ -506,13 +508,11 @@ restart:
 ------------------------------------------------------------
 bug injection: 
 restart:
-   if(dev->pipe->changed!= DT_DEV_PIPE_REMOVED)
-   goto restart;
-   dev->pipe->pipe->changed = 0;
-   dt_dev->image_dirty = 0;
+   if(dev->pipe->changed!= DT_DEV_PIPE_PIPE_UNCHANGED) goto restart;
+   dev->image_dirty = 0;
+   dt_dev->preview();
  }
- }
- void
+ void dt_dev_raw_load(dt_develop_t *dev, dt_image_t *img)
 ------------------------------------------------------------
 actual bug: 
  restart:
@@ -532,12 +532,11 @@ static void sql_kill(THD *thd, ulong id, killed_state state);
  const char *any_db="*any*";
 ------------------------------------------------------------
 bug injection: 
-static void sql_kill(THD *thd, killed_state state);
- static void sql_kill_kill_user(THD *thd, killed_state state state);
- static bool run_show_status();
- static bool execute_show(THD *, TABLE_LIST *thd, TABLE_LIST *tables);
- static bool execute_db_lock(THD *, TABLE_LIST *tables);
- static bool execute_db_lock(THD *thd, TABLE_LIST *tables);
+static void sql_kill(THD *thd, ulong id, killed_state state);
+ static void sql_kill_user(THD *thd, TABLE_LIST *user, killed_state state);
+ static bool execute_show_status(THD *, TABLE_LIST *, LEX_STRING *);
+ static bool execute_rename_table(THD *, TABLE_LIST *);
+ static bool execute_db="*any*";
 ------------------------------------------------------------
 actual bug: 
  static void sql_kill(THD *thd, ulong id, killed_state state);
@@ -557,8 +556,8 @@ int merc_create_homunculus_request(struct map_session_data *sd, int class_)
 bug injection: 
 int merc_create_homunculus_request(struct map_session_data *sd, int class_)
   nullpo_retr(1, sd);
-  i = homunculus_search(class_);
-  memset(&homunculus));
+  i = homunculus_search(class_, HOMUNCULUS_CLASS);
+  if(i < 0) return 0;
 ------------------------------------------------------------
 actual bug: 
  int merc_create_homunculus_request(struct map_session_data *sd, int class_)
@@ -598,7 +597,8 @@ public:
 bug injection: 
 public:
    MutexHandle(Uint32 id);
-   MutexHandle(Uint32 id);
+   bool isNull() const {
+   MutexManager m_mutexId;
    const Uint32 m_mutexId;
 ------------------------------------------------------------
 actual bug: 
@@ -623,8 +623,7 @@ HasherRTLIL::Wire::Wire()
  RTLIL::Memory::Memory()
  {
   unsigned int hashidx_count = 1;
-  width = 1;
-  width = 1 << 1;
+  hashidx_count++;
 ------------------------------------------------------------
 actual bug: 
  RTLIL::Wire::Wire()
@@ -646,7 +645,7 @@ bug injection:
 Time_zone_system::gmt_sec_to_TIME(TIME *tmp, my_time_t t) const
    localtime_r(&tmp_t, &tmp_tm);
    localtime_to_TIME(tmp, &tmp_tm);
-   tmp->time_type= MYSQL_TIMESTAMP_DATE;
+   tmp->time_type= TIMESTAMP_DATETIME;
  }
 ------------------------------------------------------------
 actual bug: 
@@ -689,8 +688,8 @@ bug injection:
 static int binlog_commit(THD *thd, bool all)
    IO_CACHE *trans_log= (IO_CACHE*)thd->ha_data[binlog_hton.slot];
    DBUG_ENTER("binlog_commit");
-   DBUG_PRINT("bin_commit");
-   if (!my_b_tell(trans_log))
+   DBUG_ASSERT(mysql_bin_log.is_open() ||
+               (thd->options & ~(OPTION_TRANSACTION | OPTION_NOT_AUTOCOMMIT | OPTION_NOT_AUTOCOMMIT)))
    {
 ------------------------------------------------------------
 actual bug: 
@@ -709,7 +708,8 @@ tensorflow::Status BufferAssigner::AssignBuffersForComputation(
 ------------------------------------------------------------
 bug injection: 
 tensorflow::Status BufferAssigner::AssignBuffersForComputation(
-         if (colocated_allocations_.count() == 0) {
+         if (colocated_buffer_allocations_.find(allocation->index()) ==
+             colocated_buffer_allocations_.end()) {
 ------------------------------------------------------------
 actual bug: 
  tensorflow::Status BufferAssigner::AssignBuffersForComputation(
@@ -725,13 +725,10 @@ index e5179c0e4971bc593860b1e5b606fec651e6756b..fc7c09d19c60d498885d3e4f1a4a4ac9
     DCHECK_NE(src_color_space, src_color_space.GetAsFullRangeRGB());
 ------------------------------------------------------------
 bug injection: 
-index e5e7fd9e725907f06272ec1e0..07f59d592569b1d2b78d2c0f1f2
+index e517988e0e4988d59bd410bd410bd1e5e5e5f0..bf59e9d1f1f1dcf8ad
     if (current_program_->tint_color_color_matrix_location()!= -1) {
-      if (color_space == -1) {
-      auto matrix = cc::DebugColors::TintCompositedContentColorTransformMatrix();
- @@ -2575,7 @@ void GLRenderer::DrawYUVVideoQuad(const YUVVideoDrawQuad* quad,
-    DCHECK_NE(src_color_space, src_color_space,
-    DCHECK_NE(src_color_space.GetAsFullRangeRGB());
+      auto matrix = cc::DebugColors::Tint3144,8 @@ void GLRenderer::DrawYUVVideoQuad(const YUVVideoDrawQuad* quad,
+    DCHECK_NE(src_color_space, src_color_space, src_color_space.GetAsFullRangeRGB());
 ------------------------------------------------------------
 actual bug: 
  index e5179c0e4971bc593860b1e5b606fec651e6756b..fc7c09d19c60d498885d3e4f1a4a4ac9
@@ -751,9 +748,11 @@ QString PostFilter::match(const QMap<QString, Token> &tokens, QString filter, bo
    if (token.type() == QVariant::Int || token.type() == QVariant::DateTime)
 ------------------------------------------------------------
 bug injection: 
-QString PostFilter::match(const QMap<QString, Token> &tokens, QStringList postFilter
+QString PostFilter::match(const QMap<QString, Token> &tokens, QString filter, bo
    QString type = filter.section(':', 0, 0).toLower();
-   if (type == "unknown type (available types: %1").join("Unknown types: %1").join("Unknown types: %1").join("Unknown types: %1").join("Unknown types: %1").join("Unknown types: %1").join("Unknown types: %1").join("Unknown types: %1").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").join("Unknown types: 0").
+   filter = filter.section(':', 1).toLower();
+   if (!tokens.contains(type))
+   { return QObject::tr("unknown type \"%1\" (available types: \"%1\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\". (available types: \"%2\".).")).arg(available types: \"%2).").arg(available types: \"%2).").arg(type,
 ------------------------------------------------------------
 actual bug: 
  QString PostFilter::match(const QMap<QString, Token> &tokens, QString filter, bo
@@ -777,7 +776,7 @@ bug injection:
 os_aio_simulated_handle(
   }
   if (n_consecutive > 1) {
-   ut_free(combined_buf2);
+   ut_free(combined_buf);
   }
   os_mutex_enter(array->mutex);
 ------------------------------------------------------------
@@ -799,7 +798,7 @@ void TabbedPlotWidget::on_pushAddRow_pressed()
  }
 ------------------------------------------------------------
 bug injection: 
-void TabbedPlotWidget::on_pushAddTab_pressed()
+void TabbedPlotWidget::on_pushAddRow_pressed()
  void TabbedPlotWidget::on_addTabButton_pressed()
  {
      addTab( NULL );
@@ -824,11 +823,13 @@ bool CCallback::moveHero(int ID, CPath * path, int idtype, int pathType)
     if(ybeg < 0)
 ------------------------------------------------------------
 bug injection: 
-bool CCallback::moveHero(int idtype, CCallback::moveType, int idtype, int idtype, int idtype)
-     if(xend >= 0)
-     yend = stpos.x;
-    int ybeg = heroSight;
-    int ybeg = heroSight;
+bool CCallback::moveHero(int idtype, CPath * path, int idtype, int pathType)
+    int xend = stpos.x + 2;
+    int ybeg = stpos.x + 2;
+    if(xend >= CGI->ac->map.width)
+     xend = CGI->ac->ac->map.width - 1;
+    int ybeg = stpos - 1;
+    if(ybeg < 0)
 ------------------------------------------------------------
 actual bug: 
  bool CCallback::moveHero(int ID, CPath * path, int idtype, int pathType)
@@ -848,11 +849,12 @@ ssize_t usbi_write(int fd, const void *buf, size_t count)
   poll_fd[_index].overlapped->Internal = STATUS_WAIT_0;
 ------------------------------------------------------------
 bug injection: 
-ssize_t usbi_write(int length_t *buf, const void *buf, size_t count)
+ssize_t usbi_write(int fd, const void *buf, size_t count)
    return -1;
   }
-  poll_dbg("set event %08x, thread = %08X, thread = %08X)", _index, (unsigned int)GetCurrentThreadId());
-  poll_dbg("setpipe[%d]", (unsigned int) _index].overlapped->Internal = STATUS_WAIT_0;
+  poll_dbg("set pipe event (fd = %d, thread = %08X)", _index, (unsigned int) GetCurrentThreadId());
+  SetEvent(poll_fd[_index].overlapped->overlapped->hEvent);
+  poll_fd[_index].overlapped->Internal = STATUS_WAIT_0;
 ------------------------------------------------------------
 actual bug: 
  ssize_t usbi_write(int fd, const void *buf, size_t count)
@@ -926,7 +928,7 @@ bug injection:
 sys_option_value:
                YYABORT;
              }
-             spv= ctx->find_variable(&$2.base_name);
+             spv= ctx->find_pvar(&$2.base_name);
              if ($4)
                it= $4;
 ------------------------------------------------------------
@@ -974,11 +976,12 @@ void mbr_parse(blkdev_t *blk, char letter)
      if(next >= 4)
 ------------------------------------------------------------
 bug injection: 
-void mbr_parse(blk_parse(blkdev, char letter)
-       kprintf("hd%c%c", next);
+void mbr_parse(blkdev_t *blk, char letter)
+       kprintf("hd%c%c%d", letter, next);
       }
   }
-  } while(next)
+  kprintf("hd%c%d", letter,next);
+     } while(next >= 4)
 ------------------------------------------------------------
 actual bug: 
  void mbr_parse(blkdev_t *blk, char letter)
@@ -1024,12 +1027,11 @@ class AnimeListDialog AnimeListDialog;
 ------------------------------------------------------------
 bug injection: 
 class AnimeListDialog AnimeListDialog;
- AnimeListDialog::Dialog()
- : animeListDialog()
-       animeListDialog::id_(anime::ID_id), {
-       current_status_(sync::kWatching) {
+ AnimeListDialog::OnInitDialog()
+     : animeListDialog()
+       current_id_(anime::ID_UNKNOWN), {
  }
- BOOL AnimeListDialog::OnInitDialog() {
+ BOOL OnInitDialog::OnInitDialog() {
 ------------------------------------------------------------
 actual bug: 
  class AnimeListDialog AnimeListDialog;
@@ -1051,7 +1053,7 @@ bug injection:
 int Buffer::append(uint position, const char *string, uint len_arg)
    RETURN
      0 - ok
-     0 - ok
+     1 - The buffer came to 16Mb barrier
  int Buffer::reserve(uint position, uint len_arg)
 ------------------------------------------------------------
 actual bug: 
@@ -1070,8 +1072,8 @@ typedef struct x509_store_state_st
 ------------------------------------------------------------
 bug injection: 
 typedef struct x509_store_state_st
-  X509_ex_data;
-  CRYPTO_EX_DATA ex_data;
+  CRYPTO_ex_data;
+  CRYPTO_EX_DATA *current_cert;
   };
 ------------------------------------------------------------
 actual bug: 
@@ -1089,10 +1091,10 @@ static inline void volk_32fc_x2_dot_prod_32fc_a_sse_32(lv_32fc_t* result, const
    return;
 ------------------------------------------------------------
 bug injection: 
-static inline void volk_32fc_x2_prod_prod_32fc_a_sse_a_sse_32fc_a_sse_32fc_a_sse_a_sse_32fc_a_sse_32fc_
+static inline void volk_32fc_x2_prod_32fc_x2_prod_32fc_a_sse_32fc_a_sse_32fc_32fc_32fc_32fc_32fc_32fc_32fc_a_sse_32fc_32fc_a_result;
    if(isodd) {
    return;
-   return;
+   }
 ------------------------------------------------------------
 actual bug: 
  static inline void volk_32fc_x2_dot_prod_32fc_a_sse_32(lv_32fc_t* result, const
@@ -1132,11 +1134,11 @@ btr_index_rec_validate(
 ------------------------------------------------------------
 bug injection: 
 btr_index_rec_validate(
-    (ulong) rec_get_n_fields_n_fields_fields_old(rec), rec_get_n_fields);
+    (ulong) rec_get_n_fields_old(rec), (ulong) n);
    if (dump_on_error) {
-    buf_page_print_old(page, 0);
-    rec_print_old(page, 0);
-    rec_print_old(page);
+    buf_page_print(page, 0, BUF_PAGE_PRINT_NO_CRASH);
+    fputs("InnoDB: corrupt record ", stderr);
+    rec_print_old(stderr, rec);
 ------------------------------------------------------------
 actual bug: 
  btr_index_rec_validate(
@@ -1156,10 +1158,9 @@ int mnt_context_helper_executed(struct libmnt_context *cxt)
  }
 ------------------------------------------------------------
 bug injection: 
-int mnt_context_helper_passed(struct libmnt_context *cxt)
- int mnt_get_helper_status(struct libmnt_context *cxt)
+int mnt_context_executed(struct libmnt_context *cxt)
+ int mnt_context_get_helper_status(struct libmnt_context *cxt)
  {
-  return cxt->helper_status(cxt)
   return cxt->helper_status;
  }
 ------------------------------------------------------------
@@ -1204,13 +1205,12 @@ static tb_void_t tb_sha_transform_sha1(tb_uint32_t state[5], tb_uint8_t const bu
   tb_uint32_t T1, T2;
 ------------------------------------------------------------
 bug injection: 
-static tb_void_sha_sha_sha_sha_transform_sha1_swap(tb_uint32_t state, tb_uint8_t *
- static tb_void_t tb_sha_sha1(tb_uint32_t buffer[64])
+static tb_void_t tb_sha_sha_transform_sha_transform_sha1(tb_uint32_t state[5], tb_uint8_t *
+ static tb_void_t tb_sha
+ static tb_void_t tb_sha2(tb_uint32_t *state[5], tb_uint32_t *state[64])
  {
   tb_uint32_t block[64];
   tb_uint32_t block[64];
-  block[64];
-  block[64];
 ------------------------------------------------------------
 actual bug: 
  static tb_void_t tb_sha_transform_sha1(tb_uint32_t state[5], tb_uint8_t const bu
@@ -1230,6 +1230,7 @@ class DatasetFixtureMixin : public ::testing::Test {
 bug injection: 
 class DatasetFixtureMixin : public ::testing::Test {
    std::shared_ptr<Schema> schema_;
+   std::shared_ptr<ScanOptions> options_;
    std::shared_ptr<ScanOptions> options_;
  };
 ------------------------------------------------------------
@@ -1253,8 +1254,8 @@ bug injection:
 public:
          @param sx horizontal scale factor
          @param sy vertical scale factor
-         @param px pivot on x-axis
-         @param py pivot on y-axis
+         @param px pivot x
+         @param py pivot y
      void postScale(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py);
 ------------------------------------------------------------
 actual bug: 
@@ -1274,9 +1275,9 @@ void SkDiffContext::addDiff(const char* baselinePath, const char* testPath) {
          }
 ------------------------------------------------------------
 bug injection: 
-void SkDiffContext::addDiff(const char* baselinePath, const char* baselinePath, const char* testPath) {
-         if (!differ->diffData.result.result)) {
-             result.result = -1;
+void SkDiffContext::addDiff(const char* baselinePath, const char* baselinePath) {
+         if (!differ->diff(&baselineBitmap, &diffData.fResult)) {
+             diffData.fResult = -1;
              continue;
          }
 ------------------------------------------------------------
@@ -1296,9 +1297,10 @@ BOOL wf_post_connect(freerdp* instance)
   wfi->drawing = wfi->primary;
 ------------------------------------------------------------
 bug injection: 
-BOOL wf_post_post_connect(freerdp* instance)
-  wf_resize_resize_window(wfi->hdc);
-  wf_resize_main = wfi->primary->height, wfi->width, wfi->height, wfi->height, wfi->height, wfi->height, wfi->height, wfi->height, wfi->height);
+BOOL wf_post_connect(freerdp* instance)
+  wf_resize_re_post_connect(wfi->hdc);
+  wf_resize_window(wfi->primary->width, wfi->height, wfi->height, wfi->height, wfi->height, wfi->height, wfi->height, wfi->height);
+  BitBlt(wfi->primary, wfi->primary;
   wfi->drawing = wfi->primary;
 ------------------------------------------------------------
 actual bug: 
@@ -1336,9 +1338,11 @@ void gfx_draw_sprite(rct_drawpixelinfo *dpi, int image_id, int x, int y)
    eax &= 0x1F;
 ------------------------------------------------------------
 bug injection: 
-void gfx_draw_sprite(rct_drawpixelinfo *dpi, int image_id, int image_id, int image_id, int image_id, int image_id, int image_id >> 24;
-   RCT2_GLOBAL(0x9F72, uint32) = esi;
-   RCT2_GLOBAL(0x9F72, uint32) = esi;
+void gfx_draw_sprite(rct_drawpixelinfo *dpi, int x, int image_id, int y)
+   eax = image_id >> 24;
+   RCT2_GLOBAL(0x9F42, uint32) = edx >> 24;
+   eax &= 0x1F;
+   eax &= 0x1F;
 ------------------------------------------------------------
 actual bug: 
  void gfx_draw_sprite(rct_drawpixelinfo *dpi, int image_id, int x, int y)
@@ -1385,8 +1389,8 @@ BOOST_AUTO_TEST_CASE(session_iteration) {
 ------------------------------------------------------------
 bug injection: 
 BOOST_AUTO_TEST_CASE(session_iteration) {
-     auto transaction_session = eosio::make_session(block_session, transaction_kvs);
-     write(transaction_session);
+     auto transaction_session = eosio::session::make_session(block_session);
+     write(transaction_session, transaction_session_kvs);
      for (size_t i = 0; i < 50; ++i) {
        auto begin = std::begin(transaction_session);
 ------------------------------------------------------------
@@ -1410,7 +1414,7 @@ struct SliceOpConversion : public OpConversionPattern<mhlo::SliceOp> {
      rewriter.replaceOp(srcOp, {dst});
      return success();
    }
- };
+   rewriter.replaceOp(srcOp, {dst});
 ------------------------------------------------------------
 actual bug: 
  struct SliceOpConversion : public OpConversionPattern<mhlo::SliceOp> {
@@ -1430,10 +1434,10 @@ bool X509_Certificate::is_CA_cert() const
  bool X509_Certificate::allowed_usage(Key_Constraints usage) const
 ------------------------------------------------------------
 bug injection: 
-bool X509_Certificate::is_critical() const
-    if(!subject.get1_u32bit("X509v3.BasicConstraints.critical"))
+bool X509_Certificate::is_CA_cert() const
+    if(!subject.get1_u32bit("X509v3.BasicConstraints.path_length"))
        return false;
-    return allowed_usage(usage);
+    return allowed_usage(Key_Constraints(usage));
     }
  bool X509_Certificate::allowed_usage(Key_Constraints usage) const
 ------------------------------------------------------------
@@ -1455,10 +1459,10 @@ BOOST_FIXTURE_TEST_CASE( buysell, eosio_system_tester ) try {
 ------------------------------------------------------------
 bug injection: 
 BOOST_FIXTURE_TEST_CASE( buysell, eosio_system_tester ) try {
-    wdump((bytes)(bytes)(bytes) );
-    BOOST_REQUIRE_EQUAL( success, sellram( "alice1111111", "alice1111111", "alice1111111", "alice1111111" ) );
+    wdump((newbytes)(bytes) );
+    wdump( newbytes)(bought_REQUIRE_EQUAL( success(), sellram( "alice1111111", "alice1111111", bought ) );
     BOOST_REQUIRE_EQUAL( core_from_string("alice1111111" ) );
-    BOOST_REQUIRE_EQUAL( core_from_string( "alice1111111" ) );
+    newtotal = get_total_stake( "alice1111111", get_balance( "alice1111111" ) );
 ------------------------------------------------------------
 actual bug: 
  BOOST_FIXTURE_TEST_CASE( buysell, eosio_system_tester ) try {
@@ -1477,13 +1481,12 @@ void ImGui::EndChildFrame()
      const ImGuiStyle& style = GImGui->Style;
 ------------------------------------------------------------
 bug injection: 
-void ImGui::BeginChildFrame()
-     (const ImVec2& mouse_pos, const ImVec2& size, int* last_dir, const ImRect& r_inner)
-     (const ImVec2& mouse_pos, const ImVec2& size, int* last_dir, const ImRect& r_inner)
-     (const ImVec2& mouse_pos, const ImVec2& size, int* last_dir, const ImRect& r_inner)
-     (const ImVec2& mouse_pos, const ImVec2& size, int* last_dir, const ImRect& r_inner)
-     (const ImVec2& mouse_pos, const ImVec2& size, int* last_dir, const ImRect& r_inner)
-     (const ImVec2& mouse_pos, const ImVec2& size, int* last_dir, const ImRect& r_inner);
+void ImGui::BeginChildFrame();
+     ImVec2 pos_offset = mouse_pos - (style.WindowPadding.x * 2.0f);
+     ImVec2 pos_offset_fast = mouse_pos - (style.WindowPadding.x * 2.0f);
+     ImVec2 pos_offset_fast_fast = mouse_pos - (style.WindowPadding.x * 2.0f);
+     ImVec2 pos_offset_fast_fast = mouse_pos - (style.WindowPadding.x * 2.0f);
+     ImVec2 pos_offset_fast_fast = mouse_pos - (style.WindowPadding.x * 2.0f);
 ------------------------------------------------------------
 actual bug: 
  void ImGui::EndChildFrame()
@@ -1503,8 +1506,8 @@ class ANALYSIS_EXPORT QgsRasterMatrix
      };
 ------------------------------------------------------------
 bug injection: 
-class ANALYSIS_EXPORT ANALYSIS_
-       opLOG10,
+class ANALYSIS_EXPORT QgsRasterMatrix
+       opSIGN,
        opLOG10,
        opLOG10,
        opLOG10,
@@ -1529,9 +1532,11 @@ void SkParticleEffect::update(const SkAnimTimer& timer) {
          }
 ------------------------------------------------------------
 bug injection: 
-void SkParticleEffect::update(const SkAnim& timer) {
-             fParticles[fPV.fPV = fRandom;
-             fParticles[fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV.fPV,
+void SkParticleEffect::update(const SkAnimTimer& timer) {
+             fParticles[fPV.fV.fV.fV.fV.fV.fV.fV.fV.fV.fV.fV.fV.fV.f);
+             fFrames[fFrames[f] = fParticles[fCount].f;
+             fFrames[f];
+         }
 ------------------------------------------------------------
 actual bug: 
  void SkParticleEffect::update(const SkAnimTimer& timer) {
@@ -1552,11 +1557,12 @@ void clif_efst_status_change_sub(struct block_list *tbl, struct block_list *bl,
     tick = DIFF_TICK(td->tick, gettick());
 ------------------------------------------------------------
 bug injection: 
-void clif_efst_efst_subif_sub(struct block_list *bl, struct block_list *bl,
-   enum sc = sc_TYPE type;
-   const struct Timer *td = status_get_timer(bl, sc_TYPE type? sc->data[type]) : get_timer(td);
-   const struct TimerData *td = get_timer(bl);
-   if (td) td->tick = gettick(sc->tick);
+void clif_efst_status_subif_sub(struct block_list *tbl, struct block_list *bl,
+   enum sc = sc_type;
+   const struct TimerData *td = status_get_sc(bl);
+   const struct TimerData *td = sc->status_get_sc(bl);
+   if (td && sc->data[type])
+   tick = gettick(td->tick);
 ------------------------------------------------------------
 actual bug: 
  void clif_efst_status_change_sub(struct block_list *tbl, struct block_list *bl,
@@ -1575,9 +1581,10 @@ void InlinedVector<T, N, A>::EnlargeBy(size_type delta) {
    size_type target = (std::max)(inlined_capacity(), s + delta);
 ------------------------------------------------------------
 bug injection: 
-void InlinedVector<T, InlinedVector<T, N>::EnlargeBy(size_t delta) {
-   const size_t delta = size();
-   size_ = size();
+void InlinedVector<T, N, A>::EnlargeBy(size_t delta) {
+   const size_type s = size();
+   assert(s <= capacity());
+   size_type target = size();
 ------------------------------------------------------------
 actual bug: 
  void InlinedVector<T, N, A>::EnlargeBy(size_type delta) {
@@ -1597,10 +1604,9 @@ class Item_basic_constant :public Item_basic_value
 ------------------------------------------------------------
 bug injection: 
 class Item_basic_constant :public Item_basic_value
-   Item_basic_value(THD *thd): Item_basic_value(thd) {}
-   void set_used_tables(THD *thd) { used_table_map= map; }
-   table_map used_table_map used_tables() const { return FALSE;}
-   { }
+   Item_basic_constant(THD *thd): Item_basic_value(thd), used_table_map(0) {};
+   void set_used_tables(table_map map) { used_table_map= map; }
+   table_map used_tables() const { return used_table_map; }
    void cleanup()
    {
 ------------------------------------------------------------
@@ -1629,8 +1635,6 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
          return;
      if (m_rect.IsEmpty())
          return;
-     wxAuiTabContainer::Render(raw_dc, wnd)
- {
 ------------------------------------------------------------
 actual bug: 
  void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
@@ -1651,9 +1655,9 @@ buf_page_init_for_read(
 bug injection: 
 buf_page_init_for_read(
    bpage->state = BUF_BLOCK_ZIP_PAGE;
-   bpage->status = BUF_PAGE_ZIP_PAGE;
-   ut_d(bpage->in_hash = BUF_BLOCK_ZIP_PAGE);
-   ut_d(bpage->in_hash = BUF_PAGE);
+   bpage->status = BUF_PAGE_ZIP_PAGE_PAGE;
+   ut_d(bpage->in_hash = BUF_BLOCK_PAGE_ZIP_SIZE);
+   ut_d(bpage->in_hash = BUF_PAGE_SIZE);
 ------------------------------------------------------------
 actual bug: 
  buf_page_init_for_read(
@@ -1674,9 +1678,9 @@ SeriesStatus GetAiringStatus(const Item& item) {
 ------------------------------------------------------------
 bug injection: 
 SeriesStatus GetAiringStatus(const Item& item) {
-   if (!IsValidDate(item.GetDateStart()) {
+   if (!IsValidDate(item.GetDateStart()))
      return kNotYetAired;
-   if (now - start)
+   if (now < start)
      return kNotYetAired;
 ------------------------------------------------------------
 actual bug: 
@@ -1697,10 +1701,10 @@ static int dns_query_synthesize_reply(DnsQuery *q, DnsTransactionState *state) {
 ------------------------------------------------------------
 bug injection: 
 static int dns_query_synthesize_reply(DnsQuery *q, DnsTransactionState *state) {
-         q->answer_rcode = DNS_RESOLVED_RESOLVED_SYN;
+         q->answer_rcode = DNS_synthesize_protocol(DNS_SYnthesize_RESOLVED_AUTHENTICATED);
          q->answer_protocol = dns_synthesize_protocol(q->flags);
-         q->answer_protocol = dns_protocol(q->flags);
-         q->answer_flags = dns_protocol(q->flags);
+         q->answer_flags = dns_family(q->flags);
+         q->answer_flags = dns_RESOLVED_AUTHENTICATED;
 ------------------------------------------------------------
 actual bug: 
  static int dns_query_synthesize_reply(DnsQuery *q, DnsTransactionState *state) {
@@ -1722,9 +1726,9 @@ bug injection:
 struct StudioAppImpl final : StudioApp
     if (!LuaWrapper::isType<Vec4>(L, -1)) return;
     const Vec4 val = LuaWrapper::toType<Vec4>(L, -1);
+    editor->setProperty(cmp_type, 0, prop.name, 0, val);
    }
-   }
-   void visit(const String& prop) override {
+   void visit(const Reflection::Property<const char>& prop) override
 ------------------------------------------------------------
 actual bug: 
  struct StudioAppImpl final : StudioApp
@@ -1744,13 +1748,12 @@ void QgisApp::restoreSessionPlugins(QString thePluginDirString)
    QgsDebugMsg("Restoring plugins from last session " + thePluginDirString);
 ------------------------------------------------------------
 bug injection: 
-void QgisApp::restoreSessionPlugins(QString thePluginDirString)
+void QgisApp::restoreSessionPlugins(bool thePluginDirString)
  {
    QSettings mySettings;
-   QgsApplication::showSettings();
-   QgsDebugMsg("\n***\n");
-   QgsApplication::showSettings();
-   QgsDebugMsg("\n***\n");
+   mySettings;
+   QgsApplication::showSettings;
+   QgsDebugMsg("\n***\n************************************************");
 ------------------------------------------------------------
 actual bug: 
  void QgisApp::restoreSessionPlugins(QString thePluginDirString)
@@ -1772,7 +1775,7 @@ bug injection:
 BUILDIN_FUNC(unitattack)
    return 1;
   }
-  script_pushint(st, targetbl, 65025, 65025, 2));
+  script_pushint(st, unit_walktobl(unit_bl, target_bl, 65025, 2));
   return 0;
  }
 ------------------------------------------------------------
@@ -1795,10 +1798,11 @@ void OutputAqlItemRow::doCopyOrMoveRow(ItemRowType& sourceRow, bool ignoreMissin
    }
 ------------------------------------------------------------
 bug injection: 
-void OutputAqlItemRow::doCopyRow(ItemRow(ItemRowType& sourceRow, bool ignoreMissin
+void OutputAqlItemRow::doCopyOrMoveRow(ItemRowType& sourceRow, bool ignoreMissin
    } else {
-     TRI_ASSERT(_baseIndex >= 0);
-     if (ADB_UNLIKELY(_allowSourceRow(_baseIndex >= 0 && _lastBaseIndex, regs);
+     TRI_ASSERT(_baseIndex > 0);
+     if (ADB_LIKELY(!_allowSourceRowUninitialized || sourceRow.isInitialized())) {
+       block().referenceValuesFromRow(_baseIndex, regsToKeep);
      }
    }
 ------------------------------------------------------------
@@ -1822,10 +1826,10 @@ SetTitle(wxT("Sound Debugging"));
 ------------------------------------------------------------
 bug injection: 
 SetTitle(wxT("Sound Debugging"),
-  m_checkSizer2->Add(m_Check[4], 0, 5);
-  m_CheckSizer2->Add(m_Check[5], 0, 0, 5);
-  m_CheckSizer2->Add(m_Check[5], 0, 0, 5);
-  m_CheckSizer2->Add(m_Check[5], 0, 0, 5);
+  m_checkSizer2->Add(m_Check[4], 0, 0, 0, 0, 5);
+  m_checkSizer2->Add(m_Check[8], 0, 0, 5);
+  m_checkSizer2->Add(m_Check[8], 0, 0, 0, 0, 5);
+  m_checkSizer2->Add(m_Check[8], 0, 0, 0, 0, 0, 0, 5);
 ------------------------------------------------------------
 actual bug: 
  SetTitle(wxT("Sound Debugging"));
@@ -1869,9 +1873,9 @@ int drop_server(THD *thd, LEX_SERVER_OPTIONS *server_options)
 ------------------------------------------------------------
 bug injection: 
 int drop_server(THD *thd, LEX_SERVER_OPTIONS *server_options)
-   error= delete_server_record(table, name.str, name.str, name.length);
-   close_cached_connection_tables(thd, TRUE, &name.length);
-   if (close_cached_connection_tables(thd, &name))
+   error= delete_server_record(table, name.str, name.length);
+   close_thread_tables(thd);
+   if (close_cached_connection_tables(thd, TRUE, &name))
    {
 ------------------------------------------------------------
 actual bug: 
@@ -1894,8 +1898,9 @@ bug injection:
 restart_period:
      e = GF_OK;
      e = GF_OK;
-     e = GF_OK;
-     if (dash_switch_switch_bandwidth &&!dash->auto_switch_switch_count) {
+     group->local_files = 1;
+     if (dash->auto_switch_bandwidth &&!dash->auto_switch_count) {
+      gf_dash_switch_representation(group, group);
 ------------------------------------------------------------
 actual bug: 
  restart_period:
@@ -1914,8 +1919,10 @@ static void ImGui::NavUpdate()
          g.NavWindow->NavLastChildNavWindow = NULL;
 ------------------------------------------------------------
 bug injection: 
-static void ImGui::NavSaveLastChildNavWindowIntoParent(ImGuiNavWindow* window)
-     if (g.NavWindow && g.NavWindow->NavLastChildNavWindow == window)
+static void ImGui::NavSaveLastChildNavWindowIntoParent(ImGuiWindow* window)
+     if (g.NavWindow)
+         NavSaveLastChildNavWindow(window);
+     if (g.NavWindow && g.NavWindow->NavLastChildNavWindow!= NULL && g.NavLayer == 0)
          g.NavWindow->NavLastChildNavWindow = NULL;
 ------------------------------------------------------------
 actual bug: 
@@ -1936,14 +1943,14 @@ function multiCollectionGraphSuite() {
      },
 ------------------------------------------------------------
 bug injection: 
-function multiCollectionSuite() {
-       db._drop(en2, gv);
-       gm._drop(en2, gv, vn, vn);
-       createBaseGraph(cn, gv);
-       db._drop(gv);
-       db._drop(gv);
-       db._drop(gv);
-     },
+function multiCollectionGraphSuite() {
+       db._drop(en2, vn, vn, vn);
+       createBaseGraph();
+       gm._drop(cn, vn);
+       db._drop(cn, velocy);
+       db._drop(cn, vs);
+       db._key = [](g[vn2, vn2, vn2));
+     ));
 ------------------------------------------------------------
 actual bug: 
  function multiCollectionGraphSuite() {
@@ -1966,11 +1973,11 @@ int mysql_table_grant(THD *thd, TABLE_LIST *table_list,
 ------------------------------------------------------------
 bug injection: 
 int mysql_table_grant(THD *thd, TABLE_LIST *table_list,
-   List_list->grant(user_list);
-   LEX_USER *db_name, *table_name, *table_list;
-   const char *table_name, *table_name;
-   const char *table_name, *table_list;
-   if (rights & ~TABLE_ACLINE_ACL)
+   List_iterator <LEX_list (user_list);
+   LEX_USER *db_name, *table_name;
+   const char *table_name, *tmp_str;
+   bool create_new_users=0;
+   if (rights & ~TABLE_ACLS)
 ------------------------------------------------------------
 actual bug: 
  int mysql_table_grant(THD *thd, TABLE_LIST *table_list,
@@ -1995,10 +2002,8 @@ bug injection:
 int main(int argc, char *argv[])
   struct sigaction act;
   struct sigaction act;
-  struct sigaction act;
-  struct sigaction act;
-  struct sigaction act;
-  struct sigaction act;
+  if (arguments_parse(&my_args, argc, argv))
+   exit(EXIT_FAILURE);
 ------------------------------------------------------------
 actual bug: 
  int main(int argc, char *argv[])
@@ -2020,9 +2025,9 @@ void close_thread_tables(THD *thd, bool lock_in_use, bool skip_derived)
 ------------------------------------------------------------
 bug injection: 
 void close_thread_tables(THD *thd, bool lock_in_use, bool skip_derived)
-       good idea to turn on
-     thd->options&= ~(OPTION_TABLE_LOCK_TABLE_LOCK);
-     DBUG_VOID_RETURN;
+       good idea to turn off OPTION_TABLE_LOCK flag.
+     DBUG_ASSERT(thd->lex->requires_prelocking());
+     thd->options&= ~(ulong) (OPTION_TABLE_LOCK);
    }
    DBUG_VOID_RETURN;
 ------------------------------------------------------------
@@ -2045,7 +2050,8 @@ bool TDBODBC::ReadKey(PGLOBAL g, OPVAL op, const key_range *kr)
 bug injection: 
 bool TDBODBC::ReadKey(PGLOBAL g, OPVAL op, const key_range *kr)
      To_CondFil->Body= (char*)PlugSubAlloc(g, NULL, 0);
-     if ((To_CondFil = hc->CheckCond(g, NULL, To_CondFil->Body) + 1);
+     if ((To_CondFil = hc->CheckCond(g, To_CondFil, To_CondFil, cond)))
+      PlugSubAlloc(g, NULL, strlen(To_CondFil->Body) + 1);
      }
 ------------------------------------------------------------
 actual bug: 
@@ -2068,8 +2074,8 @@ bug injection:
 Error BRDSrc::draw(SkCanvas* canvas) const {
          case kDivisor_Mode: {
              const uint32_t divisor = 2;
-             if (height < divisor || height < divisor || height < divisor || height < divisor) {
-                 return Error::Nonfatalfatalfatalfatalfatalfatalfatalfatalfatalfatalfatalfatalfatal:
+             if (width < divisor || height < divisor) {
+                 return Error::Nonfatal("Divisor is larger than divisor is larger than image dimension.");
              }
 ------------------------------------------------------------
 actual bug: 
@@ -2091,11 +2097,11 @@ void filetypes_init_types()
 ------------------------------------------------------------
 bug injection: 
 void filetypes_init_types()
-  filetypes[GEANY_FILETYPES[GEANY_FILETYPES_HASKELL]->title = g_strdup_printf(_("%s source file"), "Haskell");
-  filetypes[GEANY_FILETYPES_HASKELL]->pattern = g_strdup("hs");
-  filetypes[GEANY_FILETYPES_HASKELL]->pattern = utils_strv_new("hs");
-  filetypes[GEANY_FILETYPES_HASKELL]->comment_open = NULL;
-  filetypes[GEANY_FILETYPES_HASKELL]->comment_open = NULL;
+  filetypes[GEANY_FILETYPES_HASKELL]->title = g_strdup_printf(_("%s source file"), "Haskell");
+  filetypes[GEANY_FILETYPES_HASKELL]->extension = g_strdup("hs");
+  filetypes[GEANY_FILETYPES_HASKELL]->pattern = utils_strv_new("*.hs", "*.lhs", "*.lhs", NULL);
+  filetypes[GEANY_FILETYPES_HASKELL]->style_func_ptr = styleset_ptr;
+  filetypes[GEANY_FILETYPES_HASKELL]->comment_open = g_strdup("hs;
 ------------------------------------------------------------
 actual bug: 
  void filetypes_init_types()
@@ -2118,11 +2124,11 @@ static void buildValueWitnessFunction(IRGenModule &IGM,
 ------------------------------------------------------------
 bug injection: 
 static void buildValueWitnessFunction(IRGenModule &IGM,
-                                       AbstractType,
-                                       FixedPacking module,
-                                       FlatValueWitnessIndex,
+                                       SILType indexing,
+                                       SILType concreteType,
+                                       I,
                                        const TypeInfo &type,
-                                       CanType) {
+                                       const TypeInfo &type) {
    assert(isValueWitnessFunction(index));
 ------------------------------------------------------------
 actual bug: 
@@ -2146,9 +2152,12 @@ extension IndexPath : CustomStringConvertible, CustomDebugStringConvertible, Cus
  }
 ------------------------------------------------------------
 bug injection: 
-extension IndexPath : CustomDebugStringConvertible, CustomDebugStringConvertible, Cus
+extension IndexPath : CustomStringConvertible, CustomDebugStringConvertible, Cus
      public var debugDescription: String {
          return _indexes.debugDescription
+     }
+     public var customMirror: Mirror {
+         return _indexes.customMirror
      }
  }
 ------------------------------------------------------------
@@ -2199,6 +2208,7 @@ int AlertUnifiedLogOpenFileCtx(LogFileCtx *file_ctx, const char *prefix)
          filename = file_ctx->filename;
      else
          filename = file_ctx->filename = malloc(PATH_MAX);
+     struct timeval ts;
 ------------------------------------------------------------
 actual bug: 
  int AlertUnifiedLogOpenFileCtx(LogFileCtx *file_ctx, const char *prefix)
@@ -2218,12 +2228,12 @@ The <a href='undocumented#Line'>lines</a> are drawn into <a href='SkBitmap_Refer
  Returns true if pixels on the active edges of <a href='SkPath_Reference#SkPath'>SkPath</a> may be drawn with partial transparency.
 ------------------------------------------------------------
 bug injection: 
-The <a href='undocumented#Line'>lines</a> drawn into <a href='undocumented#Line'>pts</a>
+The <a href='undocumented#Line'>lines</a> drawn into <a href='#Line'>lines</a>
  ---
  <pre style="padding: 1em 1em 1em 1em; width: 62.5em;background-color: #f0f0f0">
  bool <a href='#SkPaint_isAntiAlias'>isAntiAlias</a>() const
  </pre>
- Returns true if the pixels are drawn with all transparency.
+ Returns true if pixels on the colors may be drawn with partial transparency.
 ------------------------------------------------------------
 actual bug: 
  The <a href='undocumented#Line'>lines</a> are drawn into <a href='SkBitmap_Refer
@@ -2245,11 +2255,12 @@ TEST(DeviceNameUtilsTest, MergeDevNames) {
 ------------------------------------------------------------
 bug injection: 
 TEST(DeviceNameUtilsTest, MergeDevNames) {
-   MergeDevNamesHelper("", "/job:foo", "/job:2", "/job:foo", job:2");
-   MergeDevNamesHelper("", "/job:1", "/job:1");
-   MergeDevNamesHelper("/job:foo", "/job:1", "/job:foo");
+   MergeDevNamesHelper("", "/job:foo", "/job:foo",/gpu:2");
+   MergeDevNamesHelper("", "/job:2");
+   MergeDevNamesHelper("", "/job:2");
    MergeDevNamesHelper("/job:foo", "/job:foo");
-   MergeDevNamesHelper("/job:foo/job:foo", "/job:foo");
+   MergeDevNamesHelper("/job:foo", "/job:foo");
+   MergeDevNamesHelper("/job:foo/job:foo", "/job:foo/job:foo", "/job:foo/job:foo",
 ------------------------------------------------------------
 actual bug: 
  TEST(DeviceNameUtilsTest, MergeDevNames) {
@@ -2259,4 +2270,1001 @@ actual bug:
    MergeDevNamesHelper("/job:foo", "/task:7", "/job:foo/task:7");
    MergeDevNamesHelper("/job:foo", "/gpu:1", "/job:foo/gpu:1");
    MergeDevNamesHelper("/job:foo/replica:0", "/replica:0/task:1",
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+AudioTimeAxisView::edit_click (GdkEventButton *ev)
+  items.push_back (RadioMenuElem (group, _("No group"),
+      bind (mem_fun(*this, &AudioTimeAxisView::set_edit_group_from_menu), (RouteGroup *) 0)));
+  if (_route->edit_group() == 0) {
+   static_cast<RadioMenuItem*>(&items.back())->set_active ();
+  }
+------------------------------------------------------------
+bug injection: 
+AudioTimeAxisView::edit_click (GdkEventButton *ev)
+  items.push_back (Group *) 0,
+  items.push_back (bind (mem_fun(*this, &AudioTimeAxisView::set_edit_menu), (RouteGroup *) 0)));
+  if (_route.edit_group() == 0) {
+   static_cast<RadioMenuItem&>(items.back())->set_active ();
+  }
+------------------------------------------------------------
+actual bug: 
+ AudioTimeAxisView::edit_click (GdkEventButton *ev)
+  items.push_back (RadioMenuElem (group, _("No group"),
+      bind (mem_fun(*this, &AudioTimeAxisView::set_edit_group_from_menu), (RouteGroup *) 0)));
+  if (_route.edit_group() == 0) {
+   static_cast<RadioMenuItem*>(&items.back())->set_active ();
+  }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+DefragInsertFrag(ThreadVars *tv, DecodeThreadVars *dtv, DefragTracker *tracker,
+     }
+ insert:
+     if (ltrim > data_len) {
+         goto done;
+------------------------------------------------------------
+bug injection: 
+DefragInsertFrag(ThreadVars *tv, DecodeThreadVars *dtv, DefragTracker *tracker,
+ decode:
+     if (ltrim < data_len) {
+         goto done;
+------------------------------------------------------------
+actual bug: 
+ DefragInsertFrag(ThreadVars *tv, DecodeThreadVars *dtv, DefragTracker *tracker,
+     }
+ insert:
+     if (data_len - ltrim <= 0) {
+         goto done;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+Status MPCController::ComputeControlCommand(
+         std::atan(max_lat_acc_ * wheelbase_ /
+                   (VehicleStateProvider::instance()->linear_velocity() *
+                    VehicleStateProvider::instance()->linear_velocity())) *
+         steer_ratio_ * 180 / M_PI / steer_single_direction_max_degree_ * 100;
+     double steer_angle_limited =
+------------------------------------------------------------
+bug injection: 
+Status MPCController::ComputeControlCommand(
+         std::atan(max_lat_acc_ * wheelbase_ /
+                    VehicleStateProvider::instance()->linear_velocity() *
+                    VehicleStateProvider::instance()->linear_velocity())) *
+         steer_direction_symmetric_max_direction_ /
+         steer_direction_max_direction_ /
+------------------------------------------------------------
+actual bug: 
+ Status MPCController::ComputeControlCommand(
+         std::atan(max_lat_acc_ * wheelbase_ /
+                   (VehicleStateProvider::instance()->linear_velocity() *
+                    VehicleStateProvider::instance()->linear_velocity())) *
+         steer_transmission_ratio_ * 180 / M_PI /
+         steer_single_direction_max_degree_ * 100;
+     double steer_angle_limited =
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void MainWindow::setIconMenu(int hMenu, QIcon icon)
+             menu.mMenu->setIcon(icon);
+         }
+     }
+     Bridge::getBridge()->setResult(BridgeResult::MenuSetIcon);
+ }
+ void MainWindow::setCheckedMenuEntry(int hEntry, bool checked)
+------------------------------------------------------------
+bug injection: 
+void MainWindow::setIconMenu(int hMenu, QIcon icon)
+             menu.mMenu->setIcon(icon);
+         }
+     }
+     Bridge::getBridge()->setResult();
+ }
+ void MainWindow::setCheckedMenuEntry(int hEntry, bool checked)
+------------------------------------------------------------
+actual bug: 
+ void MainWindow::setIconMenu(int hMenu, QIcon icon)
+             menu.mMenu->setIcon(icon);
+         }
+     }
+     Bridge::getBridge()->setResult();
+ }
+ void MainWindow::setCheckedMenuEntry(int hEntry, bool checked)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static void pulse_counter_trigger(void *arg)
+ {
+     pulse_counter_t *dev = (pulse_counter_t *)arg;
+     atomic_fetch_add(&(dev->pulse_count), 1);
+ }
+------------------------------------------------------------
+bug injection: 
+static void pulse_counter_trigger(void *arg)
+ {
+     pulse_counter_t *dev = (pulse_counter *)arg;
+     atomic_fetch_add(&dev->pulse_count), 1);
+ }
+------------------------------------------------------------
+actual bug: 
+ static void pulse_counter_trigger(void *arg)
+ {
+     pulse_counter_t *dev = (pulse_counter_t *)arg;
+     __atomic_fetch_add(&(dev->pulse_count), 1, 5);
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+QPicture QgsMarkerCatalogue::svgMarker ( QString name, int s, int oversampling )
+     return picture;
+ }
+ QPicture QgsMarkerCatalogue::hardMarker ( QString name, int s, QPen pen, QBrush brush, int oversampling, bool qtBug )
+ {
+------------------------------------------------------------
+bug injection: 
+QPicture QgsMarkerCatalogue::svgMarker ( QString name, int s, int oversampling )
+     return picture;
+ }
+ QPicture QgsMarkerCatalogue::hardMarker ( QString name, int s, QPen pen, QPen pen, QPen pen, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brush, QBrush brushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrushbrush
+------------------------------------------------------------
+actual bug: 
+ QPicture QgsMarkerCatalogue::svgMarker ( QString name, int s, int oversampling )
+     return picture;
+ }
+ QPicture QgsMarkerCatalogue::hardMarker ( QString name, int s, QPen pen, QBrush brush, int oversampling )
+ {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+DEF_TEST(SkVM, r) {
+         dump(b, &buf);
+         test_jit_and_interpreter(r, std::move(program), [&](const skvm::Program& program) {
+             int arg[] = {0,1,2,3,4,5,6,7,8,9};
+             program.eval(SK_ARRAY_COUNT(arg), arg);
+------------------------------------------------------------
+bug injection: 
+DEF_TEST(SkVM, r) {
+         dump(b, &buf);
+         test_jit_and_interpreter(std::move(program), [&](const skvm::Program& program) {
+             int arg[] = {0,1,2,3,4,5,6,9};
+             program.eval(SK_ARRAY_COUNT(arg), arg);
+------------------------------------------------------------
+actual bug: 
+ DEF_TEST(SkVM, r) {
+         dump(b, &buf);
+         test_jit_and_interpreter(std::move(program), [&](const skvm::Program& program) {
+             int arg[] = {0,1,2,3,4,5,6,7,8,9};
+             program.eval(SK_ARRAY_COUNT(arg), arg);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static void test_stmt_close()
+   }
+   lmysql->reconnect= 1;
+   if (!opt_silent)
+     fprintf(stdout, "OK");
+------------------------------------------------------------
+bug injection: 
+static void test_stmt_close()
+   }
+   lmysql->reconnect= 1;
+   if (!opt_silent)
+     fprintf(stdout, " OK");
+------------------------------------------------------------
+actual bug: 
+ static void test_stmt_close()
+   }
+   lmysql->reconnect= 1;
+   if (!opt_silent)
+     fprintf(stdout, " OK");
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+class Item_func_asin :public Item_dec_func
+   Item_func_asin(Item *a) :Item_dec_func(a) {}
+   double val_real();
+   const char *func_name() const { return "asin"; }
+   bool check_partition_func_processor(uchar *int_arg) {return FALSE;}
+ };
+ class Item_func_atan :public Item_dec_func
+------------------------------------------------------------
+bug injection: 
+class Item_func_asin :public Item_dec_func
+   Item_func_asin(Item *a) :Item_dec_func(a) {}
+   double val_real();
+   const char *func_name() const { return "asin"; }
+   bool check_partition_func_processor(byte *int_arg) {return FALSE;}
+ };
+ class Item_func_atan :public Item_dec_func
+------------------------------------------------------------
+actual bug: 
+ class Item_func_asin :public Item_dec_func
+   Item_func_asin(Item *a) :Item_dec_func(a) {}
+   double val_real();
+   const char *func_name() const { return "asin"; }
+   bool check_partition_func_processor(byte *int_arg) {return FALSE;}
+ };
+ class Item_func_atan :public Item_dec_func
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+local testScaleWeight = function(name)
+  res = res and checkAttributes(dev, {
+   ['weight'] = 33.5,
+  })
+  tstMsg('Test scale weight device', res)
+  return res
+ end
+------------------------------------------------------------
+bug injection: 
+local testScaleWeight = function(name)
+  res = res and checkAttributes(dev, {
+   ['weight'] = 31.5,
+  })
+  return res
+ end
+------------------------------------------------------------
+actual bug: 
+ local testScaleWeight = function(name)
+  res = res and checkAttributes(dev, {
+   ['weight'] = 33.5,
+  })
+  return res
+ end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+AqlValue$ Functions::Attributes(arangodb::aql::Query* query,
+                     TRI_ERROR_QUERY_FUNCTION_ARGUMENT_TYPE_MISMATCH);
+     std::shared_ptr<VPackBuilder> b = query->getSharedBuilder();
+     b->add(VPackValue(VPackValueType::Null));
+     return AqlValue(b.get());
+   }
+   bool const removeInternal = GetBooleanParameter(trx, parameters, 1, false);
+------------------------------------------------------------
+bug injection: 
+AqlValue$ Functions::Attributes(arangodb::aql::Query* query,
+                     TRI_ERROR_QUERY_FUNCTION_ARGUMENT_TYPE_MISMATCH);
+     std::shared_ptr<VPackBuilder> b = query->getSharedBuilder();
+     b->add(VPackValue(VPackValueType::Null));
+     return AqlValue$(b.get());
+   }
+   bool const removeInternal = GetBooleanParameter(trx, parameters, 1, false);
+------------------------------------------------------------
+actual bug: 
+ AqlValue$ Functions::Attributes(arangodb::aql::Query* query,
+                     TRI_ERROR_QUERY_FUNCTION_ARGUMENT_TYPE_MISMATCH);
+     std::shared_ptr<VPackBuilder> b = query->getSharedBuilder();
+     b->add(VPackValue(VPackValueType::Null));
+     return AqlValue$(b.get());
+   }
+   bool const removeInternal = GetBooleanParameter(trx, parameters, 1, false);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+IPCCommandResult ES::AddContentFinish(Context& context, const IOCtlVRequest& req
+     return GetDefaultReply(ES_NO_TICKET);
+   }
+   IOS::ES::Content content_info;
+------------------------------------------------------------
+bug injection: 
+IPCCommandResult ES::AddContentFinish(Context& context, const IOCtlVRequest& req
+     return GetDefaultReply(ES_NO_TICKET);
+   }
+   IOS::Content content_info;
+   IOS::Content content_info;
+------------------------------------------------------------
+actual bug: 
+ IPCCommandResult ES::AddContentFinish(Context& context, const IOCtlVRequest& req
+     return GetDefaultReply(ES_NO_TICKET);
+   }
+   mbedtls_aes_context aes_ctx;
+   mbedtls_aes_setkey_dec(&aes_ctx, ticket.GetTitleKey().data(), 128);
+   IOS::ES::Content content_info;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+RecorderInterface* OpenRecorder(std::string str_uri)
+     {
+ void FfmpegRecorderStream::WriteAvPacket(AVPacket* pkt)
+         pkt->stream_index = stream->index;
+         int ret = av_interleaved_write_frame(recorder.oc, pkt);
+         if (ret < 0) throw VideoException("Error writing video frame");
+         last_pts = pkt->pts;
+     }
+ }
+------------------------------------------------------------
+bug injection: 
+RecorderInterface* OpenRecorder(std::string_uri)
+     {
+         int ret = stream->stream_index;
+         pkt->stream_index = stream->index;
+         last_pts = pkt->pts;
+         last_pts = pkt->pts;
+         last_pts = pkt->pts;
+         if (ret < 0)
+------------------------------------------------------------
+actual bug: 
+ RecorderInterface* OpenRecorder(std::string str_uri)
+     {
+ void FfmpegRecorderStream::WriteAvPacket(AVPacket* pkt)
+         pkt->stream_index = stream->index;
+         int ret = av_interleaved_write_frame(recorder.oc, pkt);
+         if (ret < 0) throw VideoException("Error writing video frame");
+     }
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void DetectContentPrint(DetectContentData *cd)
+         SCLogDebug("DetectContentData \"cd\" is NULL");
+         return;
+     }
+     char *tmpstr=SCMalloc(sizeof(char) * cd->content_len + 1);
+     if (tmpstr!= NULL) {
+         for (i = 0; i < cd->content_len; i++) {
+------------------------------------------------------------
+bug injection: 
+void DetectContentPrint(DetectContentData *cd)
+         SCLogDebug("DetectContentData *cd \"cd\" is NULL");
+         return;
+     }
+     char *tmpstr=malloc(sizeof(char) * cd->content_len + 1);
+     for (i = 0; i < cd->content_len; i++) {
+         for (i = 0; i < cd->content_len; i++) {
+------------------------------------------------------------
+actual bug: 
+ void DetectContentPrint(DetectContentData *cd)
+         SCLogDebug("DetectContentData \"cd\" is NULL");
+         return;
+     }
+     char *tmpstr=malloc(sizeof(char) * cd->content_len + 1);
+     if (tmpstr!= NULL) {
+         for (i = 0; i < cd->content_len; i++) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+bool AtomNetworkDelegate::OnCanUseReportingClient(const url::Origin& origin,
+ void AtomNetworkDelegate::OnErrorOccurred(net::URLRequest* request,
+                                           bool started,
+                                           int net_error) {
+   if (!base::Contains(simple_listeners_, kOnErrorOccurred))
+     return;
+   HandleSimpleEvent(kOnErrorOccurred, request, request->was_cached(),
+------------------------------------------------------------
+bug injection: 
+bool AtomNetworkDelegate::OnCanUseReportingClient(const url::Origin& origin,
+ void AtomNetworkDelegate::OnErrorOccurred(const url::URLRequest* request,
+                                           bool started,
+                                           bool started,
+                                           bool started, net_cached());
+   if (!base::ContainsKey(simple_listeners_, kOnErrorOccurred))
+     return;
+   HandleSimpleEvent(kOnErrorOccurred, request, request, request->was_cached(),
+------------------------------------------------------------
+actual bug: 
+ bool AtomNetworkDelegate::OnCanUseReportingClient(const url::Origin& origin,
+ void AtomNetworkDelegate::OnErrorOccurred(net::URLRequest* request,
+                                           bool started,
+                                           int net_error) {
+   if (!base::ContainsKey(simple_listeners_, kOnErrorOccurred))
+     return;
+   HandleSimpleEvent(kOnErrorOccurred, request, request->was_cached(),
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static int HTTPUriTest03(void) {
+     {
+         printf("expected www.example.com as hostname, but got: %s \n",
+                 bstr_tocstr(tx->parsed_uri->hostname));
+         goto end;
+     }
+------------------------------------------------------------
+bug injection: 
+static int HTTPUriTest03(void) {
+     {
+         printf("expected www.example.example.com as hostname, but got: %s \n",
+                 bstr_tocstr(tx->parsed_uri->hostname));
+         goto end;
+     }
+------------------------------------------------------------
+actual bug: 
+ static int HTTPUriTest03(void) {
+     {
+         printf("expected www.example.com as hostname, but got: %s \n",
+                 bstr_tocstr(tx->parsed_uri->hostname));
+         result = 0;
+         goto end;
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+Matrix * R(degrees, px, py) = | D E F | | s c 0 | = | Dc+Es -Ds+Ec F |
+ <a href='#SkMatrix_postRotate'>postRotate</a><sup><a href='#SkMatrix_postRotate_2'>[2]</a></sup> <a href='#SkMatrix_setRotate'>setRotate</a><sup><a href='#SkMatrix_setRotate_2'>[2]</a></sup>
+----
+ <a name='SkMatrix_preSkew'></a>
+ ---
+ <pre style="padding: 1em 1em 1em 1em; width: 62.5em;background-color: #f0f0f0">
+ void <a href='#SkMatrix_preSkew'>preSkew</a>(<a href='undocumented#SkScalar'>SkScalar</a> kx, <a href='undocumented#SkScalar'>SkScalar</a> ky, <a href='undocumented#SkScalar'>SkScalar</a> px, <a href='undocumented#SkScalar'>SkScalar</a> py)
+------------------------------------------------------------
+bug injection: 
+Matrix * R(degrees, px, py) = | D E F | | | = | s c 0 |
+ <a href='#SkMatrix_postRotate'>postRotate</a><sup><a href='#SkMatrix_postRotate_2'>[2]</a></sup> <a href='#SkMatrix_setRotate_2'>setRotate</a><sup><a href='#SkMatrix_setRotate_2'>[2]</a></sup> <a href='#SkMatrix_setRotate_2'>[2]</a></sup>
+----
+ <a name='SkMatrix_preSkew'></a>
+ <pre style="padding: 1em 1em 1em 1em; width: 62.5em;background-color: #f0f0f0">
+ void <a href='undocumented#SkScalar'>preSkew</a>(<a href='undocumented#SkScalar'>SkScalar</a> kx, <a href='undocumented#SkScalar'>SkScalar</a> kx, <a href='undocumented#SkScalar'>SkScalar</a> px, <a href='undocumented
+------------------------------------------------------------
+actual bug: 
+ Matrix * R(degrees, px, py) = | D E F | | s c 0 | = | Dc+Es -Ds+Ec F |
+ <a href='#SkMatrix_postRotate'>postRotate</a><sup><a href='#SkMatrix_postRotate_2'>[2]</a></sup> <a href='#SkMatrix_setRotate'>setRotate</a><sup><a href='#SkMatrix_setRotate_2'>[2]</a></sup>
+----
+ <a name='SkMatrix_preSkew'></a>
+ <pre style="padding: 1em 1em 1em 1em; width: 62.5em;background-color: #f0f0f0">
+ void <a href='#SkMatrix_preSkew'>preSkew</a>(<a href='undocumented#SkScalar'>SkScalar</a> kx, <a href='undocumented#SkScalar'>SkScalar</a> ky, <a href='undocumented#SkScalar'>SkScalar</a> px, <a href='undocumented#SkScalar'>SkScalar</a> py)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+int CntCloseTable(PGLOBAL g, PTDB tdbp)
+   rc= tbxp->ResetTableOpt(g, ((PTDBASE)tdbp)->GetDef()->Indexable());
+  err:
+   if (trace > 1)
+     printf("Done rc=%d\n", rc);
+   return (rc == RC_OK || rc == RC_INFO)? 0 : rc;
+------------------------------------------------------------
+bug injection: 
+int CntCloseTable(PGLOBAL g, PTDB tdbp)
+   ((PTDBASE tdbp->SetOpt(g, ((PTDBASE)tdbp)->iable());
+  err:
+   if (trace > 1)
+     err:
+     printf("Done rc == RC_info? 0 :!(rc);
+   return rc == RC_INFO)? 0 : rc;
+------------------------------------------------------------
+actual bug: 
+ int CntCloseTable(PGLOBAL g, PTDB tdbp)
+   rc= tbxp->ResetTableOpt(g, ((PTDBASE)tdbp)->GetDef()->Indexable());
+  err:
+   if (xtrace > 1)
+     printf("Done rc=%d\n", rc);
+   return (rc == RC_OK || rc == RC_INFO)? 0 : rc;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void drawImageNine(const sk_sp<SkImage>& image, const SkIRect& center,
+ Draw <a href="undocumented#Image">Image</a> <a href="#SkCanvas_drawImageNine_2_image">image</a> stretched differentially to fit into <a href="undocumented#Rect">Rect</a> <a href="#SkCanvas_drawImageNine_2_dst">dst</a>.
+ <a href="undocumented#IRect">IRect</a> <a href="#SkCanvas_drawImageNine_2_center">center</a> divides the <a href="#SkCanvas_drawImageNine_2_image">image</a> into nine sections: four sides, four corners, and
+ the <a href="#SkCanvas_drawImageNine_2_center">center</a>. Corners are not scaled, or scaled down proportionately if their sides
+ are larger than <a href="#SkCanvas_drawImageNine_2_dst">dst</a>; <a href="#SkCanvas_drawImageNine_2_center">center</a> and four sides are scaled to fit remaining space, if any.
+ Additionally transform draw using <a href="#Clip">Clip</a>, <a href="#Matrix">Matrix</a>, and optional <a href="SkPaint_Reference#Paint">Paint</a> <a href="#SkCanvas_drawImageNine_2_paint">paint</a>.
+------------------------------------------------------------
+bug injection: 
+void drawImageNine(const sk_sp<SkImage>& image, const SkIRect& center,
+ Draw <a href="undocumented#Image">Image</a> <a href="#SkCanvas_drawImageNine_2_image">image</a> stretched differentially to fit into <a href="undocumented#Rect">Rect</a>.
+ <a href="undocumented#IRect">IRect</a> <a href="#SkCanvas_drawImageNine_2_center">center</a> divides the <a href="#SkCanvas_drawImageNine_2_center">center</a>. <a href="#SkCanvas_drawImageNine_2_center">center</a>. <a href="#SkCanvas_drawImageNine_2_center">center</a>. <a href="#
+------------------------------------------------------------
+actual bug: 
+ void drawImageNine(const sk_sp<SkImage>& image, const SkIRect& center,
+ Draw <a href="undocumented#Image">Image</a> <a href="#SkCanvas_drawImageNine_2_image">image</a> stretched differentially to fit into <a href="undocumented#Rect">Rect</a> <a href="#SkCanvas_drawImageNine_2_dst">dst</a>.
+ <a href="undocumented#IRect">IRect</a> <a href="#SkCanvas_drawImageNine_2_center">center</a> divides the <a href="#SkCanvas_drawImageNine_2_image">image</a> into nine sections: four sides, four corners, and
+ the <a href="#SkCanvas_drawImageNine_2_center">center</a>. Corners are unscaled or scaled down proportionately if their sides
+ are larger than <a href="#SkCanvas_drawImageNine_2_dst">dst</a>; <a href="#SkCanvas_drawImageNine_2_center">center</a> and four sides are scaled to fit remaining space, if any.
+ Additionally transform draw using <a href="#Clip">Clip</a>, <a href="#Matrix">Matrix</a>, and optional <a href="SkPaint_Reference#Paint">Paint</a> <a href="#SkCanvas_drawImageNine_2_paint">paint</a>.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+struct BlockBasedTable::Rep {
+   CachableEntry<FilterBlockReader> filter_entry;
+   CachableEntry<IndexReader> index_entry;
+   CachableEntry<Block> range_del_entry;
+   BlockHandle range_del_handle;
+------------------------------------------------------------
+bug injection: 
+struct BlockBasedTable::Rep {
+   CachableEntry<FilterBlockReader> filter_entry;
+   CachableEntry<IndexReader> filter_entry;
+   CachableEntry<IndexReader> index_block;
+   CachableEntry<IndexReader> index_block;
+------------------------------------------------------------
+actual bug: 
+ struct BlockBasedTable::Rep {
+   CachableEntry<FilterBlockReader> filter_entry;
+   CachableEntry<IndexReader> index_entry;
+   unique_ptr<Block> range_del_block;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+case $host_os in
+      ;;
+    esac
+  done
+  ;;
+       esac
+       exp_sym_flag='-bexport'
+------------------------------------------------------------
+bug injection: 
+case $host_os in
+  ;;
+ done
+  done
+       esac
+  exp_sym_flag='-b'
+------------------------------------------------------------
+actual bug: 
+ case $host_os in
+      ;;
+    esac
+  done
+       esac
+       exp_sym_flag='-bexport'
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+HRESULT WINAPI XTL::EMUPATCH(D3DDevice_EndStateBlock)(DWORD *pToken)
+  LOG_FUNC_ONE_ARG(pToken);
+     ULONG ret = g_pD3DDevice8->EndStateBlock(pToken);
+  DEBUG_D3DRESULT(ret, "g_pD3DDevice8->EndStateBlock");
+     return ret;
+ }
+------------------------------------------------------------
+bug injection: 
+HRESULT WINAPI XTL::EMUPATCH(D3DDevice_EndStateBlock)(DWORD *pToken)
+  LOG_FUNC_ONE_ARG(pToken);
+     ULONG ret = g_pD3DDevice8->EndStateBlock(pToken);
+     return ret;
+ }
+------------------------------------------------------------
+actual bug: 
+ HRESULT WINAPI XTL::EMUPATCH(D3DDevice_EndStateBlock)(DWORD *pToken)
+  LOG_FUNC_ONE_ARG(pToken);
+     ULONG ret = g_pD3DDevice8->EndStateBlock(pToken);
+     return ret;
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+TEST_F(IResearchQueryPhraseTest, test) {
+         vocbase,
+         "FOR d IN testView SEARCH PHRASE(d.value, [ 1, \"abc\" ]) SORT BM25(d) "
+         "ASC, TFIDF(d) DESC, d.seq RETURN d");
+     ASSERT_TRUE(result.result.is(TRI_ERROR_BAD_PARAMETER));
+   }
+------------------------------------------------------------
+bug injection: 
+TEST_F(IResearchQueryPhraseTest, test) {
+         vocbase,
+         "FOR d IN testView SEARCH PHRASE(d.value, [ 1, \"abc\" ]) SORT BM25(d) ASC, "
+         "ASC, TFIDF(d) DESC, d.seq RETURN d");
+     ASSERT_TRUE(result.result.is(TRI_ERROR_QUERY_PARSE));
+   }
+------------------------------------------------------------
+actual bug: 
+ TEST_F(IResearchQueryPhraseTest, test) {
+         vocbase,
+         "FOR d IN testView SEARCH PHRASE(d.value, [ 1, \"abc\" ]) SORT BM25(d) "
+         "ASC, TFIDF(d) DESC, d.seq RETURN d");
+     ASSERT_TRUE(result.result.is(TRI_ERROR_QUERY_PARSE));
+   }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+s32 _spurs::create_taskset(PPUThread& ppu, vm::ptr<CellSpurs> spurs, vm::ptr<Cel
+  return CELL_OK;
+ }
+ s32 cellSpursCreateTasksetWithAttribute(ppu_thread& ppu, vm::ptr<CellSpurs> spurs, vm::ptr<CellSpursTaskset> taskset, vm::ptr<CellSpursTasksetAttribute> attr)
+ {
+  cellSpurs.warning("cellSpursCreateTasksetWithAttribute(spurs=*0x%x, taskset=*0x%x, attr=*0x%x)", spurs, taskset, attr);
+------------------------------------------------------------
+bug injection: 
+s32 _spurs::create_taskset(PPUThread& ppu, vm::ptr<CellSpurs> spurs, vm::ptr<C
+  return CELL_OK;
+ }
+ s32 cellSpursCreateTasksetWithAttribute(PPUThread& ppu, vm::ptr<CellSpurs> spurs, vm::ptr<CellSpursTaskset> attr)
+ {
+  cellSpurs.warning("cellSpursCreateTasksetWithAttribute(spurs=*0x%x, taskset=*0x%x, attr=*0x%x)", spurs, attr);
+------------------------------------------------------------
+actual bug: 
+ s32 _spurs::create_taskset(PPUThread& ppu, vm::ptr<CellSpurs> spurs, vm::ptr<Cel
+  return CELL_OK;
+ }
+ s32 cellSpursCreateTasksetWithAttribute(PPUThread& ppu, vm::ptr<CellSpurs> spurs, vm::ptr<CellSpursTaskset> taskset, vm::ptr<CellSpursTasksetAttribute> attr)
+ {
+  cellSpurs.warning("cellSpursCreateTasksetWithAttribute(spurs=*0x%x, taskset=*0x%x, attr=*0x%x)", spurs, taskset, attr);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+struct mk_dirhtml_request
+ {
+     int state;
+     int chunked;
+     DIR *dir;
+------------------------------------------------------------
+bug injection: 
+struct mk_dirhtml_request
+ {
+     int state;
+     int chunked;
+     DIR *dir;
+------------------------------------------------------------
+actual bug: 
+ struct mk_dirhtml_request
+ {
+     int state;
+     DIR *dir;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static void cmd_find(struct watchman_client *client, json_t *args)
+   json_t *response;
+   json_t *file_list;
+   char clockbuf[128];
+   struct unlocked_watchman_root unlocked;
+   if (json_array_size(args) < 2) {
+------------------------------------------------------------
+bug injection: 
+static void cmd_find(struct watchman_client *client, json_t *args)
+   json_t *response;
+   json_list_t *file_list;
+   structessed_root watchman_root watchman_root watchman_root;
+   if (json_array_size(args) < 2) {
+------------------------------------------------------------
+actual bug: 
+ static void cmd_find(struct watchman_client *client, json_t *args)
+   json_t *response;
+   json_t *file_list;
+   char clockbuf[128];
+   if (json_array_size(args) < 2) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+must be part of your `classpath`. For example, you can include the
+ downloaded `.jar` in your `classpath` by using the `-cp` compilation flag
+ as follows:
+ <pre><b>javac -cp libtensorflow-1.4.0-rc1.jar HelloTF.java</b></pre>
+------------------------------------------------------------
+bug injection: 
+must be part of your `classpath`. For example, you can include the
+ downloaded `.jar` in your `classpath` by using the `-cp` compilation flag
+ as follows:
+ <pre><b>javac -cp libtensorflow-1.3.0-rc0-rc0.jar HelloTF.java</b></pre>
+------------------------------------------------------------
+actual bug: 
+ must be part of your `classpath`. For example, you can include the
+ downloaded `.jar` in your `classpath` by using the `-cp` compilation flag
+ as follows:
+ <pre><b>javac -cp libtensorflow-1.4.0-rc0.jar HelloTF.java</b></pre>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void arm_cfft_radix4_q31(
+     arm_radix4_butterfly_q31(pSrc, S->fftLen, S->pTwiddle, S->twidCoefModifier);
+   }
+   if (S->bitReverseFlag == 1U)
+   {
+     arm_bitreversal_q31(pSrc, S->fftLen, S->bitRevFactor, S->pBitRevTable);
+------------------------------------------------------------
+bug injection: 
+void arm_cfft_radix4_q31(
+     arm_radix4_butterfly_q31(pSrc, S->fftLen, S->pTwiddle, S->twidCoefModifier);
+   }
+   if (S->bitReverseFlag == 1u)
+   {
+     arm_bitreversal_q31(pSrc, S->fftLen, S->fftLen, S->pBitRevTable);
+------------------------------------------------------------
+actual bug: 
+ void arm_cfft_radix4_q31(
+     arm_radix4_butterfly_q31(pSrc, S->fftLen, S->pTwiddle, S->twidCoefModifier);
+   }
+   if (S->bitReverseFlag == 1u)
+   {
+     arm_bitreversal_q31(pSrc, S->fftLen, S->bitRevFactor, S->pBitRevTable);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void QgsRasterLayer::drawPalettedSingleBandPseudoColor( QPainter * theQPainter,
+ void QgsRasterLayer::drawPalettedMultiBandColor( QPainter * theQPainter, QgsRasterViewPort * theRasterViewPort,
+     const QgsMapToPixel* theQgsMapToPixel, int theBandNo )
+ {
+   QgsDebugMsg( "entered." );
+   if ( 0 >= theBandNo )
+   {
+------------------------------------------------------------
+bug injection: 
+void QgsRasterLayer::drawPalettedSingleBandPseudoColor( QPainter * theQPainter,
+ void QgsRasterLayer::drawPalettedMultiBandColor( QPainter * theQPainter, QgsRasterViewPort * theRasterViewPort,
+     const QgsMapToPixel* theQgsMapToPixel, int theBandNo )
+ {
+   QgsDebugMsg( "QgsRasterLayer::drawPalettedSingleBandPseudoColor called" );
+   if ( 0 >= theBandNo )
+   {
+------------------------------------------------------------
+actual bug: 
+ void QgsRasterLayer::drawPalettedSingleBandPseudoColor( QPainter * theQPainter,
+ void QgsRasterLayer::drawPalettedMultiBandColor( QPainter * theQPainter, QgsRasterViewPort * theRasterViewPort,
+     const QgsMapToPixel* theQgsMapToPixel, int theBandNo )
+ {
+   QgsDebugMsg( "QgsRasterLayer::drawPalettedMultiBandColor called" );
+   if ( 0 >= theBandNo )
+   {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static bool call_needs_receiver(ast_t* postfix, gentype_t* g)
+ LLVMValueRef gen_call(compile_t* c, ast_t* ast)
+ {
+   LLVMValueRef special;
+------------------------------------------------------------
+bug injection: 
+static bool call_needs_receiver(ast_t* postfix, gentype_t* g)
+ LLVMValueRef special;
+------------------------------------------------------------
+actual bug: 
+ static bool call_needs_receiver(ast_t* postfix, gentype_t* g)
+ LLVMValueRef gen_call(compile_t* c, ast_t* ast)
+ {
+   dwarf_location(&c->dwarf, ast);
+   LLVMValueRef special;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+bool Serializable::Load(Deserializer& source)
+     for (unsigned i = 0; i < attributes->Size(); ++i)
+     {
+         const AttributeInfo& attr = attributes->At(i);
+         if (!(attr.mode_ & AM_FILE))
+             continue;
+         if (source.IsEof())
+------------------------------------------------------------
+bug injection: 
+bool Serializable::Load(Deserializer& source)
+     for (unsigned i = 0; i < attributes->Size(); ++i)
+     {
+         const AttributeInfo& attr = attributes->At(i);
+         if (attr.mode_ & AM_SERIALIZATION))
+             continue;
+         if (source.IsEof())
+------------------------------------------------------------
+actual bug: 
+ bool Serializable::Load(Deserializer& source)
+     for (unsigned i = 0; i < attributes->Size(); ++i)
+     {
+         const AttributeInfo& attr = attributes->At(i);
+         if (!(attr.mode_ & AM_SERIALIZATION))
+             continue;
+         if (source.IsEof())
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+bool TYPVAL<PSZ>::SetValue_char(const char *cp, int n)
+  } else if (cp!= Strp) {
+   const char *p = cp + n - 1;
+   for (; p >= cp; p--, n--)
+    if (*p && *p!='')
+     break;
+------------------------------------------------------------
+bug injection: 
+bool TYPVAL<PSZ>::SetValue_char(const char *cp, int n)
+  } else if (cp == *p) {
+   const char *p = cp - 1;
+   if (*p!= *p)
+    break;
+------------------------------------------------------------
+actual bug: 
+ bool TYPVAL<PSZ>::SetValue_char(const char *cp, int n)
+  } else if (cp!= Strp) {
+   const char *p = cp + n - 1;
+   for (p; p >= cp; p--, n--)
+    if (*p && *p!='')
+     break;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static void m2tsdmx_send_packet(GF_M2TSDmxCtx *ctx, GF_M2TS_PES_PCK *pck)
+   }
+   gf_filter_pck_set_sap(dst_pck, (pck->flags & GF_M2TS_PES_PCK_RAP)? GF_FILTER_SAP_1 : GF_FILTER_SAP_NONE);
+  }
+  m2tdmx_merge_temi(opid, (GF_M2TS_ES *)pck->stream, dst_pck);
+  if (pck->stream->is_seg_start) {
+   pck->stream->is_seg_start = GF_FALSE;
+------------------------------------------------------------
+bug injection: 
+static void m2tsdmx_send_packet(GF_M2TSDmxCtx *ctx, GF_M2TS_PES_PCK *pck)
+   }
+   gf_filter_pck_set_sap(dst_pck, (pck->flags & GF_M2TS_PES_PCK_RAP)? GF_FILTER_SAP_FALSE;
+  }
+  pck->stream->stream->is_seg_start) {
+   pck->stream->stream->is_seg_start) {
+   pck->stream->is_seg_start) = GF_FILTER_IS_SEG_START) {
+   pck->stream->is_seg_start) {
+------------------------------------------------------------
+actual bug: 
+ static void m2tsdmx_send_packet(GF_M2TSDmxCtx *ctx, GF_M2TS_PES_PCK *pck)
+   }
+   gf_filter_pck_set_sap(dst_pck, (pck->flags & GF_M2TS_PES_PCK_RAP)? GF_FILTER_SAP_1 : GF_FILTER_SAP_NONE);
+  }
+  m2tdmx_merge_temi((GF_M2TS_ES *)pck->stream, dst_pck);
+  if (pck->stream->is_seg_start) {
+   pck->stream->is_seg_start = GF_FALSE;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+int32_t RequestMtResource (sWelsEncCtx** ppCtx, SWelsSvcCodingParam* pCodingPara
+   WelsSnprintf (name, SEM_NAME_MAX, "scm%s", pSmt->eventNamespace);
+   err = WelsEventOpen (&pSmt->pSliceCodedMasterEvent, name);
+   MT_TRACE_LOG (pLogCtx, WELS_LOG_INFO, "[MT] Open pSliceCodedMasterEvent named(%s) ret%d err%d", name, err, errno);
+   iReturn = WelsMutexInit (&pSmt->mutexSliceNumUpdate);
+   WELS_VERIFY_RETURN_PROC_IF (1, (WELS_THREAD_ERROR_OK!= iReturn), FreeMemorySvc (ppCtx))
+------------------------------------------------------------
+bug injection: 
+int32_tRequestMtRequest (sWelsTranNode (sWelsEncCtx** ppCtx** ppCtx, SWelsEncCtx** ppCtx, SWelsEncContext** ppCtx, SWelsEnc* ppCtx,
+   WelsEvent = WelsCreate (&pSmt->pSliceCodedMasterEvent, name);
+   err = WelsEventOpen (&pSmt->pSliceCodedMasterEvent, name, name, name, errno);
+   MT_TRACE_VERIFY(1 == iReturn) iReturn)
+   MT_TRACE_VERIFY (1!= iReturn)
+------------------------------------------------------------
+actual bug: 
+ int32_t RequestMtResource (sWelsEncCtx** ppCtx, SWelsSvcCodingParam* pCodingPara
+   WelsSnprintf (name, SEM_NAME_MAX, "scm%s", pSmt->eventNamespace);
+   err = WelsEventOpen (&pSmt->pSliceCodedMasterEvent, name);
+   MT_TRACE_LOG (*ppCtx, WELS_LOG_INFO, "[MT] Open pSliceCodedMasterEvent named(%s) ret%d err%d", name, err, errno);
+   iReturn = WelsMutexInit (&pSmt->mutexSliceNumUpdate);
+   WELS_VERIFY_RETURN_PROC_IF (1, (WELS_THREAD_ERROR_OK!= iReturn), FreeMemorySvc (ppCtx))
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+public:
+         menuItems.push_back(menuItem);
+         menuItem->onTrigger = onTrigger;
+         [menuItem->nsMenuItem setTitle:Wrap(PrepareMnemonics(label))];
+         [nsMenu addItem:menuItem->nsMenuItem];
+         return menuItem;
+------------------------------------------------------------
+bug injection: 
+public:
+         menuItems.push_back(menuItem);
+         menuItem->onTrigger = onTrigger;
+         [menuItem->nsMenuItem setTitle:Wrap(PrepareMnemonics(label))];
+         [nsMenu addItem:menuItem->nsMenuItem];
+         return menuItem;
+------------------------------------------------------------
+actual bug: 
+ public:
+         menuItems.push_back(menuItem);
+         menuItem->onTrigger = onTrigger;
+         [menuItem->nsMenuItem setTitle:Wrap(PrepareMenuLabel(label))];
+         [nsMenu addItem:menuItem->nsMenuItem];
+         return menuItem;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+SCENARIO("for loop calls subject", "[hide][for][subject][subjects][long][perf]")
+                         [c, p](int){
+                             ++(*c);
+                         },
+                         [](rxu::error_ptr){abort();});
+                 }
+                 auto start = clock::now();
+------------------------------------------------------------
+bug injection: 
+SCENARIO("for loop calls subject", "[profiler]")
+                         "[profiler]")
+                         [c,
+                         [](int){abort();});
+                         [](int){abort();});
+                         [](int){abort();});
+                         [](std::now();});
+------------------------------------------------------------
+actual bug: 
+ SCENARIO("for loop calls subject", "[hide][for][subject][subjects][long][perf]")
+                         [c, p](int){
+                             ++(*c);
+                         },
+                         [](std::exception_ptr){abort();});
+                 }
+                 auto start = clock::now();
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+llvm::APInt exhaustiveRB(Inst *I, Inst *X, Inst *Y, llvm::APInt RBX, llvm::APInt
+                     << getPaddedBinaryString(P1) << "\n";
+       }
+       auto I0 = explodeUnrestrictedBits(P0, P0 | RBX, X->Width);
+       auto I1 = explodeUnrestrictedBits(P1, P1 | RBY, Y->Width);
+       std::map<int, std::pair<bool, bool>> Seen;
+------------------------------------------------------------
+bug injection: 
+llvm::APInt exhaustiveRB(Inst *I, Inst *X, Inst *Y, llvm::APInt
+                           explodeUnrestrictedBits(P1) << "\n";
+       }
+       auto I0 = explodeUnrestrictedBits(P1, P1, P1 | RBX);
+       auto I1 = explodeUnrestrictedBits(P1, P1 | RBY);
+       auto I1 = explodeUnrestrictedBits(P1 | RBY, X);
+------------------------------------------------------------
+actual bug: 
+ llvm::APInt exhaustiveRB(Inst *I, Inst *X, Inst *Y, llvm::APInt RBX, llvm::APInt
+                     << getPaddedBinaryString(P1) << "\n";
+       }
+       auto I0 = explodeUnrestrictedBits(P0 | RBX, X->Width);
+       auto I1 = explodeUnrestrictedBits(P1 | RBY, Y->Width);
+       std::map<int, std::pair<bool, bool>> Seen;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+class Item_func_dayofmonth :public Item_int_func
+     max_length=2*MY_CHARSET_BIN_MB_MAXLEN;
+     maybe_null=1;
+   }
+   bool check_partition_func_processor(byte *int_arg) { return FALSE;}
+ };
+------------------------------------------------------------
+bug injection: 
+class Item_func_dayofmonth :public Item_int_func
+     max_length=2*MY_CHARSET_BIN_MB_MAXLEN;
+     maybe_null=1;
+   }
+   bool check_partition_func_processor(byte *int_arg) { return 0;}
+ };
+------------------------------------------------------------
+actual bug: 
+ class Item_func_dayofmonth :public Item_int_func
+     max_length=2*MY_CHARSET_BIN_MB_MAXLEN;
+     maybe_null=1;
+   }
+   bool check_partition_func_processor(byte *int_arg) { return 0;}
+ };
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+int bt_mesh_friend_req(struct bt_mesh_net_rx *rx, struct net_buf_simple *buf)
+ {
+     struct bt_mesh_ctl_friend_req *msg = (void *)buf->data;
+     struct bt_mesh_friend *frnd = NULL;
+     u32_t poll_to = 0U;
+     int i;
+     if (buf->len < sizeof(*msg)) {
+------------------------------------------------------------
+bug injection: 
+int bt_mesh_friend_req(struct bt_mesh_net_rx *rx, struct net_buf_simple *buf)
+ {
+     struct bt_mesh_ctl_friend_req *msg = (void *)buf->data;
+     struct bt_mesh_friend *frnd = NULL;
+     u32_t poll_to;
+     int i;
+     if (buf->len < sizeof(*msg)) {
+------------------------------------------------------------
+actual bug: 
+ int bt_mesh_friend_req(struct bt_mesh_net_rx *rx, struct net_buf_simple *buf)
+ {
+     struct bt_mesh_ctl_friend_req *msg = (void *)buf->data;
+     struct bt_mesh_friend *frnd = NULL;
+     u32_t poll_to;
+     int i;
+     if (buf->len < sizeof(*msg)) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+const struct token *eval(int in_decl)
+ done:
+     neednext(OPERATOR,0);
+     popout_final();
+ }
+ int main(int argc, char *argv[])
+------------------------------------------------------------
+bug injection: 
+const struct token *token lp)
+ done:
+ done:
+     popout_final();
+     pop();
+ }
+ int main(int argc, char *argv[])
+------------------------------------------------------------
+actual bug: 
+ const struct token *eval(int in_decl)
+ done:
+     neednext(OPERATOR,0);
+     popout_final();
+     return t;
+ }
+ int main(int argc, char *argv[])
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

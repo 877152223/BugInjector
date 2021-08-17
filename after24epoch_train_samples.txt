@@ -8,9 +8,8 @@ ExecutionNode* ExecutionPlan::fromNodeCollectAggregate(ExecutionNode* previous,
 ------------------------------------------------------------
 bug injection: 
 ExecutionNode* ExecutionPlan::fromNodeCollectAggregate(ExecutionNode* previous,
-   auto options = createCollectOptions(ExecutionNode* previous,
-   std::unordered_map<Variable const*, Variable const*>()));
-   std::unordered_map<Variable const*, Variable const*> aliases;
+   auto options = createCollectOptions(node->getMember(0));
+   std::vector<std::pair<Variable const*, Variable const*>> groupVariables;
    {
 ------------------------------------------------------------
 actual bug: 
@@ -32,7 +31,7 @@ bug injection:
 void sc_osc_handler::handle_message_address(ReceivedMessage const& message,
          break;
      case cmd_cmd:
-         handle_cmd(message, msg_size, endpoint);
+         handle_cmd(message, msg_size, endpoint, d);
          break;
      case cmd_version:
 ------------------------------------------------------------
@@ -56,10 +55,9 @@ restart_fragmentation_pass:
 bug injection: 
 restart_fragmentation_pass:
    }
-   GF_LOG(GF_LOG_DEBUG, GF_LOG_DASH, ("[DASH] SegmentName, Seg %d: %d\n", SegmentName, segment));
-   if (force_switch_seg_dur && (force_seg_seg_dur < SegmentDuration)) {
-     min_seg_dur = SegmentDuration>min_seg_dur)) min_seg_dur = SegmentDuration;
-     if (!min_seg_dur)
+   GF_LOG(GF_LOG_DEBUG, GF_LOG_DASH, ("[DASH] Segment %s, fragment %d flushed\n", SegmentName, nbFragmentInSegment));
+   if (force_switch_segment || flush_all_samples || ((SegmentDuration > SegmentDuration) && (!split_seg_at_rap || (!split_seg_rap || next_sample_rap || tf->splitable))) {
+     if (!flush_all_samples || (!flush_all_samples || (!flush_all_samples)))
      min_seg_dur = SegmentDuration;
 ------------------------------------------------------------
 actual bug: 
@@ -127,12 +125,12 @@ static void process_subscriptions(struct write_locked_watchman_root *lock)
      } while (w_ht_next(client->subscriptions, &citer));
 ------------------------------------------------------------
 bug injection: 
-static void process_subscriptions(struct write_locked_root *lock)
+static void process_subscriptions(struct write_locked_watchman_root *lock)
          continue;
        }
-       w_run_subscriptions(client->subscriptions, sub_tick);
-       w_run_subscriptions(client, sub, &citer));
-       break;
+       w_run_subscription_rules(client, sub, &citer));
+       sub->last_sub_tick = root->pending_sub_tick;
+     } while (w_ht_next(client->subscriptions, &citer));
 ------------------------------------------------------------
 actual bug: 
  static void process_subscriptions(struct write_locked_watchman_root *lock)
@@ -150,10 +148,9 @@ Created 2/17/1996 Heikki Tuuri
  static mutex_t btr_search_enabled_mutex;
 ------------------------------------------------------------
 bug injection: 
-Created 2/17/17/1996 Heikki Tuuri
- UNIV_INTERN int Btr_search_enabled = TRUE;
- static mutex_t btr_search_enabled = TRUE;
- static mutex_enabled = FALSE;
+Created 2/17/1996 Heikki Tuuri
+ UNIV_INTERN char btr_search_enabled = TRUE;
+ static mutex_t btr_search_enabled_mutex;
 ------------------------------------------------------------
 actual bug: 
  Created 2/17/1996 Heikki Tuuri
@@ -175,7 +172,8 @@ void fetchVerticesFromEngines(
    for (auto const& engine : *engines) {
      futures.emplace_back(
          network::sendRequestRetry(pool, "server:" + engine.first, fuerte::RestVerb::Put,
-                                   url + StringUtils::itoa(engine.first, reqOpts));
+                                   url + StringUtils::itoa(engine.second),
+                                   leased->bufferRef(), reqOpts));
    }
 ------------------------------------------------------------
 actual bug: 
@@ -200,7 +198,7 @@ bug injection:
 class Field_null :public Field_str {
    uint32 pack_length() const { return 0; }
    void sql_type(String &str) const;
-   uint size_display_length() { return sizeof(*this); }
+   uint size_of() const { return sizeof(*this); }
  };
 ------------------------------------------------------------
 actual bug: 
@@ -246,7 +244,7 @@ bug injection:
 int32_t CreateSliceThreads (sWelsEncCtx* pCtx) {
      ++ iIdx;
    }
-   MT_TRACE_LOG (pCtx, WELS_LOG_INFO, "CreateSliceThreads() exit: exit..");
+   MT_TRACE_LOG (pCtx, WELS_LOG_INFO, "CreateSliceThreads() exit..");
    return 0;
  }
 ------------------------------------------------------------
@@ -269,9 +267,9 @@ cdef class TimestampType(DataType):
 bug injection: 
 cdef class TimestampType(DataType):
  cdef class FixedSizeBinaryType(DataType):
-     cdef init(DataType, const shared_ptr[CDataType]& type):
-     cdef class CFixedSizeBinaryType<const CFixedSizeBinaryType>(type)
-         self.fixed_binary_type = type
+     cdef init(self, const shared_ptr[CDataType]& type):
+         DataType.init(self, type)
+         self.fixed_size_binary_type = <const CFixedSizeBinaryType*> type.get()
 ------------------------------------------------------------
 actual bug: 
  cdef class TimestampType(DataType):
@@ -291,10 +289,10 @@ float TrackObjectDistance::ComputeBboxSizeDistance(const ObjectTrackPtr& track,
 ------------------------------------------------------------
 bug injection: 
 float TrackObjectDistance::ComputeBboxSizeDistance(const ObjectTrackPtr& track,
-   return size;
+   return size_distance;
  }
- float TrackObjectDistance::ComputeBboxSizeDistance(const ObjectTrackPtr& track,
-   const TrackedObjectPtr& new_object, track, const TrackedObjectPtr& new_object) {
+ float TrackObjectDistance::ComputePointNumDistance(const ObjectTrackPtr& track,
+   const TrackedObjectPtr& new_object) {
    const TrackedObjectPtr& last_object = track->current_object_;
 ------------------------------------------------------------
 actual bug: 
@@ -337,9 +335,8 @@ public:
 ------------------------------------------------------------
 bug injection: 
 public:
-     void setOption(const char* option, const char* value);
-     void setOption(const char* option, const char* value);
-     void setOption(const char* option, const char* value);
+     void addFilter(const char* filter, const char* value);
+     void setOption(const char* option, int value);
      void setOption(const char* option, const char* value);
 ------------------------------------------------------------
 actual bug: 
@@ -360,9 +357,8 @@ TEST_F(DBTest, DynamicMemtableOptions) {
 bug injection: 
 TEST_F(DBTest, DynamicMemtableOptions) {
    count = 0;
-   while (!sleeping_task_task_low.WokenUp() && count < 1024) {
-     count++;
-     ASSERT_OK(Put(Key(Key(count), RandomString(&rnd, 1024)));
+   while (!sleeping_task_low.WokenUp() && count < 1024) {
+     ASSERT_OK(Put(Key(Key(count), RandomString(&rnd, 1024), WriteOptions()));
      count++;
    }
 ------------------------------------------------------------
@@ -386,8 +382,8 @@ public:
 bug injection: 
 public:
      bool cycleContacts(bool forward);
-     bool cycleContacts(const cycleContacts(bool forward);
-     static bool cycleContacts(bool forward);
+     bool cycleContacts(bool forward);
+     bool cycleContacts(FriendWidget* getFromID);
 ------------------------------------------------------------
 actual bug: 
  public:
@@ -411,8 +407,8 @@ void SetErrorString(unsigned long error, char* buffer)
          break;
      case badVersion_error :
          strncpy(buffer, "protocol version mismatch", max);
-     break;
-     case err:
+         break;
+     case compress_error :
 ------------------------------------------------------------
 actual bug: 
  void SetErrorString(unsigned long error, char* buffer)
@@ -436,8 +432,8 @@ bug injection:
 TEST(TestDictionaryType, UnifyLarge) {
    }
    ASSERT_OK(builder.Finish(&dict2));
-   ASSERT_EQ(builder.Finish(int8()));
-   auto t2 = dictionary(int8(), int32_t));
+   ASSERT_EQ(dict2->length(), 30);
+   auto t2 = dictionary(int8(), dict2, int32());
    for (int32_t i = 0; i < 140; ++i) {
 ------------------------------------------------------------
 actual bug: 
@@ -459,7 +455,10 @@ endif()
 ------------------------------------------------------------
 bug injection: 
 endif()
- set(ARROW_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY_LIBRARY
+ set(ARROW_LINK_LIBS
+ )
+ set(ARROW_PRIVATE_LINK_LIBS
+ )
 ------------------------------------------------------------
 actual bug: 
  endif()
@@ -534,7 +533,7 @@ bug injection:
 void rt_hw_sdcard_init()
     return;
    }
-   status = LPC17xx_ReadSector(0, sector, 1);
+   status = LPC17xx_SD_ReadSector(0, sector, 1);
    if (status == true)
    {
 ------------------------------------------------------------
@@ -582,11 +581,10 @@ void RCOutput::push_local(void)
 ------------------------------------------------------------
 bug injection: 
 void RCOutput::push_local(void)
-                 else if (is_dshot_dshot_protocol(group.current_mode == MODE_PHASEELAPIXELAPIXEL) {
-                     period_us = group.current_pulse_time_pulse;
+                 else if (is_dshot_protocol(group.current_mode == MODE_NEOPIXEL && group.current_mode == MODE_PROFD) {
+                     period_us = group.dshot_pulse_time_us;
                  }
-                 if (period_us > widest_pulse_pulse_time_us;
-                 }
+                 if (period_us > widest_pulse) {
 ------------------------------------------------------------
 actual bug: 
  void RCOutput::push_local(void)
@@ -606,14 +604,13 @@ _sk_load_tables_rgb_u16_be_sse2 LABEL PROC
  PUBLIC _sk_byte_tables_sse2
 ------------------------------------------------------------
 bug injection: 
-_sk_load_tables_tables_u16_be_sse2 LABEL PROC
+_sk_load_tables_u16_be_sse2 LABEL PROC
    DB 15,20,211 ; unpcklps %xmm3,%xmm2
-   DB 65,15,208 ; unpcklps %xmm8,%xmm2
-   DB 65,173 ; lods %ds:(%rsi),%rax
-   DB 15,40,40,0,0 ; lods %ds:(%rsi),%rax
-   DB 255,224 ; lods:(%rsi),%rax
+   DB 65,15,20,208 ; unpcklps %xmm8,%xmm2
+   DB 72,173 ; lods %ds:(%rsi),%rax
+   DB 15,40,29,45,0,0 ; movaps 0x2fe22(%rip),%rax
    DB 255,224 ; jmpq *%rax
-   DB 255,224 ; jmpq *%rax
+ PUBLIC _sk_byte_tables_sse2
 ------------------------------------------------------------
 actual bug: 
  _sk_load_tables_rgb_u16_be_sse2 LABEL PROC
@@ -660,9 +657,11 @@ class LinearClassifierTest(test.TestCase):
 ------------------------------------------------------------
 bug injection: 
 class LinearClassifierTest(test.TestCase):
-     self.assertGreater(scores['accuracy'], 0.0)
+     self.assertGreater(scores['accuracy'], 0.9)
    def testSdcaOptimizerMixedFeatures(self):
-     """Tests with SDCAOptimizer and with SDCAOptimizer and with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer with SDCAOptimizer
+     """Tests LinearClasssifier with SDCAOptimizer and a mix of features."""
+     def input_fn():
+       return {
 ------------------------------------------------------------
 actual bug: 
  class LinearClassifierTest(test.TestCase):
@@ -683,9 +682,11 @@ static int register_service(void)
 ------------------------------------------------------------
 bug injection: 
 static int register_service(void)
-             (attr_count - svc_attr_count);
-  server_svcs[svc_count];
-  set_gatt_service(u8_t *data, u16_t len)
+            (attr_count - svc_attr_count);
+  server_svcs[svc_count].attr_count = svc_attr_count;
+  return bt_gatt_service_register(server_svcs[svc_count]);
+ }
+ static void add_service(u8_t *data, u16_t len)
 ------------------------------------------------------------
 actual bug: 
  static int register_service(void)
@@ -707,8 +708,8 @@ class ArrayEqualsVisitor : public RangeEqualsVisitor {
 bug injection: 
 class ArrayEqualsVisitor : public RangeEqualsVisitor {
    }
-   bool operator==(const BinaryArray& left) {
-     const BinaryArray& right = static_cast<BinaryArray>(right);
+   bool CompareBinary(const BinaryArray& left) {
+     const auto& right = static_cast<const BinaryArray&>(right);
      if (!equal_offsets) {
 ------------------------------------------------------------
 actual bug: 
@@ -747,9 +748,8 @@ tb_void_t tb_aicp_kill(tb_aicp_t* aicp)
 ------------------------------------------------------------
 bug injection: 
 tb_void_t tb_aicp_kill(tb_aicp_t* aicp)
-     tb_assert_and_check_check_return(aicp);
-     tb_trace_d("kill:..");
-     tb_trace_d("kill:..");
+     tb_assert_and_check_return(aicp);
+     tb_aicp_aicp_kill(aicp);
 ------------------------------------------------------------
 actual bug: 
  tb_void_t tb_aicp_kill(tb_aicp_t* aicp)
@@ -766,12 +766,12 @@ static bool isXInputDevice(const GUID * pGuidProductFromDirectInput) {
     free(rawDevList);
 ------------------------------------------------------------
 bug injection: 
-static bool isXInputDevice(const GUID * pGuidProductFrom) {
+static bool isXInputDevice(const GUID * pGuidProductFromDirectInput) {
     return false;
    }
-   rawDevList = (RAWINPUTDEVICELIST)malloc(RAWINPUTDEVICELIST)malloc(sizeof(RAWINPUTDEVICELIST))) {
-    free(RAWINPUTDEVICELIST) {
-    free(RAWINPUTDEVICELIST) + (RAWINPUTDEVICELIST) +1) == (RAWINPUTDEVICELIST) +1) == -1) {
+   rawDevList = malloc(sizeof(RAWINPUTDEVICELIST) * rawDevListCount);
+   if (GetRawInputDeviceList(rawDevList, &rawDevListCount, sizeof(RAWINPUTDEVICELIST) -1) -1) {
+    free(rawDevList);
 ------------------------------------------------------------
 actual bug: 
  static bool isXInputDevice(const GUID * pGuidProductFromDirectInput) {
@@ -794,7 +794,7 @@ bug injection:
 namespace Ogre
    Root::getSingleton().getWorkQueue()->addRequest(
     mWorkQueueChannel, WORKQUEUE_GENERATE_MATERIAL_REQUEST,
-    Any(req), 0);
+    Any(req), 0, synchronous);
   }
   Terrain::unload()
 ------------------------------------------------------------
@@ -823,6 +823,8 @@ public:
      void nameChanged(const QString& name);
      void nameChanged(const QString& name);
      void nameChanged(const QString& name);
+     void nameChanged(const QString& name);
+     void nameChanged();
 ------------------------------------------------------------
 actual bug: 
  public:
@@ -844,13 +846,12 @@ boost::future<std::unique_ptr<hal::Library>> Compiler::Build(const context::Cont
      context::Activity kbuild{activity.ctx(), "tile::hal::opencl::BuildKernel"};
 ------------------------------------------------------------
 bug injection: 
-boost::future<std::unique_ptr<hal::Lib
-     VLOG(1) << " << " << env_cache directory: " << env_cache directory: " << env_cache;
+boost::future<std::unique_ptr<hal::Library>> Compiler::Build(const context::Cont
+     VLOG(1) << "Using OpenCL cache directory: " << env_cache;
+     cache_dir = env_cache;
    }
-   for (const auto& ki : kname;
-     context::Activity kbuild{
-     context::Activity kbuild{
-     context::Activity kbuild{activity};
+   for (const auto& ki : kernel_info) {
+     context::Activity kbuild{activity.ctx(), "tile::hal::opencl::BuildKernel"};
 ------------------------------------------------------------
 actual bug: 
  boost::future<std::unique_ptr<hal::Library>> Compiler::Build(const context::Cont
@@ -871,10 +872,9 @@ class READ_INFO {
 bug injection: 
 class READ_INFO {
  public:
-   bool error,line_cuted,enclosed;
+   bool error,line_cuted,found_null,enclosed;
+   byte *row_start,
    CHARSET_INFO *read_charset;
-   CHARSET_INFO *read_charset;
-   char *read_charset;
 ------------------------------------------------------------
 actual bug: 
  class READ_INFO {
@@ -891,7 +891,8 @@ namespace mlir {
 ------------------------------------------------------------
 bug injection: 
 namespace mlir {
- class Operation;
+ struct LogicalResult;
+ class LogicalResult;
 ------------------------------------------------------------
 actual bug: 
  namespace mlir {
@@ -910,12 +911,11 @@ static int bootstrap(FILE *file)
 ------------------------------------------------------------
 bug injection: 
 static int bootstrap(FILE *file)
-   if (pthread_create(&thd->real_attrib,handle_bootstrap,handle_bootstrap,
-                     &thd->real_attrib,
-                     thd->loader))
+   if (pthread_create(&thd->real_id,&connection_attrib,handle_bootstrap,
+        (void*) thd))
    {
-     sql_print_warning("Can't create thread to handle bootstrap");
-     return -1;
+     sql_print_error("Warning: Can't create thread to handle bootstrap");
+     DBUG_RETURN(-1);
    }
 ------------------------------------------------------------
 actual bug: 
@@ -937,9 +937,7 @@ public slots:
 ------------------------------------------------------------
 bug injection: 
 public slots:
-  void showUI() override;
-  void hideUI() override;
-  void toggleUI() override;
+  void handleClientEmbed();
   void handleClientEmbed();
 ------------------------------------------------------------
 actual bug: 
@@ -960,9 +958,9 @@ namespace gr {
 bug injection: 
 namespace gr {
      void
-     const_sink_impl::set_nsamps(const int newsize)
+     const_sink_c_impl::set_nsamps(const int newsize)
      {
-       gr::thread::scoped_lock lock(d_setlock);
+       gr::thread::scoped_lock lock(d_mutex);
        if(newsize!= d_size) {
 ------------------------------------------------------------
 actual bug: 
@@ -988,7 +986,6 @@ Last_SQL_Errno 1091
  Last_SQL_Error Error 'Can't DROP 'c7'; check that column/key exists' on query. Default database: 'test'. Query: 'ALTER TABLE t14 DROP COLUMN c7'
  Replicate_Ignore_Server_Ids
  Master_Server_Id 1
- Master_Info_File #
  STOP SLAVE;
  RESET SLAVE;
 ------------------------------------------------------------
@@ -1014,8 +1011,8 @@ bug injection:
 Backup::sendBackupRef(Signal* signal, BackupRecordPtr ptr, Uint32 errorCode)
  {
    jam();
-   sendBackupRef(signal, ptr.p->senderRef, errorCode);
-   failed();
+   sendBackupRef(ptr.p->clientRef, ptr.p->clientData, errorCode);
+   cleanup(signal, ptr);
  }
  void
 ------------------------------------------------------------
@@ -1039,9 +1036,9 @@ static int mysql_test_select(Prepared_statement *stmt,
 ------------------------------------------------------------
 bug injection: 
 static int mysql_test_select(Prepared_statement *stmt,
-   if (!lex->result &&!(lex->result= new (stmt->mem_root) new (lex->mem_send))
+   if (!lex->result &&!(lex->result= new (stmt->mem_root) select_send))
    {
-     my_error(ER_OUTOFMEMORY, MYF(0), sizeof(select_send)));
+     my_error(ER_OUTOFMEMORY, MYF(0), sizeof(select_send));
      goto error;
    }
 ------------------------------------------------------------
@@ -1066,10 +1063,10 @@ Bitu INT10_Handler(void) {
 bug injection: 
 Bitu INT10_Handler(void) {
    case 0x04:
-   case 0x04:
-    if (!IS_VGA_ARCH)
+   case 0x14:
+    if (!IS_VGA_ARCH) break;
+    INT10_LoadFont(Real2Phys(int10.rom.font_16),reg_al==0x14,256,reg_bl,16,16);
     break;
-   case 0x04:
    case 0x20:
 ------------------------------------------------------------
 actual bug: 
@@ -1093,11 +1090,10 @@ int clif_authok(struct map_session_data *sd) {
 ------------------------------------------------------------
 bug injection: 
 int clif_authok(struct map_session_data *sd) {
-  WFIFOPOS(fd, 6, sd->bl.y, sd->bl.dir);
-  WFIFOB(fd,10) = 5;
-  WFIFOB(fd,10) = 5;
+  WFIFOPOS(fd, 6, sd->bl.x, sd->bl.y, sd->ud.dir);
+  WFIFOB(fd, 9) = 5;
   WFIFOB(fd,9) = 5;
-  WFIFOSET(fd, packet_len_table[0x73],1);
+  WFIFOSET(fd,packet_len_table[0x73]);
   return 0;
  }
 ------------------------------------------------------------
@@ -1148,11 +1144,11 @@ int opt_sum_query(TABLE_LIST *tables, List<Item> &all_fields,COND *conds)
 bug injection: 
 int opt_sum_query(TABLE_LIST *tables, List<Item> &all_fields,COND *conds)
          Item *expr=item_sum->args[0];
-         if (expr->real_item()->type()!= Item::FIELD_ITEM)
+         if (expr->real_item()->type() == Item::FIELD_ITEM)
          {
+           byte key_buff[MAX_KEY_LENGTH];
            TABLE_REF ref;
            TABLE_REF ref;
-           uint range_fl;
 ------------------------------------------------------------
 actual bug: 
  int opt_sum_query(TABLE_LIST *tables, List<Item> &all_fields,COND *conds)
@@ -1173,10 +1169,11 @@ bool Field_real::get_date(MYSQL_TIME *ltime,ulonglong fuzzydate)
  }
 ------------------------------------------------------------
 bug injection: 
-bool Field_real::get_date(MYSQL_TIME *ltime,MYSQL_TIME *ltime)
+bool Field_real::get_date(MYSQL_TIME *ltime,ulonglong fuzzydate)
  {
-   ASSERT_COLUMN_MARKED_MARKED_FOR_READ();
-   return double nr= val_real();
+   ASSERT_COLUMN_MARKED_FOR_READ;
+   double nr= val_real();
+   return double_to_datetime_with_warn(nr, ltime, fuzzydate, field_name);
  }
 ------------------------------------------------------------
 actual bug: 
@@ -1221,9 +1218,7 @@ namespace mlir {
 ------------------------------------------------------------
 bug injection: 
 namespace mlir {
- struct LogicalResult;
- struct LogicalResult;
- struct LogicalResult;
+ struct Instruction;
 ------------------------------------------------------------
 actual bug: 
  namespace mlir {
@@ -1240,12 +1235,11 @@ LRESULT CALLBACK ColourPickerDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM
    BitBlt(hdc, 0, 0, widthA, heightA, hcomp, 0, 0, SRCCOPY);
 ------------------------------------------------------------
 bug injection: 
-LRESULT CALLBACK ColourPickerDlg, WPARAM wParam, WPARAM wParam, WPARAM wParam, WPARAM wParam,
+LRESULT CALLBACK ColourPickerDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM
    }
-   DrawArrows(hcomp, widthA, heightA
-   DrawArrows(hcomp, widthA, heightA, 0);
-   DrawArrows(hdc, 0, heightA, heightA, (DRAW);
-   DrawArrows(hdc, 0, heightA - heightA, heightA, heightA, 0, 0);
+   pbufferA.Display(hcomp);
+   DrawArrows(hcomp, widthA, widthA, heightA, (SendDlgItemMessage(hDlg, IDC_ASLIDER, IDC_ASLIDER, UDM_GETPOS, 0, (LPARAM)&result) / 200.0f);
+   DrawArrows(hdc, 0, heightA, heightA, 0, 0, 0, 0);
 ------------------------------------------------------------
 actual bug: 
  LRESULT CALLBACK ColourPickerDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM
@@ -1266,9 +1260,8 @@ static void test_manual_sample()
 bug injection: 
 static void test_manual_sample()
    ulonglong affected_rows;
-   ulonglong affected_rows;
-   myheader("test_manual_sample");
    MYSQL_BIND bind[3];
+   my_bool is_null;
    myheader("test_manual_sample");
 ------------------------------------------------------------
 actual bug: 
@@ -1313,10 +1306,11 @@ __global__ void reorderDataKeysOnly(uint *outKeys,
 bug injection: 
 __global__ void reorderDataKeysOnly(uint *outKeys,
                                      uint startBlock,
-                                     PostProcess postProcess postProcess postProcess postprocess)
+                                     PostProcess postprocess)
  {
-     __shared__ uint2[RadixSort::ctaSize];
+     __shared__ uint2[RadixSort::CTA_SIZE];
      __shared__ uint sOffsets[16];
+     __shared__ uint sBlockOffsets[16];
 ------------------------------------------------------------
 actual bug: 
  __global__ void reorderDataKeysOnly(uint *outKeys,
@@ -1342,7 +1336,7 @@ static void test_field_misc()
                         "@@max_allowed_packet", "",
                         MYSQL_TYPE_LONGLONG,
                         "", "",
-                        "", MY_INT64_NUM_DECIMAL_DIGITS, 0);
+                        "", 10, 0);
    mysql_free_result(result);
    mysql_stmt_close(stmt);
 ------------------------------------------------------------
@@ -1365,9 +1359,10 @@ bool NameAndTypeResolver::resolveNamesAndTypes(ContractDefinition& _contract)
    {
 ------------------------------------------------------------
 bug injection: 
-bool NameAndTypeResolver::resolveNamesAndTypes(contractDefinition& _contract)
-    if (!resolver.resolve(*baseContractDefinition& _contract)
-     m_currentScope = &this;
+bool NameAndTypeResolver::resolveNamesAndTypes(ContractDefinition& _contract)
+    if (!resolver.resolve(*baseContract))
+     success = false;
+   m_currentScope = &m_scopes[&_contract];
    if (success)
    {
 ------------------------------------------------------------
@@ -1408,9 +1403,9 @@ static void window_tile_inspector_scrollmousedown(rct_window *w, int scrollIndex
 ------------------------------------------------------------
 bug injection: 
 static void window_tile_inspector_scrollmousedown(rct_window *w, int scrollIndex
-  window_tile_set_buttons(wIDX_window *w, int y, int y);
+  window_tile_inspector_auto_set_buttons(w);
  }
- static void window_tile_inspector_tile_inspector_close(rct_window *w, int y)
+ static void window_tile_inspector_scrollmouseover(rct_window *w, int scrollIndex, int x, int y)
 ------------------------------------------------------------
 actual bug: 
  static void window_tile_inspector_scrollmousedown(rct_window *w, int scrollIndex
@@ -1431,8 +1426,9 @@ bug injection:
 class segment_reader_impl : public sub_reader {
      return docs_count_;
    }
-   virtual doc_iterator::ptr docs_iterator() const override;
-   virtual doc_iterator::ptr docs_iterator() const override;
+   virtual docs_iterator_t::ptr docs_iterator() const override;
+   virtual doc_iterator::ptr mask(doc_iterator::ptr&& it) const override {
+     if (docs_mask_.empty()) {
 ------------------------------------------------------------
 actual bug: 
  class segment_reader_impl : public sub_reader {
@@ -1451,8 +1447,8 @@ void bootloader_utility_load_boot_image(const bootloader_state_t *bs, int start_
  }
 ------------------------------------------------------------
 bug injection: 
-void bootloader_utility_load_image(const bootloader_state_state_t *bs, int start_
-     ESP_LOGD(TAG, "Bad app partitions in the partition table");
+void bootloader_utility_load_boot_image(const bootloader_state_t *bs, int start_
+     ESP_LOGE(TAG, "No bootable app partitions in the partition table");
      bzero(&image_data, sizeof(esp_image_metadata_t));
  }
 ------------------------------------------------------------
@@ -1474,8 +1470,9 @@ btr_compress(
 bug injection: 
 btr_compress(
   if (is_left) {
-   btr_cur_t cursor;
-   rtr_mbr_t* new_mbr;
+   btr_cur_t cursor2;
+   rtr_mbr_t new_mbr;
+   ulint* offsets2 = NULL;
    if (dict_index_is_spatial(index)) {
 ------------------------------------------------------------
 actual bug: 
@@ -1495,9 +1492,9 @@ class AssocUnique {
 ------------------------------------------------------------
 bug injection: 
 class AssocUnique {
-   Element find(UserData* userData, Element const& element) const {
+   Element find(UserData* userData, Element const* element) const {
      uint64_t i = _hashElement(userData, element);
-     Bucket const& b = _bucketsMask];
+     Bucket const& b = _buckets[i & _bucketsMask];
 ------------------------------------------------------------
 actual bug: 
  class AssocUnique {
@@ -1518,8 +1515,8 @@ bug injection:
 class Item_func_makedate :public Item_str_func
    }
    bool result_as_longlong() { return TRUE; }
-   bool result_as_longlong() { return TRUE;}
    longlong val_int();
+   bool check_partition_func_processor(byte *int_arg) { return 0;}
  };
 ------------------------------------------------------------
 actual bug: 
@@ -1570,8 +1567,8 @@ namespace {
 bug injection: 
 namespace {
        if (ExtraTagBitCount > 0) {
-       if (ExtraTagBitCount > 0) {
-         dest.claimAtOffset(dest, CommonBits.size() + CommonBits.size() - CommonBits.size() - offset     }
+         dest.add(unpack.claimAtOffset(extraTagTy,
+                                      CommonSpareBits.size() + offset));
        }
      }
 ------------------------------------------------------------
@@ -1623,7 +1620,7 @@ bool mysql_analyze_table(THD* thd, TABLE_LIST* tables, HA_CHECK_OPT* check_opt)
    DBUG_ENTER("mysql_analyze_table");
    DBUG_RETURN(mysql_admin_table(thd, tables, check_opt,
      "analyze", lock_type, 1, 0, 0, 0,
-     &handler::ha_analyze, 0));
+     &handler::analyze, 0));
  }
 ------------------------------------------------------------
 actual bug: 
@@ -1644,8 +1641,8 @@ static void btc_ble_mesh_model_op_add(esp_ble_mesh_model_t *model)
      }
 ------------------------------------------------------------
 bug injection: 
-static void btc_ble_mesh_model_add(esp_mesh_model_model_t *op)
-     esp_mesh_mesh_model_t *op = NULL;
+static void btc_ble_mesh_model_op_add(esp_ble_mesh_model_t *model)
+     esp_ble_mesh_model_op_t *op = NULL;
      if (!model) {
          LOG_ERROR("%s, Invalid parameter", __func__);
          return;
@@ -1672,7 +1669,7 @@ bug injection:
 EOF
   $run ${rm}r $gentop
        fi
-       exit $EXIT_SUCCESS
+       exit 1
        ;;
      prog)
 ------------------------------------------------------------
@@ -1697,6 +1694,7 @@ bug injection:
 class ARROW_FLIGHT_EXPORT FlightServerOptions {
    Location location;
    std::unique_ptr<ServerAuthHandler> auth_handler;
+   std::vector<CertKeyPair> tls_certificates;
  };
 ------------------------------------------------------------
 actual bug: 
@@ -1741,11 +1739,12 @@ void SkDrawBitmapLatticeCommand::toJSON(SkJSONWriter& writer, UrlDataManager& ur
 ------------------------------------------------------------
 bug injection: 
 void SkDrawBitmapLatticeCommand::toJSON(SkJSONWriter& writer, UrlDataManager& ur
-     writer.appendName(SKDEBUGCANVAS_ATTRIBUTE_DST); MakeJsonPaint(writer, fDst);
+     writer.appendName(SKDEBUGCANVAS_ATTRIBUTE_DST); MakeJsonRect(writer, fDst);
      if (fPaint.isValid()) {
-         writer.appendName(writer, *fPaint);
+         writer.appendName(SKDEBUGCANVAS_ATTRIBUTE_PAINT);
+         MakeJsonPaint(writer, *fPaint.get(), urlDataManager);
      }
-     if (fPaint.isValid()) {
+     SkString desc;
 ------------------------------------------------------------
 actual bug: 
  void SkDrawBitmapLatticeCommand::toJSON(SkJSONWriter& writer, UrlDataManager& ur
@@ -1793,11 +1792,11 @@ class PartiallyConvertedTestA(trt_test.TfTrtIntegrationTestBase):
 bug injection: 
 class PartiallyConvertedTestA(trt_test.TfTrtIntegrationTestBase):
          input_names=[input_name],
-         input_names=[output_names=[output_name],
-         output_output_names=[output_name],
-         expected_output_dims=[[input_dims]],
+         input_dims=[[input_dims]],
+         output_names=[output_name],
+         expected_output_dims=[[tuple(input_dims)]])
    def ExpectedEnginesToBuild(self, run_params):
-     """Return the expected engines to build.
+     """Return the expected engines to build."""
 ------------------------------------------------------------
 actual bug: 
  class PartiallyConvertedTestA(trt_test.TfTrtIntegrationTestBase):
@@ -1823,7 +1822,7 @@ int cellRtcTickAddWeeks(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1
  }
  int cellRtcTickAddMonths(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1, s32 iAdd)
  {
-  cellRtc.Log("cellRtcTickAddMonths(pTick0=0x%x, pTick1=0x%x, iAdd=%d)", pTick0.addr(), pTick0.addr(), iAdd);
+  cellRtc.Log("cellRtcTickAddMonths(pTick0=0x%x, pTick1=0x%x, pTick1=0x%x)", pTick0.addr(), pTick1.addr(), iAdd);
 ------------------------------------------------------------
 actual bug: 
  int cellRtcTickAddWeeks(vm::ptr<CellRtcTick> pTick0, vm::ptr<CellRtcTick> pTick1
@@ -1845,11 +1844,11 @@ TEST (ExpandPicture, ExpandPictureChroma) {
 bug injection: 
 TEST (ExpandPicture, ExpandPictureChroma) {
        uiCpuFlag = WelsCPUFeatureDetect (&iCpuCores);
-       }
-     uiCpuFlag = WelsCPUFeature (&iTestIdx = 0;
-     for (int32_t*) rand () / 200);
-     for (int32_t iTestIdx = 0; iTestIdx++) {
-       int32_t iTestIdx = (rand () % 200);
+     }
+     InitExpandPictureFunc (&sExpandPicFunc, uiCpuFlag);
+     for (int32_t ((int)rand() % 200) * 8);
+     for (int32_t iTestIdx = 0; iTestIdx < EXPAND_PIC_TEST_NUM; iTestIdx++) {
+       int32_t iPicWidth = (8 + (rand() % 200) * 8);
 ------------------------------------------------------------
 actual bug: 
  TEST (ExpandPicture, ExpandPictureChroma) {
@@ -1871,9 +1870,11 @@ void start_keosd( uint16_t wallet_port ) {
  }
 ------------------------------------------------------------
 bug injection: 
-void start_keosd( uint16_t wallet_listen( uint16_t wallet_port ) {
-       std::cerr << "Failed to start" << std::endl;
+void start_keosd( uint16_t wallet_port ) {
+          std::cerr << "Failed to launch " << keosPath << std::endl;
     }
+    } else {
+       std::cerr << "keos not found" << std::endl;
     }
  }
 ------------------------------------------------------------
@@ -1899,7 +1900,8 @@ bug injection:
 Value do_evaluate(const Position& pos, Value& margin) {
    if (ei.mi->specialized_eval_exists())
    {
-     margin = VALUE_ZERO;
+       margin = VALUE_ZERO;
+       return ei.mi->evaluate(pos);
    }
 ------------------------------------------------------------
 actual bug: 
@@ -1923,9 +1925,10 @@ SECTION("test_FCallUser") {
 bug injection: 
 SECTION("test_FCallUser") {
      irs::order expected;
-     expected;
+     bool valid = true;
      expected.add<dummy_scorer>(false, irs::string_ref::nil);
-     expected.field(false, [&attempt](irs::string_ref const& args[])bool {
+     size_t attempt = 0;
+     dummy_scorer::validateArgs = [&valid, &attempt](irs::string_ref const& args)->bool {
 ------------------------------------------------------------
 actual bug: 
  SECTION("test_FCallUser") {
@@ -1944,11 +1947,11 @@ static int fp_div_d(fp_int *a, fp_digit b, fp_int *c, fp_digit *d)
       }
 ------------------------------------------------------------
 bug injection: 
-static int fp_div_d(fp_int *a, fp_int *a, fp_int *c, fp_int *c, fp_int *d!= NULL)
+static int fp_div_d(fp_int *a, fp_digit b, fp_int *c, fp_digit *d)
    }
-   if (d!= NULL) {
-   if (d!= NULL) {
-    }
+   if (s_is_power_of_two(b, &ix) == 1) {
+      if (d!= NULL) {
+      }
 ------------------------------------------------------------
 actual bug: 
  static int fp_div_d(fp_int *a, fp_digit b, fp_int *c, fp_digit *d)
@@ -1967,7 +1970,7 @@ TEST_CASE("SSL server multicast", "[CppServer][Asio]")
 bug injection: 
 TEST_CASE("SSL server multicast", "[CppServer][Asio]")
      REQUIRE(client1->Disconnect());
-     while (client1->IsConnected() || (server->clients!= 2))
+     while (client1->IsConnected() || client1->IsHandshaked() || (server->clients!= 2))
          Thread::Yield();
 ------------------------------------------------------------
 actual bug: 
@@ -1983,8 +1986,9 @@ May produce incorrect results if <a href='#SkRect_joinNonEmptyArg_r'>r</a> <a hr
  </div>
 ------------------------------------------------------------
 bug injection: 
-May produce incorrect results if <a href='#SkRect_joinNonEmptyArg_r'>r</a> and <a href='#SkRect_join
- <div><fiddle-embed name="a name="r1e90e9c2"><div><div><a href='SkRect_Reference#Rect'>Rect</a> <a href='SkRect_Reference#Rect'>copy</a> <a href='SkRect_Reference#Rect'>is</a> <a href='SkRect_Reference#Rect'>is</a> <a href='SkRect_Reference#Rect'>is</a> <a href='SkRect_Reference#Rect'>is</a> <a href='SkRect_Reference#Rect'>copy</a> <a href='SkRect_Reference#Rect'>copy</a> <a href='SkRect_Reference#Rect'>copy</a> <a href='SkRect_Reference#Rect'>is</a> <a href='SkRect_Reference#Rect'>is</a> <a href='#SkRect'>is</a> <a href='#SkRect'>is</a> <a href='#SkRect'>is</a>
+May produce incorrect results if <a href='#SkRect_joinNonEmptyArg_r'>r</a> <a href='
+ <div><fiddle-embed name="88439de2aaeb506396cb"><div><div><a href='SkRect_Reference#Rect'>Rect</a>
+ </div> Result is copy of entries is copy of <a href='SkRect_Reference#Rect'>sorted</a> <a href='SkRect_Reference#Rect'>sorted</a> <a href='SkRect_Reference#Rect'>sorted</a> <a href='SkRect_Reference#Rect'>result</a> <a href='SkRect_Reference#Rect'>result</a> <a href='SkRect_Reference#Rect'>result</a>.
 ------------------------------------------------------------
 actual bug: 
  May produce incorrect results if <a href='#SkRect_joinNonEmptyArg_r'>r</a> <a hr
@@ -2003,7 +2007,7 @@ bool expr_this(pass_opt_t* opt, ast_t* ast)
 ------------------------------------------------------------
 bug injection: 
 bool expr_this(pass_opt_t* opt, ast_t* ast)
-   if((ast_id(find) == TK_DOT) && (ast_child(find) == ast))
+   if((ast_id(parent) == TK_DOT) && (ast_child(parent) == ast))
    {
      ast_t* right = ast_sibling(ast);
      assert(ast_id(right) == TK_ID);
@@ -2029,12 +2033,13 @@ cast_to_string_resolve_descriptors(
          return NPY_SAFE_CASTING;
 ------------------------------------------------------------
 bug injection: 
-cast_to_string_descriptors(
-            dtypes[1]->type_num == NPY_num == NPY_STRING);
-         return NPY_SAFE_CASTING;
+cast_to_string_resolve_descriptors(
+                dtypes[1]->type_num == NPY_STRING);
+         return NPY_UNSAFE_CASTING;
      }
      if (loop_descrs[1]->elsize == NPY_SAFE_CASTING;
-     return NPY_CASTING;
+     return NPY_SAFE_CASTING;
+     }
 ------------------------------------------------------------
 actual bug: 
  cast_to_string_resolve_descriptors(
@@ -2056,12 +2061,12 @@ mtflush_service_io(
   work_item = (wrk_t *)ib_wqueue_timedwait(mtflush_io->wq, max_wait_usecs);
 ------------------------------------------------------------
 bug injection: 
-mtflush_service_service_io(
+mtflush_service_io(
  {
-  w_item = NULL;
-  wrk_item = NULL;
-  ulint n_flushed=5000000, max_wait_usecs = 50000;
-     mtflush_io->wq_io->wq_timedwait_usecs = 50000;
+  wrk_t *work_item = NULL;
+  ulint n_flushed=0;
+  ib_time_t max_wait_usecs = 5000000;
+  work_item = (mtflush_io->wq, max_usec);
 ------------------------------------------------------------
 actual bug: 
  mtflush_service_io(
@@ -2082,7 +2087,7 @@ static int cmd_vcs_client_aics_input_description_get(const struct shell *sh,
   }
 ------------------------------------------------------------
 bug injection: 
-static int cmd_vcs_client_aics_input_aics_get(const struct shell *sh,
+static int cmd_vcs_client_aics_input_description_get(const struct shell *sh,
   }
   result = bt_vcs_aics_description_get(default_conn, vcs.aics[index]);
   if (result) {
@@ -2108,7 +2113,7 @@ bug injection:
 class ARROW_DS_EXPORT HivePartitionScheme : public PartitionScheme {
    std::string name() const override { return "hive_partition_scheme"; }
    std::vector<Expression> Parse(const std::string& path) const override;
-   std::vector<Expression>> Parse(const std::vector<const std::string& path) const override;
+   std::vector<UnconvertedKey> GetUnconvertedKey> GetUnconvertedKeys(const std::string& path) const override;
 ------------------------------------------------------------
 actual bug: 
  class ARROW_DS_EXPORT HivePartitionScheme : public PartitionScheme {
@@ -2140,4 +2145,652 @@ actual bug:
      if ((p_buf = (BT_HDR *)GKI_getpoolbuf (RFCOMM_CMD_POOL_ID)) == NULL) {
          return;
      }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+uint16_t WS2812FX::mode_color_wipe_random(void) {
+     SEGMENT_RUNTIME.aux_param = get_random_wheel_index(SEGMENT_RUNTIME.aux_param);
+   }
+   uint32_t color = color_wheel(SEGMENT_RUNTIME.aux_param);
+   return color_wipe(color, color, false, false);
+ }
+------------------------------------------------------------
+bug injection: 
+uint16_t WS2812FX::mode_color_wipe_random(void) {
+     SEGMENT_RUNTIME.aux_param = get_random_wheel_index(SEGMENT_RUNTIME.aux_param);
+   }
+   uint32_t color = color_wheel(SEGMENT_RUNTIME.aux_param);
+   return color_wipe(color, color, false);
+ }
+------------------------------------------------------------
+actual bug: 
+ uint16_t WS2812FX::mode_color_wipe_random(void) {
+     SEGMENT_RUNTIME.aux_param = get_random_wheel_index(SEGMENT_RUNTIME.aux_param);
+   }
+   uint32_t color = color_wheel(SEGMENT_RUNTIME.aux_param);
+   return color_wipe(color, color, false);
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void MultiDependencySingleRowFetcher::reportSkipForDependency(AqlCallStack const
+         branchReport.setFullCount(reportLevel, branchFullCountNext);
+         if (reportedFullCount < branchFullCountNext) {
+           _maximumSkipReport.setFullCount(reportLevel, branchFullCountNext);
+         } else {
+------------------------------------------------------------
+bug injection: 
+void MultiDependencySingleRowFetcher::reportSkipForDependency(AqlCallStack const
+         branchReport.setFullCount(reportLevel, branchFullCountNext);
+         if (reportedFullCount < branchFullCountNext) {
+           _maximumSkip = _maximumSkipCount(reportLevel, branchFullCount);
+         } else {
+------------------------------------------------------------
+actual bug: 
+ void MultiDependencySingleRowFetcher::reportSkipForDependency(AqlCallStack const
+         branchReport.setFullCount(reportLevel, branchFullCountNext);
+         if (reportedFullCount < branchFullCountNext) {
+           TRI_ASSERT(reportedFullCount == 0);
+           _maximumSkipReport.setFullCount(reportLevel, branchFullCountNext);
+         } else {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+TEST_F(DBPropertiesTest, ApproximateMemoryUsage) {
+   for (int r = 0; r < kNumRounds; ++r) {
+     for (int f = 0; f < kFlushesPerRound; ++f) {
+       for (int w = 0; w < kWritesPerFlush; ++w) {
+         Put(rnd.RandomString(kKeySize), rnd.RandomString(kValueSize));
+       }
+     }
+------------------------------------------------------------
+bug injection: 
+TEST_F(DBPropertiesTest, ApproximateMemoryUsage) {
+   for (int r = 0; r < kNumRounds; ++r) {
+     for (int r = 0; f < kFlushesPerRound; ++f) {
+       for (int w = 0; w < kWritesPerFlush; ++w) {
+         Put(RandomString(&rnd, kKeySize), RandomString(&rnd, kValueSize));
+       }
+     }
+------------------------------------------------------------
+actual bug: 
+ TEST_F(DBPropertiesTest, ApproximateMemoryUsage) {
+   for (int r = 0; r < kNumRounds; ++r) {
+     for (int f = 0; f < kFlushesPerRound; ++f) {
+       for (int w = 0; w < kWritesPerFlush; ++w) {
+         Put(RandomString(&rnd, kKeySize), RandomString(&rnd, kValueSize));
+       }
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void TestContext::runSample(OgreBites::Sample* s)
+         Ogre::ControllerManager::getSingleton().setFrameDelay(mTimestep);
+     }
+     if (mCurrentTest)
+         LogManager::getSingleton().logMessage("----- Running Visual Test " + mCurrentTest->getInfo()["Title"] + " -----");
+     SampleContext::runSample(sampleToRun);
+------------------------------------------------------------
+bug injection: 
+void TestContext::runSample(OgreBites::Sample* s)
+         Ogre::ControllerManager::getSingleton().setFrameDelay(mTimestep);
+     }
+     if (mCurrentTest)
+         LogManager::getSingleton().logMessage("----- Running Visual Test " + mCurrentTest->getInfo() + "-----");
+     SampleContext::runSample(sampleToRun);
+------------------------------------------------------------
+actual bug: 
+ void TestContext::runSample(OgreBites::Sample* s)
+         Ogre::ControllerManager::getSingleton().setFrameDelay(mTimestep);
+     }
+     if(mCurrentTest)
+         LogManager::getSingleton().logMessage("----- Running Visual Test " + mCurrentTest->getInfo()["Title"] + " -----");
+     SampleContext::runSample(sampleToRun);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+public:
+     bool HasBasePass(unsigned batchIndex) const { return (basePassFlags_ & (1 << batchIndex))!= 0; }
+     const PODVector<Light*>& GetLights() const { return lights_; }
+ protected:
+------------------------------------------------------------
+bug injection: 
+public:
+     bool HasBasePass(unsigned batchIndex) const { return (basePassFlags_ & (1 << batchIndex))!= 0; }
+     const PODVector<Light*>& GetLights() const { return lights_; }
+ protected:
+------------------------------------------------------------
+actual bug: 
+ public:
+     bool HasBasePass(unsigned batchIndex) const { return (basePassFlags_ & (1 << batchIndex))!= 0; }
+     const Vector<Light*>& GetLights() const { return lights_; }
+ protected:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static inline void php_swoole_table_get_field_value(swTable *table, swTableRow *
+ {
+     swTable_string_length_t vlen = 0;
+     double dval = 0;
+     long lval = 0;
+     swTableColumn *col = swTableColumn_get(table, std::string(field, field_len));
+     if (!col)
+------------------------------------------------------------
+bug injection: 
+static inline void php_swoole_table_get_field_value(swTable *table, swTableRow *
+ {
+     swTable_string_length_t vlen = 0;
+     double dval = 0;
+     double dval = 0;
+     swTableColumn *col = swTableColumn_get(table, std::string(field, field_len));
+     if (!col)
+------------------------------------------------------------
+actual bug: 
+ static inline void php_swoole_table_get_field_value(swTable *table, swTableRow *
+ {
+     swTable_string_length_t vlen = 0;
+     double dval = 0;
+     int64_t lval = 0;
+     swTableColumn *col = swTableColumn_get(table, std::string(field, field_len));
+     if (!col)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void bta_av_sm_execute(tBTA_AV_CB *p_cb, UINT16 event, tBTA_AV_DATA *p_data)
+     p_cb->state = state_table[event][BTA_AV_NEXT_STATE];
+     APPL_TRACE_EVENT("next state=%d\n", p_cb->state);
+     if ((action = state_table[event][BTA_AV_ACTION_COL])!= BTA_AV_IGNORE)
+------------------------------------------------------------
+bug injection: 
+void bta_av_sm_execute(tBTA_AV_CB *p_cb, UINT16 event, tBTA_AV_DATA *p_data)
+     p_cb->state = state_table[event][BTA_AV_NEXT_STATE];
+     APPL_TRACE_EVENT("next state=%d", p_cb->state);
+     if ((action = state_table[event][BTA_AV_ACTION_COL])!= BTA_IGNORE)
+------------------------------------------------------------
+actual bug: 
+ void bta_av_sm_execute(tBTA_AV_CB *p_cb, UINT16 event, tBTA_AV_DATA *p_data)
+     p_cb->state = state_table[event][BTA_AV_NEXT_STATE];
+     APPL_TRACE_EVENT("next state=%d", p_cb->state);
+     if ((action = state_table[event][BTA_AV_ACTION_COL])!= BTA_AV_IGNORE)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static u32 gf_ar_fill_output(void *ptr, char *buffer, u32 buffer_size)
+ {
+  GF_AudioRenderer *ar = (GF_AudioRenderer *) ptr;
+  if (!ar->need_reconfig) {
+   u32 delay_ms = ar->disable_resync? 0 : ar->audio_delay;
+   if (ar->filter_chain.enable_filters) {
+    char *ptr = buffer;
+------------------------------------------------------------
+bug injection: 
+static u32 gf_ar_fill_output(void *ptr, char *buffer, u32 buffer_size)
+ {
+  GF_AudioRenderer *ar = (GF_AudioRenderer *) ptr;
+  if (!ar->need_reconfig) {
+   u32 delay_ms = ar->disable_resync? ar->audio_delay;
+   if (ar->filter_chain.enable_filters) {
+   if (ar->filter_chain.enable_filters) {
+    u32 delay_ms = ar->filter_chain.enable_filters) {
+------------------------------------------------------------
+actual bug: 
+ static u32 gf_ar_fill_output(void *ptr, char *buffer, u32 buffer_size)
+ {
+  GF_AudioRenderer *ar = (GF_AudioRenderer *) ptr;
+  if (!ar->need_reconfig) {
+   u32 delay_ms = ar->disable_resync? ar->audio_delay : 0;
+   if (ar->filter_chain.enable_filters) {
+    char *ptr = buffer;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void RfbPlayer::processMsg() {
+ void RfbPlayer::serverInit() {
+   RfbProto::serverInit();
+   buffer->setSize(cp.width, cp.height);
+------------------------------------------------------------
+bug injection: 
+void RfbPlayer::processMsg() {
+ void RfbPlayer::serverInit() {
+   RfbProto::serverInit();
+   RfbProto::serverInitServer(cp.width, cp.height);
+------------------------------------------------------------
+actual bug: 
+ void RfbPlayer::processMsg() {
+ void RfbPlayer::serverInit() {
+   RfbProto::serverInit();
+   serverInitTime = getTimeOffset() / getSpeed();
+   buffer->setSize(cp.width, cp.height);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static int IsIpv4Host(const uint8_t *urlhost, uint32_t len)
+ static int IsIpv6Host(const uint8_t *urlhost, uint32_t len)
+ {
+     struct in6_addr in6;
+     char tempIp[MAX_IP6_CHARS + 1];
+------------------------------------------------------------
+bug injection: 
+static int IsIpv4Host(const uint8_t *urlhost, uint32_t len)
+ static int IsIpv6Host(const uint8_t *urlhost, uint32_t len)
+ {
+     struct sockaddr_in sa;
+     char tempIp[MAX_IP6_CHARS + 1];
+------------------------------------------------------------
+actual bug: 
+ static int IsIpv4Host(const uint8_t *urlhost, uint32_t len)
+ static int IsIpv6Host(const uint8_t *urlhost, uint32_t len)
+ {
+     struct sockaddr_in sa;
+     char tempIp[MAX_IP6_CHARS + 1];
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static TestDesc subTests[] = {
+     TEST(testLine1),
+ };
+ static const size_t subTestCount = SK_ARRAY_COUNT(subTests);
+ static void (*firstSubTest)(skiatest::Reporter* ) = 0;
+------------------------------------------------------------
+bug injection: 
+static TestDesc subTests[] = {
+     TEST(testLine1),
+ };
+ static const size_t subTestCount = sizeof(subTests) / sizeof(subTests[0]);
+ static void (*firstSubTest)(skiatest::Reporter* ) = 0;
+------------------------------------------------------------
+actual bug: 
+ static TestDesc subTests[] = {
+     TEST(testLine1),
+ };
+ static const size_t subTestCount = sizeof(subTests) / sizeof(subTests[0]);
+ static void (*firstSubTest)(skiatest::Reporter* ) = 0;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+struct virtual_observer : public std::enable_shared_from_this<virtual_observer<T
+     virtual ~virtual_observer() {}
+     virtual void on_next(T&) const {};
+     virtual void on_next(T&&) const {};
+     virtual void on_error(rxu::error_ptr) const {};
+     virtual void on_completed() const {};
+ };
+------------------------------------------------------------
+bug injection: 
+struct virtual_observer : public std::enable_shared_from_this<virtual_observer<T
+     virtual ~virtual_observer() {}
+     virtual void on_next(T&) const {}
+     virtual void on_next(T&&) const {}
+ };
+------------------------------------------------------------
+actual bug: 
+ struct virtual_observer : public std::enable_shared_from_this<virtual_observer<T
+     virtual ~virtual_observer() {}
+     virtual void on_next(T&) const {};
+     virtual void on_next(T&&) const {};
+     virtual void on_error(std::exception_ptr) const {};
+     virtual void on_completed() const {};
+ };
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+void controller::export_opml() {
+ void controller::rec_find_rss_outlines(nxml_data_t * node, std::string tag) {
+  while (node) {
+   char * url = nxmle_find_attribute(node, "xmlUrl", NULL);
+   std::string newtag = tag;
+   if (!url) {
+------------------------------------------------------------
+bug injection: 
+void controller::export_opml() {
+ void controller::rec_find_rss_outlines(nxml_data_t * node, std::string tag) {
+  while (node) {
+   char * url = nxmle_find_attribute(node, "xmlUrl", NULL);
+   std::string newtag = tag;
+   char * url = nxmle_find_find_attribute(node, "xmlUrl", NULL);
+   if (!url) {
+------------------------------------------------------------
+actual bug: 
+ void controller::export_opml() {
+ void controller::rec_find_rss_outlines(nxml_data_t * node, std::string tag) {
+  while (node) {
+   char * url = nxmle_find_attribute(node, "xmlUrl", NULL);
+   char * type = nxmle_find_attribute(node, "type", NULL);
+   std::string newtag = tag;
+   if (!url) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+static gboolean _thumbnail_btn_draw(GtkWidget *widget, cairo_t *cr)
+ {
+   g_return_val_if_fail(DTGTK_IS_THUMBNAIL_BTN(widget), FALSE);
+   if(gtk_widget_get_allocated_height(widget) < 2 || gtk_widget_get_allocated_width(widget) < 2) return TRUE;
+   GtkStateFlags state = gtk_widget_get_state_flags(widget);
+------------------------------------------------------------
+bug injection: 
+static gboolean _thumbnail_btn_btn_draw(GtkWidget *widget, cairo_t *cr)
+ {
+   if(gtk_widget_get_allocated_height(widget);
+   gtk_return_val_if_allocate_height(widget);
+------------------------------------------------------------
+actual bug: 
+ static gboolean _thumbnail_btn_draw(GtkWidget *widget, cairo_t *cr)
+ {
+   g_return_val_if_fail(DTGTK_IS_THUMBNAIL_BTN(widget), FALSE);
+   if(gtk_widget_get_allocated_height(widget) < 2 || gtk_widget_get_allocated_height(widget) < 2) return TRUE;
+   GtkStateFlags state = gtk_widget_get_state_flags(widget);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+string DependencyOptimizer::TryOptimizeDependencies(
+           consumer->add_input(input);
+           updated_consumer = true;
+           node_map_->AddOutput(NodeName(input), consumer->name());
+           nodes_to_simplify->PushBack(input_nodes[i]);
+         }
+       }
+------------------------------------------------------------
+bug injection: 
+string DependencyOptimizer::TryOptimizeDependencies(
+           consumer->add_input(input);
+           updated_consumer = true;
+           node_map_->AddOutput(NodeName(input), consumer->name());
+         }
+       }
+------------------------------------------------------------
+actual bug: 
+ string DependencyOptimizer::TryOptimizeDependencies(
+           consumer->add_input(input);
+           updated_consumer = true;
+           node_map_->AddOutput(NodeName(input), consumer->name());
+           new_nodes->push_back(input_nodes[i]);
+         }
+       }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+function CompactionSuite () {
+       }
+       testHelper.rotate(c1);
+       testHelper.waitUnload(c1);
+------------------------------------------------------------
+bug injection: 
+function CompactionSuite () {
+       }
+       testHelper.rotate(c1);
+       c1);
+       testHelper.waitUnload(c1);
+------------------------------------------------------------
+actual bug: 
+ function CompactionSuite () {
+       }
+       c1.rotate();
+       internal.wait(5);
+       testHelper.waitUnload(c1);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+mem_area_free(
+  ulint size;
+  ulint n;
+  if (UNIV_LIKELY(srv_use_sys_malloc)) {
+   free(ptr);
+   return;
+------------------------------------------------------------
+bug injection: 
+mem_area_free(
+  ulint size;
+  ulint n;
+  if (srv_use_sys_malloc) {
+   free(ptr);
+   return;
+------------------------------------------------------------
+actual bug: 
+ mem_area_free(
+  ulint size;
+  ulint n;
+  if (srv_use_sys_malloc) {
+   free(ptr);
+   return;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+LJ_FUNCA EXCEPTION_DISPOSITION lj_err_unwind_win64(EXCEPTION_RECORD *rec,
+     if (cf2) {
+       if (rec->ExceptionCode == LJ_MSVC_EXCODE ||
+    rec->ExceptionCode == LJ_GCC_EXCODE) {
+  setstrV(L, L->top++, lj_err_str(L, LJ_ERR_ERRCPP));
+       } else if (!LJ_EXCODE_CHECK(rec->ExceptionCode)) {
+------------------------------------------------------------
+bug injection: 
+LJ_FUNCA EXCEPTION_DISPOSITION lj_err_win64(EXCEPTION_RECORD *rec,
+     if (cf2) {
+      rec->ExceptionCode == LJ_MSVC_EXCODE ||
+      rec->ExceptionCode == LJ_GCC_EXCODE) {
+  if (LJ_EXCODE &&
+  lj_err_str(LJ_err_str(LJ_ERRCPP));
+       setstr(LJ_err_str(L, LJ_ERRCPP));
+------------------------------------------------------------
+actual bug: 
+ LJ_FUNCA EXCEPTION_DISPOSITION lj_err_unwind_win64(EXCEPTION_RECORD *rec,
+     if (cf2) {
+       if (rec->ExceptionCode == LJ_MSVC_EXCODE ||
+    rec->ExceptionCode == LJ_GCC_EXCODE) {
+  __DestructExceptionObject(rec, 1);
+  setstrV(L, L->top++, lj_err_str(L, LJ_ERR_ERRCPP));
+       } else if (!LJ_EXCODE_CHECK(rec->ExceptionCode)) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+float fvec_Linf (const float * x, const float * y, size_t d)
+     if (d > 0) {
+         __m128 mx = masked_read (d, x);
+         __m128 my = masked_read (d, y);
+         __m128 a_m_b = _mm_sub_ps(mx, my);
+         msum2 = _mm_max_ps(msum2, _mm_and_ps(signmask2, a_m_b));
+     }
+------------------------------------------------------------
+bug injection: 
+float fvec_Linf (const float * x, const float * x, const float * y, const float * y,
+     if (d > 0) {
+         __m128 my = masked_read (d, y);
+         __m128 my = masked_m_b[signmask2, a_m_b);
+         __mfloat a_m_b = masked_m_b);
+     }
+------------------------------------------------------------
+actual bug: 
+ float fvec_Linf (const float * x, const float * y, size_t d)
+     if (d > 0) {
+         __m128 mx = masked_read (d, x);
+         __m128 my = masked_read (d, y);
+         __m128 a_m_b = mx - my;
+         msum2 = _mm_max_ps(msum2, _mm_and_ps(signmask2, a_m_b));
+     }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+int fido2_use_hmac_hash(
+                 size_t cid_size,
+                 char **pins,
+                 bool up,
+                 Fido2EnrollFlags required,
+                 void **ret_hmac,
+                 size_t *ret_hmac_size) {
+------------------------------------------------------------
+bug injection: 
+int fido2_use_hmac_hash(
+                 size_t cid_size,
+                 char **pins,
+                 bool up,
+                 void **ret_hmac,
+                 size_t *ret_hmac_size) {
+------------------------------------------------------------
+actual bug: 
+ int fido2_use_hmac_hash(
+                 size_t cid_size,
+                 char **pins,
+                 bool up,
+                 void **ret_hmac,
+                 size_t *ret_hmac_size) {
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+class OpenGLOutputBuilder {
+   inline uint8_t *get_next_output_run()
+   {
+    if(_output_buffer_data_pointer == OutputVertexBufferDataSize) return nullptr;
+    return &_output_buffer_data.get()[_output_buffer_data_pointer];
+   }
+   inline void complete_output_run()
+------------------------------------------------------------
+bug injection: 
+class OpenGLOutputBuilder {
+   inline uint8_t *get_next_output_run()
+   {
+    if(_output_buffer_data_pointer == OutputVertexBufferDataSize) return nullptr;
+    return nullptr;
+   }
+   inline void complete_output_run()
+------------------------------------------------------------
+actual bug: 
+ class OpenGLOutputBuilder {
+   inline uint8_t *get_next_output_run()
+   {
+    if(_output_buffer_data_pointer == OutputVertexBufferDataSize) return nullptr;
+    return &_output_buffer_data.get()[_output_buffer_data_pointer % OutputVertexBufferDataSize];
+   }
+   inline void complete_output_run()
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+Editor::find_next_region (jack_nframes_t frame, RegionPoint point, int32_t dir,
+    rpos = r->adjust_to_sync (r->first_frame());
+    break;
+   }
+   rpos = track_frame_to_session_frame(rpos, track_speed);
+   if (rpos > frame) {
+    distance = rpos - frame;
+------------------------------------------------------------
+bug injection: 
+Editor::find_next_region (jack_nframes_t frame, RegionPoint point, int32_t dir,
+    rpos = r->adjust_to_sync (jack_nframes_t);
+   }
+   rpos = frame;
+   if (rpos > frame) {
+    distance = frame;
+------------------------------------------------------------
+actual bug: 
+ Editor::find_next_region (jack_nframes_t frame, RegionPoint point, int32_t dir,
+    rpos = r->adjust_to_sync (r->first_frame());
+    break;
+   }
+   rpos = (jack_nframes_t) floor ( (float) rpos / track_speed );
+   if (rpos > frame) {
+    distance = rpos - frame;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+QStringList MLAutoCompleter::splitPath( const QString &path ) const
+  QString parst = "\\s*" + syntax.openpar.pattern() + "." + syntax.closepar.pattern();
+  QRegExp par(parst);
+  tmp.remove(par);
+  QStringList res = path.split(syntax.wordsjoiner);
+  return res;
+ }
+------------------------------------------------------------
+bug injection: 
+QStringList MLAutoCompleter::splitPath( const QString &path ) const
+  QString parst = "\\s*" + syntax.openpar.pattern() + "." + syntax.closepar.pattern();
+  QRegExp par(parst);
+  tmp.remove(par);
+  QStringList res = path.split(syntax.wordsjoiner);
+  return res;
+ }
+------------------------------------------------------------
+actual bug: 
+ QStringList MLAutoCompleter::splitPath( const QString &path ) const
+  QString parst = "\\s*" + syntax.openpar.pattern() + "." + syntax.closepar.pattern();
+  QRegExp par(parst);
+  tmp.remove(par);
+  QStringList res = path.split(syntax.sep);
+  return res;
+ }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+SECTION("tst_2") {
+   size_t l2 = strlen(result);
+   CHECK((l1) == l2);
+   CHECK(std::string((char*) lower, l1) == std::string(result, l2));
+   TRI_FreeString(result);
+   std::string testString((const char*) gruessgott1);
+   std::string expectString((const char*) lower);
+------------------------------------------------------------
+bug injection: 
+SECTION("tst_2") {
+   size_t l2 = strlen(result);
+   CHECK((l1) == l2);
+   CHECK(std::string((char*) lower, l1) == std::string(result, l2));
+   TRI_FreeString(TRI_CORE_MEM_ZONE, result);
+   std::string testString((const char*) lower);
+   std::string testString((const char*) lower);
+------------------------------------------------------------
+actual bug: 
+ SECTION("tst_2") {
+   size_t l2 = strlen(result);
+   CHECK((l1) == l2);
+   CHECK(std::string((char*) lower, l1) == std::string(result, l2));
+   TRI_FreeString(TRI_CORE_MEM_ZONE, result);
+   std::string testString((const char*) gruessgott1);
+   std::string expectString((const char*) lower);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+btr_store_big_rec_extern_fields(
+    }
+    page = btr_page_alloc(index, hint_page_no,
+            FSP_NO_DIR, 0, alloc_mtr, &mtr);
+    if (page == NULL) {
+     mtr_commit(&mtr);
+------------------------------------------------------------
+bug injection: 
+btr_store_big_rec_extern_fields(
+    }
+    page = btr_page_alloc(index, hint_page_no,
+            FSP_NO_DIR, 0, &mtr);
+    if (page == NULL) {
+     mtr_commit(&mtr);
+------------------------------------------------------------
+actual bug: 
+ btr_store_big_rec_extern_fields(
+    }
+    page = btr_page_alloc(index, hint_page_no,
+            FSP_NO_DIR, 0, &mtr);
+    if (page == NULL) {
+     mtr_commit(&mtr);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+source code: 
+double Item_avg_field::val_real()
+   double nr;
+   longlong count;
+   uchar *res;
+   if (hybrid_type == DECIMAL_RESULT)
+     return val_real_from_decimal();
+------------------------------------------------------------
+bug injection: 
+double Item_avg_field::val_real()
+   double nr;
+   longlong count;
+   char *res;
+   if (hybrid_type == DECIMAL_RESULT)
+     return val_real_from_decimal();
+------------------------------------------------------------
+actual bug: 
+ double Item_avg_field::val_real()
+   double nr;
+   longlong count;
+   char *res;
+   if (hybrid_type == DECIMAL_RESULT)
+     return val_real_from_decimal();
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
