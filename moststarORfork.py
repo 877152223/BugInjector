@@ -6,7 +6,7 @@ import time
 import csv
 import time
 def getList(start,end,language):  #Only first 1000 results will be returned. Limited to Github
-    headers={'Authorization':'token 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','User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0','Accept':'	text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}
+    headers={'Authorization':'token ghp_756GkRIJZYT0oSbiGwwzTzarrGAcwE0kl6ec','User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0','Accept':'	text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}
 
     http = urllib3.PoolManager(headers=headers)
     result=[]
