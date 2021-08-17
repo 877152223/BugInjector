@@ -1,5 +1,10 @@
 # BugInjector
 
+This is to train a model which can be used to inject a bug into a normal program(C/C++). 
+The language mainly used is python.
+
+
+
 generate 810-v4.ipynb
 - tokenizer (pretrained)
 - dataloader
