@@ -15,9 +15,11 @@ generate 810-v4.ipynb
 - evaluate the generated bugs
 
 after24epoch _train_samples.txt
+
 Some generated bugs using patched code in training dataset as input.
 
 after24epoch _val_samples.txt
+
 Some generated bugs using patched code in validation dataset as input.
 
 star.csv
