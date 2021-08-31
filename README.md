@@ -5,7 +5,7 @@ The language mainly used is python.
 
 
 
-generate 810-v4.ipynb
+BugInjector-GPT2.ipynb
 - tokenizer (pretrained)
 - dataloader
 - compute bleu score
